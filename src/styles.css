@@ -35,6 +35,15 @@ h1, h2, h3, h4, h5, h6 {
     /* text-wrap: balance; */
 }
 
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
 /*
 9. Create a root stacking context
 */
@@ -173,7 +182,6 @@ header div {
 }
 
 .content .lists section h3 {
-    /* margin: 7px 10px; */
     background-color: white;
     font-size: 24px;
     padding: 2px 0;
@@ -183,10 +191,7 @@ header div {
 
 .content .lists section .card-container {
     width: 97%;
-    /* height: 93%; */
-    /* min-height: 10px; */
     background-color: #b7b7b7;
-    /* margin-bottom: 10px; */
     border-radius: 3px;
     align-self: center;
 
@@ -197,10 +202,7 @@ header div {
     gap: 8px;
     padding: 8px 0;
     
-
     overflow-y: auto;
-    /* min-height: fit-content; */
-    /* margin-bottom: 20px; */
     height: 100%;
     max-height: 100%;
 }
@@ -216,7 +218,6 @@ header div {
 }
 
 .content .lists section .add-task {
-    /* margin: 5px 15px 5px 15px; */
     padding: 4px;
     border-radius: 4px;
     transition: 0.2s;
@@ -224,13 +225,4 @@ header div {
 
 .content .lists section .add-task:hover {
     background-color: #898989;
-}
-
-button, input[type="submit"], input[type="reset"] {
-	background: none;
-	color: inherit;
-	border: none;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
 }
