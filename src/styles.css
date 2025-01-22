@@ -156,6 +156,7 @@ header div {
     width: 100%;
     position: relative;
     height: 100%;
+    padding-top: 10px;
 }
 
 .content .lists section {
@@ -168,6 +169,7 @@ header div {
     min-height: none;
     background-color: #b7b7b7;
     border-radius: 3px;
+    margin-left: 10px;
 }
 
 .content .lists section h3 {
