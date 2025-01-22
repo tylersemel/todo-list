@@ -25,14 +25,15 @@ input, button, textarea, select {
 }
 
 p, h1, h2, h3, h4, h5, h6 {
-    /* overflow-wrap: break-word; */
+    overflow-wrap: break-word;
 }
 
 p {
-    /* text-wrap: pretty; */
+    text-wrap: pretty;
 }
+
 h1, h2, h3, h4, h5, h6 {
-    /* text-wrap: balance; */
+    text-wrap: balance;
 }
 
 button, input[type="submit"], input[type="reset"] {
@@ -83,10 +84,6 @@ header div {
     font-size: 2rem;
     margin-left: 50px;
     width: 300px;
-}
-
-.sidebar, header {
-    /* border: 6px solid rgb(156, 132, 171); */
 }
 
 .sidebar {
