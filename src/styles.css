@@ -1,0 +1,145 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+  
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+
+    /* min-height: 100vh; */
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    /* overflow-wrap: break-word; */
+}
+
+p {
+    /* text-wrap: pretty; */
+}
+h1, h2, h3, h4, h5, h6 {
+    /* text-wrap: balance; */
+}
+
+/*
+9. Create a root stacking context
+*/
+#root, #__next {
+    isolation: isolate;
+}
+
+:root {
+    --main-bg-color: #fcf7f8;
+    --sidebar-bg-color: #aea4bf;
+}
+
+.container {
+    background-color: var(--main-bg-color);
+    height: 100vh;
+    max-height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: 80px auto;
+    grid-template-areas: 
+    "sidebar header"
+    "sidebar main";
+}
+
+header {
+    background-color: white;
+    grid-area: header;
+    border: 2px solid rgb(156, 132, 171);
+    background-color: var(--sidebar-bg-color);
+
+    display: flex;
+    align-items: center;
+}
+
+header div {
+    font-size: 2rem;
+    margin-left: 50px;
+    width: 300px;
+}
+
+.sidebar, header, .content {
+    border: 6px solid rgb(156, 132, 171);
+}
+
+.sidebar {
+    background-color: var(--sidebar-bg-color);
+    color: white;
+    grid-area: sidebar;
+
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    font-size: 26px;
+}
+
+.sidebar .top {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.sidebar button {
+    background-color: #aea4bf;
+    color: white;
+    padding: 10px;
+    border: none;
+    text-indent: 20px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sidebar .projects-list .child {
+    text-indent: 60px;
+    margin-top: 10px;
+}
+
+.sidebar button:hover {
+    color: darkblue;
+}
+
+.content {
+    background-color: var(--main-bg-color);
+    overflow-x: scroll;
+}
+
+/* .content {
+    background-color: #8f6593;
+    height: 100%;
+    grid-area: main;
+    padding: 20px;
+
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 20px;
+    grid-template-columns: repeat(3, minmax(350px, 1fr));
+}
+
+.content section {
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+}
+
+.content .empty {
+    background-color: rgba(255, 255, 255, 0);
+} */

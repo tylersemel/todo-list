@@ -1,6 +1,6 @@
 import { todoItemManager } from "./todo-item-manager.js";
 import { createProject } from "./project-module.js";
-
+import "./styles.css";
 
 let projectsList = [];
 const generalProject = createProject('General', 'Tasks with no project goes here!');
