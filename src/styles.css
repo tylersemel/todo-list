@@ -261,6 +261,9 @@ header div {
     border:none;
     resize: none;
     width: 350px;
+    /* height: fit-content; */
+    overflow: hidden;
+    display: block;
 }
 
 .content .lists section .card-container .new-card .title:focus {

@@ -136,6 +136,12 @@ const CardUI = (function() {
         removeCardForm(event.target.closest('.list'));
     }
 
+    function autoResize(event) {
+        event.target.style.height = 'auto';
+        event.target.style.height = event.target.scrollHeight + 'px';
+        console.log(event.target.style.height);
+    }
+
     function createCardForm(list) {
         const newCardDiv = createElement('div', 'new-card');
 
@@ -145,6 +151,7 @@ const CardUI = (function() {
 
         const titleTextArea = createElement('textarea', 'title');
         titleTextArea.setAttribute('name', 'title');
+        titleTextArea.addEventListener('input', autoResize)
 
         const saveBtn = createElement('button', 'save', 'Save');
         saveBtn.setAttribute('type', 'submit');
