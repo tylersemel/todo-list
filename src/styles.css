@@ -228,7 +228,7 @@ header div {
 }
 
 .content .lists section .card-container .card .card-info .title {
-
+    word-break: break-all;
 }
 
 .content .lists section .card-container .card button {
