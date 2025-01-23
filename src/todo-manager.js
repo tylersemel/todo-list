@@ -1,5 +1,5 @@
 const todoItemManager = (function() {
-    const STATUS = ['TO DO', 'DOING', 'DONE'];
+    const STATUS = ['todo', 'doing', 'done'];
     const PRIORITY = ['NONE', 'IMPORTANT', 'URGENT'];
 
     const createTodoItem = (title, description, dueDate, project, status, priority, notes, checkList) => {

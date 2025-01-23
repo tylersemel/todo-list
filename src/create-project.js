@@ -35,6 +35,7 @@ function createProject(title, description) {
         }        
     }
 
+    //for debugging
     function printAllTodos() {
         for (let i = 0; i < allTodos.length; i++) {
             console.log('Todo #' + (i + 1));

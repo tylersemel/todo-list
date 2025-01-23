@@ -210,7 +210,8 @@ header div {
 .content .lists section .card-container .card {
     width: 95%;
     height: 90px;
-    /* min-height: 50px; */
+    min-height: fit-content;
+    /* max-height: fit-content; */
     background-color: white;
     border-radius: 3px;
     box-shadow: 2px 3px 4px rgb(102, 102, 102);

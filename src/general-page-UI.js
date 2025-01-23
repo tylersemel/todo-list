@@ -1,22 +1,21 @@
 import { createElement } from "./create-element";
 import { CardUI } from "./card-UI";
+import { createProject } from "./create-project";
 
-const LoadTodoList = (function() {
-
-});
-
-const LoadDoingList = (function() {
-
-})();
-
-const LoadDoneList = (function() {
-
-})();
-
-const generalPageLoader = (function() {
+const GeneralPageModule = (function() {
     const contentDiv = document.querySelector('.content');
-    const loadTodoList = LoadTodoList();
+    let _project;
+    let cards = [];
 
+    function setProject() {
+        if (!_project) {
+            _project = createProject('Default', 'The default page!');
+        }
+    }
+
+    function getProject() {
+        return _project;
+    }
 
     function loadProjectName(name) {
         const projectNameH2 = document.createElement('h2');
@@ -26,6 +25,8 @@ const generalPageLoader = (function() {
     }
 
     function createHTML() {
+        loadProjectName(getProject().title);
+
         const listsDiv = createElement('div', 'lists');
 
         const listSections = [];
@@ -38,38 +39,40 @@ const generalPageLoader = (function() {
             if (i === 1) text = 'Doing';
             if (i === 2) text = 'Done';
 
+            listSections[i].classList.add('list');
             listSections[i].appendChild(createElement('h3', '', text));
             listSections[i].appendChild(createElement('div', 'card-container'));
-            let btn = createElement('button', 'add-task', '+ Add a task');
-            btn.addEventListener('click', handleAddTask);
-            listSections[i].appendChild(btn);
+
+            let addTaskBtn = createElement('button', 'add-task', '+ Add a task');
+            addTaskBtn.list = listSections[i].classList[0];
+            addTaskBtn.addEventListener('click', handleAddTask);
+            
+            listSections[i].appendChild(addTaskBtn);
             listsDiv.appendChild(listSections[i]);
         }
 
         contentDiv.appendChild(listsDiv)
     }
 
-    function addDummyCards(amt, listClass) {
-        const listDiv = contentDiv.querySelector(listClass);
-        const cardContainerDiv = listDiv.querySelector('.card-container');
+    function loadTodoList() {
 
-        for (let i = 0; i < amt; i++) {
-            let card = CardUI.createCardHTML();
-            CardUI.updateTitle(card, 'New title');
-            console.log(card);
-            cardContainerDiv.appendChild(card);
-        }
     }
     
     function handleAddTask(event) {
-        console.log("Works?" + event.target.classList[0]);
+        console.log("Works?" + event.target.closest('section').classList[0]);
+        const list = event.target.closest('section').classList[0];
+
+        CardUI.createCardForm(list);
+
+        //create new html card space at the bottom of the chosen list
+        //focus user to new card typing
+        //change 'add task' to 'save' and add an X
+        //on save -> unfocus user typing and change button back to add task
     }
 
     function loadPage() {
-        loadProjectName('General');
+        setProject();
         createHTML();
-        addDummyCards(1, '.todo');
-        addDummyCards(15, '.doing');
     }
 
     return { loadPage }
@@ -182,4 +185,4 @@ const generalPageLoader = (function() {
 //     console.log('mouse up');
 // }
 
-export { generalPageLoader };
+export { GeneralPageModule };

@@ -1,13 +1,23 @@
 import { todoItemManager } from "./todo-manager.js";
 import { createProject } from "./create-project.js";
-import { generalPageLoader } from "./general-page-UI.js";
+import { GeneralPageModule } from "./general-page-UI.js";
 import "./styles.css";
 
+const generalPageBtn = document.querySelector('.general-proj-btn');
+generalPageBtn.addEventListener('click', loadGeneralPage);
 
-document.addEventListener('DOMContentLoaded', () => {
-    generalPageLoader.loadPage();
-})
+//start page
+GeneralPageModule.loadPage();
 
+function loadGeneralPage() {
+    clearContent();
+    GeneralPageModule.loadPage();
+}
+
+function clearContent() {
+    const contentDiv = document.querySelector('.content');
+    contentDiv.replaceChildren();
+}
 
 
 
