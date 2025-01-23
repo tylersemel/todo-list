@@ -1,6 +1,6 @@
-import { todoItemManager } from "./todo-item-manager.js";
-import { createProject } from "./project-module.js";
-import { generalPageLoader } from "./general-page-loader.js";
+import { todoItemManager } from "./todo-manager.js";
+import { createProject } from "./create-project.js";
+import { generalPageLoader } from "./general-page-UI.js";
 import "./styles.css";
 
 

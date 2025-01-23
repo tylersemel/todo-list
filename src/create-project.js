@@ -1,4 +1,4 @@
-import { todoItemManager } from "./todo-item-manager.js";
+import { todoItemManager } from "./todo-manager.js";
 
 function createProject(title, description) {
     let allTodos = [];
