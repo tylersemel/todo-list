@@ -220,16 +220,41 @@ header div {
 
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 .content .lists section .card-container .card .card-info {
     padding: 4px;
 }
 
+.content .lists section .card-container .card .card-info .title {
+
+}
+
 .content .lists section .card-container .card button {
     background-color: gray;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.content .lists section .card-container .card .more {
+    display: hidden;
+    position: absolute;
+    top: 0;
+    right: 10;
+}
+
+.content .lists section .card-container .card:hover {
+    outline: 2px solid blue;
+}
+
+.content .lists section .card-container .card:hover::after{
+    content: '...';
+    /* position: absolute; */
+    /* top: -9px;
+    right: 10px; */
+    color: gray;
+    margin-right: 10px;
 }
 
 .content .lists section .card-container .new-card .title {

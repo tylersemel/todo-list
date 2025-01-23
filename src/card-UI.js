@@ -22,18 +22,24 @@ const CardUI = (function() {
         card.querySelector('.due-date').textContent = dueDate;
     }
 
+
+
     function createCardHTML() {
         const cardInfo = createElement('div', 'card-info');
     
+        const elipses = createElement('span', 'more');
         const dueDateDiv = createElement('div', 'due-date');
+        const priorityFlag = createElement('div', 'priority');
         const hasDescriptDiv = createElement('div', 'has-description');
     
         const symbolsDiv = createElement('div', 'symbols');
         symbolsDiv.appendChild(dueDateDiv);
+        symbolsDiv.appendChild(priorityFlag);
         symbolsDiv.appendChild(hasDescriptDiv);
     
         const titleDiv = createElement('span', 'title');
-    
+        
+        cardInfo.appendChild(elipses);
         cardInfo.appendChild(titleDiv);
         cardInfo.appendChild(symbolsDiv);
 
@@ -77,6 +83,8 @@ const CardUI = (function() {
     }
 
     function renderCardInfo(card, todo) {
+        console.log(todo.title.length);
+
         card.querySelector('.title').textContent = todo.title;
     }
 
@@ -99,9 +107,6 @@ const CardUI = (function() {
         const child = cardContainer.querySelector('.new-card');
         cardContainer.removeChild(child);
     }
-
-
-
 
     function handleSaveCard(event) {
         event.preventDefault();

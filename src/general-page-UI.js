@@ -59,7 +59,6 @@ const GeneralPageModule = (function() {
     }
     
     function handleAddTask(event) {
-        console.log("Works?" + event.target.closest('section').classList[0]);
         const list = event.target.closest('section').classList[0];
 
         CardUI.createCardForm(list);
