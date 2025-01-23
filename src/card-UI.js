@@ -94,29 +94,41 @@ const CardUI = (function() {
         textArea.focus();
     }
 
-    function removeCardForm(listDiv) {
-        const cardContainer = listDiv.querySelector('.card-container');
-        cardContainer.removeChild(cardContainer.querySelector('.new-card'));
+    function removeCardForm(listSection) {
+        const cardContainer = listSection.querySelector('.card-container');
+        const child = cardContainer.querySelector('.new-card');
+        cardContainer.removeChild(child);
     }
+
+
+
 
     function handleSaveCard(event) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        const listDiv = event.target.closest('.list');
+        const listSection = event.target.closest('.list');
 
         //create todo
+        if (formData.get('title') === '') {
+            removeCardForm(listSection);
+            return;
+        }
         const todo = todoItemManager.createTodoItem(formData.get('title'));
-        todo.setStatus(listDiv.classList[0]);
-        console.log(todo.title);
+        todo.setStatus(listSection.classList[0]);
+        console.log(formData.get('title'));
         
         //create cardDiv
         const cardDiv = createCardHTML();
-        addCardToList(cardDiv, listDiv.classList[0]);
+        addCardToList(cardDiv, listSection.classList[0]);
 
         renderCardInfo(cardDiv, todo);
 
-        removeCardForm(listDiv);
+        removeCardForm(listSection);
+    }
+
+    function handleCancelCard(event) {
+        removeCardForm(event.target.closest('.list'));
     }
 
     function createCardForm(list) {
@@ -132,9 +144,20 @@ const CardUI = (function() {
         const saveBtn = createElement('button', 'save', 'Save');
         saveBtn.setAttribute('type', 'submit');
 
+        titleTextArea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveBtn.click();
+            }
+        });
+
         newCardForm.appendChild(titleTextArea);
         newCardForm.appendChild(saveBtn);
         newCardDiv.appendChild(newCardForm);
+
+        const cancelBtn = createElement('button', 'cancel', 'X');
+        cancelBtn.addEventListener('click', handleCancelCard);
+        newCardDiv.appendChild(cancelBtn);
 
         const listDiv = contentDiv.querySelector(`.${list}`);
         const cardContainerDiv = listDiv.querySelector('.card-container');

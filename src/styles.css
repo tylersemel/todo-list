@@ -207,7 +207,8 @@ header div {
     max-height: 100%;
 }
 
-.content .lists section .card-container .card {
+.content .lists section .card-container .card,
+.content .lists section .card-container .new-card {
     width: 95%;
     height: 90px;
     min-height: fit-content;
@@ -229,6 +230,16 @@ header div {
     background-color: gray;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.content .lists section .card-container .new-card .title {
+    border:none;
+    resize: none;
+    width: 350px;
+}
+
+.content .lists section .card-container .new-card .title:focus {
+    outline:none;
 }
 
 .content .lists section .add-task {
