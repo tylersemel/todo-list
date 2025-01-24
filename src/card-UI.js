@@ -1,5 +1,5 @@
 import { createElement } from "./create-element";
-import { CardFormUI } from "./card-form-UI";
+import { TodoInfoUI } from "./todo-info-UI";
 import { todoItemManager } from "./todo-manager";
 
 //could have cardUImanager and CardUIFactory be different things
@@ -10,7 +10,6 @@ const CardUI = (function() {
     //cards with contain a list of objects 
     // object = { div, todo }
     let cards = [];
-    let newCardForm;
 
     const contentDiv = document.querySelector('.content');
 
@@ -22,12 +21,9 @@ const CardUI = (function() {
         card.querySelector('.due-date').textContent = dueDate;
     }
 
-
-
     function createCardHTML() {
         const cardInfo = createElement('div', 'card-info');
     
-        const elipses = createElement('span', 'more');
         const dueDateDiv = createElement('div', 'due-date');
         const priorityFlag = createElement('div', 'priority');
         const hasDescriptDiv = createElement('div', 'has-description');
@@ -39,7 +35,6 @@ const CardUI = (function() {
     
         const titleDiv = createElement('span', 'title');
         
-        cardInfo.appendChild(elipses);
         cardInfo.appendChild(titleDiv);
         cardInfo.appendChild(symbolsDiv);
 
@@ -60,7 +55,7 @@ const CardUI = (function() {
     }
 
     function handleCardClick(event) {
-        CardFormUI.showModal();
+        TodoInfoUI.showModal(cards[event.target.getAttribute('data-index')]);
     }
 
     function editToHoverCSS(card) {
@@ -72,11 +67,13 @@ const CardUI = (function() {
 
     }
 
-    function addCardToList(card, list) {
+    function addCardToList(cardDiv, todo, list) {
         const listDiv = contentDiv.querySelector(`.${list}`);
         const cardContainerDiv = listDiv.querySelector('.card-container');
 
-        cardContainerDiv.appendChild(card);
+        cardContainerDiv.appendChild(cardDiv);
+        cardDiv.setAttribute('data-index', cards.length);
+        let card = { cardDiv, todo };
         cards.push(card);
 
         // return card;
@@ -125,7 +122,7 @@ const CardUI = (function() {
         
         //create cardDiv
         const cardDiv = createCardHTML();
-        addCardToList(cardDiv, listSection.classList[0]);
+        addCardToList(cardDiv, todo, listSection.classList[0]);
 
         renderCardInfo(cardDiv, todo);
 

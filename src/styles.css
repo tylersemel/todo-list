@@ -287,6 +287,13 @@ header div {
 dialog {
     width: 500px;
     height: 500px;
-    margin: 100px auto;
+    margin: 15vh auto;
     color: black;
+    border-radius: 5px;
+}
+
+dialog .todo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
