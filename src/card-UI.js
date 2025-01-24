@@ -1,5 +1,5 @@
 import { createElement } from "./create-element";
-import { TodoInfoUI } from "./todo-info-UI";
+import { TodoModalUI } from "./todo-modal-UI";
 import { todoItemManager } from "./todo-manager";
 
 //could have cardUImanager and CardUIFactory be different things
@@ -58,7 +58,7 @@ const CardUI = (function() {
         //have to wait in order to load modal
         let hasLoaded = false;
         while (!hasLoaded) {
-            hasLoaded = TodoInfoUI.loadModal(cards[event.target.getAttribute('data-index')]);
+            hasLoaded = TodoModalUI.loadModal(cards[event.target.getAttribute('data-index')]);
         }
     }
 

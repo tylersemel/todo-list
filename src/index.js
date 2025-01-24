@@ -1,7 +1,7 @@
 import { todoItemManager } from "./todo-manager.js";
 import { createProject } from "./create-project.js";
 import { GeneralPageModule } from "./general-page-UI.js";
-import { TodoInfoUI } from "./todo-info-UI.js";
+import { TodoModalUI } from "./todo-modal-UI.js";
 import "./styles.css";
 
 const generalPageBtn = document.querySelector('.general-proj-btn');

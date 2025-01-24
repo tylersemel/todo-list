@@ -1,7 +1,7 @@
 import { createElement } from "./create-element";
 import { CardUI } from "./card-UI";
 
-const TodoInfoUI = (function() {
+const TodoModalUI = (function() {
     const dialog = document.querySelector('dialog');
 
     // function fillCardInfo(elem, todoProperty) {
@@ -12,6 +12,7 @@ const TodoInfoUI = (function() {
         console.log('here');
         const todoContainerDiv = createElement('div', 'todo-container');
         const exitBtn = createElement('button', 'exit', 'X');
+        exitBtn.addEventListener('click', closeModal);
 
         todoContainerDiv.appendChild(exitBtn);
 
@@ -104,6 +105,6 @@ const TodoInfoUI = (function() {
     return { loadModal, closeModal };
 })();
 
-export { TodoInfoUI };
+export { TodoModalUI };
 
 //need attacher and remover functions for certain html elements
