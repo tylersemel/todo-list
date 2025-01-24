@@ -56,10 +56,11 @@ const CardUI = (function() {
 
     function handleCardClick(event) {
         //have to wait in order to load modal
-        let hasLoaded = false;
-        while (!hasLoaded) {
-            hasLoaded = TodoModalUI.loadModal(cards[event.target.getAttribute('data-index')]);
-        }
+        // let hasLoaded = false;
+        // while (!hasLoaded) {
+            // hasLoaded = 
+            TodoModalUI.loadModal(cards[event.target.getAttribute('data-index')]);
+        // }
     }
 
     function editToHoverCSS(card) {
@@ -154,7 +155,7 @@ const CardUI = (function() {
         titleTextArea.setAttribute('name', 'title');
         titleTextArea.addEventListener('input', autoResize)
 
-        const saveBtn = createElement('button', 'save', 'Save');
+        const saveBtn = createElement('button', 'save', 'ᯓ➤');
         saveBtn.setAttribute('type', 'submit');
 
         titleTextArea.addEventListener('keydown', (e) => {
@@ -168,7 +169,7 @@ const CardUI = (function() {
         newCardForm.appendChild(saveBtn);
         newCardDiv.appendChild(newCardForm);
 
-        const cancelBtn = createElement('button', 'cancel', 'X');
+        const cancelBtn = createElement('button', 'cancel', '✖');
         cancelBtn.addEventListener('click', handleCancelCard);
         newCardDiv.appendChild(cancelBtn);
 

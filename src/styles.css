@@ -207,24 +207,25 @@ header div {
     max-height: 100%;
 }
 
+.content .lists section .card-container .card {
+    display: flex;
+    justify-content: space-between;
+}
+
 .content .lists section .card-container .card,
 .content .lists section .card-container .new-card {
     width: 95%;
     height: 90px;
     min-height: fit-content;
-    /* max-height: fit-content; */
     background-color: white;
-    border-radius: 3px;
+    border-radius: 5px;
     box-shadow: 2px 3px 4px rgb(102, 102, 102);
     cursor: pointer;
-
-    display: flex;
-    justify-content: space-between;
-    position: relative;
+    position: relative; 
 }
 
 .content .lists section .card-container .card .card-info {
-    padding: 4px;
+    padding: 9px;
 }
 
 .content .lists section .card-container .card .card-info .title {
@@ -250,20 +251,59 @@ header div {
 
 .content .lists section .card-container .card:hover::after{
     content: '...';
-    /* position: absolute; */
-    /* top: -9px;
-    right: 10px; */
     color: gray;
     margin-right: 10px;
+}
+
+.content .lists section .card-container .new-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content .lists section .card-container .new-card .cancel {
+    position: absolute;
+    bottom: 0;
+    right: 90px;
+    background-color: rgb(201, 201, 201);
+    margin-bottom: 7px;
+    padding: 2px 9px;
+    border-radius: 4px;
+    transition: 0.1s;
+}
+
+.content .lists section .card-container .new-card .cancel:hover {
+    background-color: rgb(148, 148, 148);
+}
+
+.content .lists section .card-container .new-card form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .content .lists section .card-container .new-card .title {
     border:none;
     resize: none;
     width: 350px;
-    /* height: fit-content; */
+    padding: 7px;
+    /* padding-left: 16px; */
     overflow: hidden;
     display: block;
+}
+
+.content .lists section .card-container .new-card .save {
+    margin-left: 80%;
+    padding: 2px 9px;
+    background-color: rgb(255, 194, 204);
+    border-radius: 4px;
+    margin-bottom: 7px;
+    margin-right: 5px;
+    transition: 0.1s;
+}
+
+.content .lists section .card-container .new-card .save:hover {
+    background-color: #ff5a75;
 }
 
 .content .lists section .card-container .new-card .title:focus {
@@ -273,6 +313,7 @@ header div {
 .content .lists section .add-task {
     padding: 4px;
     transition: 0.2s;
+    margin-top: 10px;
 }
 
 .content .lists section .add-task:hover {
