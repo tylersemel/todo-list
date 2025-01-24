@@ -3,13 +3,13 @@ import { CardUI } from "./card-UI";
 
 const TodoInfoUI = (function() {
     const dialog = document.querySelector('dialog');
-    const form = createElement('form');
 
-    function fillCardInfo(card) {
+    // function fillCardInfo(elem, todoProperty) {
+    //     elem.textContent = todoProperty;
+    // }
 
-    }
-
-    function createHTML() {
+    function createHTML(todo) {
+        console.log('here');
         const todoContainerDiv = createElement('div', 'todo-container');
         const exitBtn = createElement('button', 'exit', 'X');
 
@@ -23,9 +23,13 @@ const TodoInfoUI = (function() {
         titleDiv.setAttribute('contenteditable', 'true');
         titleInfoDiv.appendChild(titleDiv);
 
+        titleDiv.textContent = todo.title;
+
         const listInfoDiv = createElement('div', 'list-info');
         const listSpan = createElement('span', 'list', 'in list');
         listInfoDiv.appendChild(listSpan);
+
+        listSpan.textContent = `in ${todo.getStatus()}`;
 
         const descriptionInfoDiv = createElement('div', 'description-info');
         const descriptionSpan = createElement('span', '', 'Description');
@@ -72,28 +76,32 @@ const TodoInfoUI = (function() {
         todoDiv.appendChild(todoSidebarDiv);
         todoContainerDiv.appendChild(todoDiv);
         dialog.appendChild(todoContainerDiv);
+
     }
 
 
 
-    function showModal(card) {
+    function loadModal(card) {
+        if (!card) {
+            return false;
+        }
+        createHTML(card.todo);
+
         dialog.showModal();
-        fillCardInfo(card.todo);
+
+        return true;
     }
 
     function closeModal() {
         dialog.close();
     }
 
-    function loadModal() {
-        createHTML();
-    }
 
     // form.addEventListener('submit')
 
-    loadModal();
+    // loadModal();
 
-    return { showModal, closeModal, fillCardInfo };
+    return { loadModal, closeModal };
 })();
 
 export { TodoInfoUI };

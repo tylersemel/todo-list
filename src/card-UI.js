@@ -55,7 +55,11 @@ const CardUI = (function() {
     }
 
     function handleCardClick(event) {
-        TodoInfoUI.showModal(cards[event.target.getAttribute('data-index')]);
+        //have to wait in order to load modal
+        let hasLoaded = false;
+        while (!hasLoaded) {
+            hasLoaded = TodoInfoUI.loadModal(cards[event.target.getAttribute('data-index')]);
+        }
     }
 
     function editToHoverCSS(card) {
