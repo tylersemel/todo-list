@@ -1,6 +1,6 @@
 import { createElement } from "./create-element";
 import { TodoModalUI } from "./todo-modal-UI";
-import { todoItemManager } from "./todo-manager";
+import { TodoItemManager } from "./todo-manager";
 
 //could have cardUImanager and CardUIFactory be different things
 //cardmanager would hold list of cards 
@@ -55,12 +55,9 @@ const CardUI = (function() {
     }
 
     function handleCardClick(event) {
-        //have to wait in order to load modal
-        // let hasLoaded = false;
-        // while (!hasLoaded) {
-            // hasLoaded = 
-            TodoModalUI.loadModal(cards[event.target.getAttribute('data-index')]);
-        // }
+        let cardDiv = event.target.closest('.card');
+        console.log(cardDiv);
+        TodoModalUI.loadModal(cards[cardDiv.getAttribute('data-index')]);
     }
 
     function editToHoverCSS(card) {
@@ -121,7 +118,7 @@ const CardUI = (function() {
             removeCardForm(listSection);
             return;
         }
-        const todo = todoItemManager.createTodoItem(formData.get('title'));
+        const todo = TodoItemManager.createTodoItem(formData.get('title'));
         todo.setStatus(listSection.classList[0]);
         console.log(formData.get('title'));
         

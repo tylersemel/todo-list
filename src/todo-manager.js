@@ -1,4 +1,4 @@
-const todoItemManager = (function() {
+const TodoItemManager = (function() {
     const STATUS = ['todo', 'doing', 'done'];
     const PRIORITY = ['NONE', 'IMPORTANT', 'URGENT'];
 
@@ -65,4 +65,4 @@ const todoItemManager = (function() {
     return { STATUS, PRIORITY, createTodoItem };
 })();
 
-export { todoItemManager };
+export { TodoItemManager };

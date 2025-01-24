@@ -4,10 +4,6 @@ import { CardUI } from "./card-UI";
 const TodoModalUI = (function() {
     const dialog = document.querySelector('dialog');
 
-    // function fillCardInfo(elem, todoProperty) {
-    //     elem.textContent = todoProperty;
-    // }
-
     function createHTML(todo) {
         console.log('here');
         const todoContainerDiv = createElement('div', 'todo-container');
@@ -77,30 +73,33 @@ const TodoModalUI = (function() {
         todoDiv.appendChild(todoSidebarDiv);
         todoContainerDiv.appendChild(todoDiv);
         dialog.appendChild(todoContainerDiv);
-
     }
-
-
 
     function loadModal(card) {
         if (!card) {
-            return false;
+            return;
         }
+
+        clearModal();
         createHTML(card.todo);
-
         dialog.showModal();
-
-        return true;
     }
 
     function closeModal() {
         dialog.close();
     }
 
+    function clearModal() {
+        dialog.replaceChildren();
+    }
 
-    // form.addEventListener('submit')
+    function setCardInfo() {
 
-    // loadModal();
+    }
+
+    function setTodoInfo() {
+        
+    }
 
     return { loadModal, closeModal };
 })();

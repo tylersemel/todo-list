@@ -1,4 +1,4 @@
-import { todoItemManager } from "./todo-manager.js";
+import { TodoItemManager } from "./todo-manager.js";
 
 function createProject(title, description) {
     let allTodos = [];
@@ -10,13 +10,13 @@ function createProject(title, description) {
         todo.projectName = title;
         allTodos.push(todo);
 
-        if (todo.getStatus() == todoItemManager.STATUS[0]) {
+        if (todo.getStatus() == TodoItemManager.STATUS[0]) {
             todoList.push(todo);
         }
-        else if (todo.getStatus() == todoItemManager.STATUS[1]) {
+        else if (todo.getStatus() == TodoItemManager.STATUS[1]) {
             doingList.push(todo);
         }
-        else if (todo.getStatus() == todoItemManager.STATUS[2]) {
+        else if (todo.getStatus() == TodoItemManager.STATUS[2]) {
             doneList.push(todo);
         }
     }
@@ -24,13 +24,13 @@ function createProject(title, description) {
     function removeTodoFromList(todo) {
         allTodos.splice(allTodos.indexOf(todo), 1);
 
-        if (todo.getStatus() == todoItemManager.STATUS[0]) {
+        if (todo.getStatus() == TodoItemManager.STATUS[0]) {
             todoList.splice(todoList.indexOf(todo), 1);
         }
-        else if (todo.getStatus() == todoItemManager.STATUS[1]) {
+        else if (todo.getStatus() == TodoItemManager.STATUS[1]) {
             doingList.splice(doingList.indexOf(todo), 1);
         }
-        else if (todo.getStatus() == todoItemManager.STATUS[2]) {
+        else if (todo.getStatus() == TodoItemManager.STATUS[2]) {
             doneList.splice(doneList.indexOf(todo), 1);
         }        
     }
