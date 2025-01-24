@@ -13,12 +13,25 @@ const CardUI = (function() {
 
     const contentDiv = document.querySelector('.content');
 
-    function updateTitle(card, title) {
+    function updateDivTitle(card, title) {
         card.querySelector('.title').textContent = title;
     }
 
-    function updateDueDate(card, dueDate) {
+    function updateDivDueDate(card, dueDate) {
         card.querySelector('.due-date').textContent = dueDate;
+    }
+
+    function updateDivPriority(card, priority) {
+
+    }
+
+    function updateDivDescription(card, hasDescription) {
+        if (hasDescription) {
+            card.querySelector('.has-description').textContent = 'Yas';
+        }
+        else {
+            card.querySelector('.has-description').textContent = '';
+        }
     }
 
     function createCardHTML() {
@@ -180,12 +193,10 @@ const CardUI = (function() {
     }
 
     return { 
-        createCardHTML,
-        updateTitle,
-        updateDueDate,
-        createCardCopy,
-        deleteCard,
-        addCardToList,
+        updateDivTitle,
+        updateDivDueDate,
+        updateDivPriority,
+        updateDivDescription,
         getCards,
         createCardForm
     };

@@ -3,6 +3,7 @@ import { CardUI } from "./card-UI";
 
 const TodoModalUI = (function() {
     const dialog = document.querySelector('dialog');
+    let _card;
 
     function createHTML(todo) {
         console.log('here');
@@ -18,6 +19,7 @@ const TodoModalUI = (function() {
         const titleInfoDiv = createElement('div', 'title-info');
         const titleDiv = createElement('div', 'title', 'Title');
         titleDiv.setAttribute('contenteditable', 'true');
+        titleDiv.addEventListener('input', setTodoTitle);
         titleInfoDiv.appendChild(titleDiv);
 
         titleDiv.textContent = todo.title;
@@ -75,10 +77,16 @@ const TodoModalUI = (function() {
         dialog.appendChild(todoContainerDiv);
     }
 
+    function setModalInfo() {
+
+    }
+
     function loadModal(card) {
         if (!card) {
             return;
         }
+
+        _card = card;
 
         clearModal();
         createHTML(card.todo);
@@ -93,12 +101,41 @@ const TodoModalUI = (function() {
         dialog.replaceChildren();
     }
 
-    function setCardInfo() {
+    function setCardDiv(todo) {
+        //only need to set title,due date, priority, and desc symbol
+        // _card.cardDiv.updateTitle()
+        CardUI.updateDivTitle(_card.cardDiv, todo.title);
+        CardUI.updateDivDueDate(_card.cardDiv, todo.dueDate);
+    }
+
+    function setTodo() {
 
     }
 
-    function setTodoInfo() {
-        
+    function setTodoTitle(event) {
+        console.log(event.target);
+        _card.todo.title = event.target.textContent;
+        setCardDiv(_card.todo);
+    }
+
+    function setTodoDescription() {
+
+    }
+
+    function setTodoNotes() {
+
+    }
+
+    function setTodoDueDate() {
+
+    }
+
+    function setTodoPriority() {
+
+    }
+
+    function moveTodo() {
+
     }
 
     return { loadModal, closeModal };
