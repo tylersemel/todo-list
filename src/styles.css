@@ -207,8 +207,9 @@ header div {
     max-height: 100%;
 }
 
-.content .lists section .card-container .card {
+.content .lists section .card-container .card  .card-info {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -238,11 +239,20 @@ header div {
     padding-right: 5px;
 }
 
-.content .lists section .card-container .card .more {
-    display: hidden;
-    position: absolute;
-    top: 0;
-    right: 10;
+.content .lists section .card-container .card .symbols {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 12px;
+}
+
+.content .lists section .card-container .card .symbols .due-date,
+.content .lists section .card-container .card .symbols .priority,
+.content .lists section .card-container .card .symbols .has-description {
+    background-color: rgb(164, 206, 255);
+    border-radius: 4px;
+    padding: 0 5px;
+    margin-right: 10px;
 }
 
 .content .lists section .card-container .card:hover {
@@ -253,6 +263,11 @@ header div {
     content: '...';
     color: gray;
     margin-right: 10px;
+    top: 0;
+    right: 0px;
+    position: absolute;
+    background-color: white;
+    padding: 5px;
 }
 
 .content .lists section .card-container .new-card {
@@ -279,27 +294,27 @@ header div {
 .content .lists section .card-container .new-card form {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
+    width: 98%;
 }
 
 .content .lists section .card-container .new-card .title {
     border:none;
     resize: none;
-    width: 350px;
     padding: 7px;
-    /* padding-left: 16px; */
     overflow: hidden;
     display: block;
 }
 
 .content .lists section .card-container .new-card .save {
-    margin-left: 80%;
     padding: 2px 9px;
     background-color: rgb(255, 194, 204);
     border-radius: 4px;
     margin-bottom: 7px;
-    margin-right: 5px;
+    width: 60px;
     transition: 0.1s;
+    align-self: flex-end;
+    margin-right: 8px;
 }
 
 .content .lists section .card-container .new-card .save:hover {

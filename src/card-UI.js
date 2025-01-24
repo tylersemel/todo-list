@@ -156,6 +156,7 @@ const CardUI = (function() {
         titleTextArea.addEventListener('input', autoResize)
 
         const saveBtn = createElement('button', 'save', 'ᯓ➤');
+        saveBtn.setAttribute('title', 'Save');
         saveBtn.setAttribute('type', 'submit');
 
         titleTextArea.addEventListener('keydown', (e) => {
@@ -170,6 +171,7 @@ const CardUI = (function() {
         newCardDiv.appendChild(newCardForm);
 
         const cancelBtn = createElement('button', 'cancel', '✖');
+        cancelBtn.setAttribute('title', 'Cancel');
         cancelBtn.addEventListener('click', handleCancelCard);
         newCardDiv.appendChild(cancelBtn);
 
