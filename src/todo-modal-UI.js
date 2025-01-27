@@ -5,10 +5,13 @@ const TodoModalUI = (function() {
     const dialog = document.querySelector('dialog');
     let _card;
 
+    function createFormHTML(todo) {
+
+    }
+
     function createHTML(todo) {
-        console.log('here');
         const todoContainerDiv = createElement('div', 'todo-container');
-        const exitBtn = createElement('button', 'exit', 'X');
+        const exitBtn = createElement('button', 'exit', '✖');
         exitBtn.addEventListener('click', closeModal);
 
         todoContainerDiv.appendChild(exitBtn);
@@ -19,7 +22,7 @@ const TodoModalUI = (function() {
         const titleInfoDiv = createElement('div', 'title-info');
         const titleDiv = createElement('div', 'title', 'Title');
         titleDiv.setAttribute('contenteditable', 'true');
-        titleDiv.addEventListener('input', setTodoTitle);
+        titleDiv.addEventListener('keydown', setTodoTitle);
         titleInfoDiv.appendChild(titleDiv);
 
         titleDiv.textContent = todo.title;
@@ -28,13 +31,27 @@ const TodoModalUI = (function() {
         const listSpan = createElement('span', 'list', 'in list');
         listInfoDiv.appendChild(listSpan);
 
-        listSpan.textContent = `in ${todo.getStatus()}`;
+        listSpan.textContent = `in list ${todo.getStatus()}`;
+
+        const projectInfoDiv = createElement('div', 'project-info');
+        const projectSpan = createElement('span', 'project', 'in project');
+        projectInfoDiv.appendChild(projectSpan);
+
+        projectSpan.textContent = `in project ${todo.projectName}`;
 
         const descriptionInfoDiv = createElement('div', 'description-info');
         const descriptionSpan = createElement('span', '', 'Description');
-        const descriptionBtn = createElement('button', 'description', 'Add a description...');
+        const descriptionDiv = createElement('div', 'description');
+        descriptionDiv.setAttribute('contenteditable', 'true');
+        descriptionDiv.setAttribute('data-text', "Add a description...");
+        descriptionDiv.addEventListener('keydown', setTodoDescription);
+
         descriptionInfoDiv.appendChild(descriptionSpan);
-        descriptionInfoDiv.appendChild(descriptionBtn);
+        descriptionInfoDiv.appendChild(descriptionDiv);
+
+        if (todo.description) {
+            descriptionDiv.textContent = todo.description;
+        }
 
         const notesInfoDiv = createElement('div', 'notes-info');
         const notesSpan = createElement('span', '', 'Notes');
@@ -45,6 +62,7 @@ const TodoModalUI = (function() {
 
         todoInfoDiv.appendChild(titleInfoDiv);
         todoInfoDiv.appendChild(listInfoDiv);
+        todoInfoDiv.appendChild(projectInfoDiv);
         todoInfoDiv.appendChild(descriptionInfoDiv);
         todoInfoDiv.appendChild(notesInfoDiv);
 
@@ -106,6 +124,7 @@ const TodoModalUI = (function() {
         // _card.cardDiv.updateTitle()
         CardUI.updateDivTitle(_card.cardDiv, todo.title);
         CardUI.updateDivDueDate(_card.cardDiv, todo.dueDate);
+        CardUI.updateDivDescription(_card.cardDiv, todo.description);
     }
 
     function setTodo() {
@@ -113,13 +132,21 @@ const TodoModalUI = (function() {
     }
 
     function setTodoTitle(event) {
-        console.log(event.target);
-        _card.todo.title = event.target.textContent;
-        setCardDiv(_card.todo);
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            return;
+        }
+        else {
+            _card.todo.title = event.target.textContent;
+            setCardDiv(_card.todo);
+        }
     }
 
-    function setTodoDescription() {
+    function setTodoDescription(event) {
+        
 
+        _card.todo.description = event.target.textContent;
+        setCardDiv(_card.todo);
     }
 
     function setTodoNotes() {

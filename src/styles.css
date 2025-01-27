@@ -246,9 +246,9 @@ header div {
     margin-top: 12px;
 }
 
-.content .lists section .card-container .card .symbols .due-date,
-.content .lists section .card-container .card .symbols .priority,
-.content .lists section .card-container .card .symbols .has-description {
+.content .lists section .card-container .card .symbols .due-date:not(:empty),
+.content .lists section .card-container .card .symbols .priority:not(:empty),
+.content .lists section .card-container .card .symbols .has-description:not(:empty) {
     background-color: rgb(164, 206, 255);
     border-radius: 4px;
     padding: 0 5px;
@@ -341,15 +341,98 @@ header div {
 }
 
 dialog {
-    width: 500px;
-    height: 500px;
-    margin: 15vh auto;
+    width: 60vw;
+    height: 80vh;
+    margin: 7vh auto;
     color: black;
     border-radius: 5px;
+}
+
+dialog .todo-container {
+    padding: 20px 50px 20px 30px;
+    position: relative;
 }
 
 dialog .todo {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+dialog .todo-info {
+    background-color: #d8d8d8;
+    border-radius: 4px;
+    flex: 1;
+    padding: 10px;
+}
+
+dialog .exit {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 23px;
+    
+}
+
+
+body > dialog > div > div > div.todo-info > div.description-info {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+body > dialog > div > div > div.todo-info > div.description-info > .description {
+    text-align: left;
+    overflow-y: auto;
+    padding-left: 5px;
+    height: 100px;
+    background-color: #ff5a75;
+    border-radius: 4px;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text)
+  }
+
+dialog .title {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 24px;
+    word-break: break-all;
+}
+
+body > dialog > div > div > div.todo-info > div.notes-info {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+body > dialog > div > div > div.todo-info > div.notes-info > button {
+    text-align: left;
+    overflow-y: auto;
+    padding-left: 5px;
+    height: 100px;
+    background-color: #ff5a75;
+    border-radius: 4px;
+}
+
+dialog .todo-sidebar {
+    background-color: rgb(137, 137, 137);
+    padding: 15px;
+    border-radius: 4px;
+    height: 70vh;
+}
+
+body > dialog > div > div > div.todo-sidebar > div.due-date-info {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+body > dialog > div > div > div.todo-sidebar > div.priority-info {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
 }

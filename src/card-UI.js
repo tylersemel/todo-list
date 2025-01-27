@@ -27,7 +27,7 @@ const CardUI = (function() {
 
     function updateDivDescription(card, hasDescription) {
         if (hasDescription) {
-            card.querySelector('.has-description').textContent = 'Yas';
+            card.querySelector('.has-description').textContent = 'More';
         }
         else {
             card.querySelector('.has-description').textContent = '';
