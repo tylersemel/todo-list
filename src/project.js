@@ -33,6 +33,12 @@ class Project {
     }
 
     addTodoToList(todo, otherList) {
+        this.removeTodo(todo);
+
+        otherList.push(todo);
+    }
+
+    removeTodo(todo) {
         for (const list of this.lists) {
             let index = this.checkTodoInList(todo, list);
             if (index !== -1) {
@@ -40,8 +46,6 @@ class Project {
                 break;
             }
         }
-
-        otherList.push(todo);
     }
 
     getAllTodos() {

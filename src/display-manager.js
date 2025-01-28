@@ -17,6 +17,8 @@ const DisplayManager = (() => {
     let projects = [];
 
     function addProject(project) {
+        //may do 
+        //const project = new Project(title); before later
         projects.push(project);
     }
 
@@ -37,7 +39,7 @@ const DisplayManager = (() => {
 
 const ProjectUI = (function() {
     let projectNameH2;
-    let project;
+    let _project;
     // function addProject(title) {
     //     project = createProject(title);
     // }
@@ -51,6 +53,7 @@ const ProjectUI = (function() {
     // }
 
     function addProject(project) {
+        _project = project; 
         // project = new Project('Default');
     }
 
@@ -79,7 +82,7 @@ const ProjectUI = (function() {
             listSections[i].appendChild(createElement('div', 'card-container'));
 
             let addTaskBtn = createElement('button', 'add-task', '+ Add a task');
-            addTaskBtn.addEventListener('click', handleAddTask);
+            addTaskBtn.addEventListener('click', handleAddTaskClick);
             
             listSections[i].appendChild(addTaskBtn);
             listsDiv.appendChild(listSections[i]);
@@ -90,43 +93,77 @@ const ProjectUI = (function() {
 
     function displayCardsHTML(project) {
         const todos = project.getAllTodos();
+        console.log(_project);
 
         for (const todo of todos) {
             const cardDiv = CardUI.createCardHTML();
             const listSection = contentDiv.querySelector(`.${todo.status}`);
             const cardContainer = listSection.querySelector('.card-container');
-            console.log(cardContainer);
+            
             cardContainer.appendChild(cardDiv);
-            CardUI.renderCardInfo(cardDiv, todo);
+            CardUI.renderCard(cardDiv, todo);
         }
     }
 
-    // function disableAddTaskBtn() {
+    function toggleAddTaskBtns() {
+        const addTaskBtns = contentDiv.querySelectorAll('.add-task');
 
-    // }
+        for (const addTaskBtn of addTaskBtns) {
+            addTaskBtn.disabled = !addTaskBtn.disabled;
+            addTaskBtn.classList.toggle('disabled');
+        }
+    }
 
-    function handleAddTask(event) {
+    function handleAddTaskClick(event) {
         let count = CardUI.getCards().length;
 
         const list = event.target.closest('section').classList[0];
-        //create a todo beforehand and then populate it in if the card gets saved?
-        // const todo = project.createTodoItem('', list);
-        const newCardDiv = CardUI.createPendingCard(list);  
+        
+        //after need to disable add task btn temporarily
+        toggleAddTaskBtns();
+
+        CardUI.createPendingCard(list);  
     }
 
-    // function addTodoToProject(project, todo) {
-    //     project.createT
-    // }
+    function addTodoToProject(title, list) {
+        const todo = _project.createTodoItem(title, list);
+        return todo;
+    }
 
+    function handleSavePendingCard(event) {
+        event.preventDefault();
 
+        const formData = new FormData(event.target);
+        const listSection = event.target.closest('.list');
+
+        //create todo
+        if (formData.get('title') === '') {
+            removePendingCard(listSection);
+            return;
+        }
+
+        
+        // const todo = event.target.todo;
+        // todo.title = formData.get('title');
+        
+        //add data to a new card
+        //add that card to the list
+        //have the project ui module access that newest card and create a todo in that project
+
+        //create cardDiv
+        // createCardDiv(listSection);
+    }
+
+    
 
     function displayProject(project) {
+        addProject(project);
         createOutlineHTML();
         displayProjectTitle(project.title);
         displayCardsHTML(project);
     }
 
-    return { displayProject };
+    return { displayProject, addTodoToProject, toggleAddTaskBtns };
 
 })();
 
@@ -189,19 +226,17 @@ const CardUI = (function() {
         TodoModalUI.loadModal(cards[cardDiv.getAttribute('data-index')]);
     }
 
-    function addCardToList(cardDiv, todo, list) {
+    function addCardToList(cardDiv, list) {
         const listDiv = contentDiv.querySelector(`.${list}`);
         const cardContainerDiv = listDiv.querySelector('.card-container');
 
         cardContainerDiv.appendChild(cardDiv);
-        cardDiv.setAttribute('data-index', cards.length);
-        let card = { cardDiv, todo };
-        cards.push(card);
+        // cardDiv.setAttribute('data-index', cards.length);
+        // let card = { cardDiv, todo };
+        // cards.push(card);
     }
 
-    function renderCardInfo(card, todo) {
-        console.log(todo.title.length);
-
+    function renderCard(card, todo) {
         card.querySelector('.title').textContent = todo.title;
     }
 
@@ -234,13 +269,6 @@ const CardUI = (function() {
         cardContainer.removeChild(child);
     }
 
-    function createCardDiv(todo, listSection) {
-        const cardDiv = createCardHTML();
-        addCardToList(cardDiv, todo, listSection.classList[0]);
-        renderCardInfo(cardDiv, todo);
-        removePendingCard(listSection);
-    }
-
     
     //save pending card === save info to the project's given list of todos
     //then close out the pending card and create the finalized card, display that card
@@ -256,19 +284,20 @@ const CardUI = (function() {
             return;
         }
 
-        // const todo = event.target.todo;
-        // todo.title = formData.get('title');
-        
-        //add data to a new card
-        //add that card to the list
-        //have the project ui module access that newest card and create a todo in that project
+        const todo = ProjectUI.addTodoToProject(formData.get('title'), listSection.classList[0]);
 
         //create cardDiv
-        // createCardDiv(listSection);
+        const cardDiv = createCardHTML();
+        addCardToList(cardDiv, listSection.classList[0]);
+        renderCard(cardDiv, todo);
+        removePendingCard(listSection);
+
+        ProjectUI.toggleAddTaskBtns();
     }
         
     function handleCancelPendingCard(event) {
         removePendingCard(event.target.closest('.list'));
+        ProjectUI.toggleAddTaskBtns();
     }
 
     function createPendingCard(list) {
@@ -318,7 +347,7 @@ const CardUI = (function() {
         getCards,
         createPendingCard,
         createCardHTML,
-        renderCardInfo,
+        renderCard,
         project
     };
 })();

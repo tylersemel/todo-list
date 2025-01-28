@@ -331,7 +331,7 @@ header div {
     margin-top: 10px;
 }
 
-.content .lists section .add-task:hover {
+.content .lists section .add-task:not(:disabled):hover {
     background-color: #898989;
 }
 
@@ -435,4 +435,13 @@ body > dialog > div > div > div.todo-sidebar > div.priority-info {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+.disabled:hover{
+    background-color: none;
 }
