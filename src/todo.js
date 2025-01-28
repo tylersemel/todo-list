@@ -1,7 +1,7 @@
 const STATUS = ['todo', 'doing', 'done'];
 const PRIORITY = ['NONE', 'IMPORTANT', 'URGENT'];
 
-class TodoItem {
+class Todo {
     #status;
     #priority;
 
@@ -46,4 +46,4 @@ class TodoItem {
     }
 }
 
-export { TodoItem, STATUS, PRIORITY };
+export { Todo, STATUS, PRIORITY };
