@@ -1,15 +1,13 @@
 import { createElement } from "./create-element";
 import { TodoModalUI } from "./todo-modal-UI";
-import { TodoItemManager } from "./todo-manager";
-
+import { createProject } from "./create-project";
+import { TodoItem } from "./todo-item";
 //could have cardUImanager and CardUIFactory be different things
 //cardmanager would hold list of cards 
 
 const CardUI = (function() {
-    let index = 0;
-    //cards with contain a list of objects 
-    // object = { div, todo }
     let cards = [];
+    let project;
 
     const contentDiv = document.querySelector('.content');
 
@@ -22,7 +20,7 @@ const CardUI = (function() {
     }
 
     function updateDivPriority(card, priority) {
-
+        card.querySelector('.priority').textContent = priority;
     }
 
     function updateDivDescription(card, hasDescription) {
@@ -58,28 +56,10 @@ const CardUI = (function() {
         return cardDiv;
     }
 
-    function createCardCopy(card) {
-        const copy = createCardHTML();
-        copy.updateTitle(card.querySelector('.title').textContent);
-
-        //Object.assign ?
-
-        return copy;
-    }
-
     function handleCardClick(event) {
         let cardDiv = event.target.closest('.card');
         console.log(cardDiv);
         TodoModalUI.loadModal(cards[cardDiv.getAttribute('data-index')]);
-    }
-
-    function editToHoverCSS(card) {
-
-    }
-
-    function pickUpCard(card) {
-        createCardCopy(card);
-
     }
 
     function addCardToList(cardDiv, todo, list) {
@@ -90,8 +70,6 @@ const CardUI = (function() {
         cardDiv.setAttribute('data-index', cards.length);
         let card = { cardDiv, todo };
         cards.push(card);
-
-        // return card;
     }
 
     function renderCardInfo(card, todo) {
@@ -114,39 +92,6 @@ const CardUI = (function() {
         textArea.focus();
     }
 
-    function removeCardForm(listSection) {
-        const cardContainer = listSection.querySelector('.card-container');
-        const child = cardContainer.querySelector('.new-card');
-        cardContainer.removeChild(child);
-    }
-
-    function handleSaveCard(event) {
-        event.preventDefault();
-
-        const formData = new FormData(event.target);
-        const listSection = event.target.closest('.list');
-
-        //create todo
-        if (formData.get('title') === '') {
-            removeCardForm(listSection);
-            return;
-        }
-        const todo = TodoItemManager.createTodoItem(formData.get('title'));
-        todo.setStatus(listSection.classList[0]);
-        console.log(formData.get('title'));
-        
-        //create cardDiv
-        const cardDiv = createCardHTML();
-        addCardToList(cardDiv, todo, listSection.classList[0]);
-
-        renderCardInfo(cardDiv, todo);
-
-        removeCardForm(listSection);
-    }
-
-    function handleCancelCard(event) {
-        removeCardForm(event.target.closest('.list'));
-    }
 
     function autoResize(event) {
         event.target.style.height = 'auto';
@@ -154,12 +99,58 @@ const CardUI = (function() {
         console.log(event.target.style.height);
     }
 
-    function createCardForm(list) {
+    /** PENDING CARD HTML AND FUNCTIONALITY */
+
+    function removePendingCard(listSection) {
+        const cardContainer = listSection.querySelector('.card-container');
+        const child = cardContainer.querySelector('.new-card');
+        cardContainer.removeChild(child);
+    }
+
+    function createCardDiv(todo, listSection) {
+        const cardDiv = createCardHTML();
+        addCardToList(cardDiv, todo, listSection.classList[0]);
+        renderCardInfo(cardDiv, todo);
+        removePendingCard(listSection);
+    }
+
+    
+    //save pending card === save info to the project's given list of todos
+    //then close out the pending card and create the finalized card, display that card
+    function handleSavePendingCard(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const listSection = event.target.closest('.list');
+
+        //create todo
+        if (formData.get('title') === '') {
+            removePendingCard(listSection);
+            return;
+        }
+
+        const todo = event.target.todo;
+        todo.title = formData.get('title');
+        
+        //add data to a new card
+        //add that card to the list
+        //have the project ui module access that newest card and create a todo in that project
+
+        //create cardDiv
+        createCardDiv(todo, listSection);
+    }
+        
+    function handleCancelPendingCard(event) {
+        removePendingCard(event.target.closest('.list'));
+    }
+
+    function createPendingCard(todo, list) {
         const newCardDiv = createElement('div', 'new-card');
 
         const newCardForm = createElement('form');
         newCardForm.setAttribute('method', 'POST');
-        newCardForm.addEventListener('submit', handleSaveCard);
+        newCardForm.todo = todo;
+        newCardForm.addEventListener('submit', handleSavePendingCard);
 
         const titleTextArea = createElement('textarea', 'title');
         titleTextArea.setAttribute('name', 'title');
@@ -182,7 +173,7 @@ const CardUI = (function() {
 
         const cancelBtn = createElement('button', 'cancel', '✖');
         cancelBtn.setAttribute('title', 'Cancel');
-        cancelBtn.addEventListener('click', handleCancelCard);
+        cancelBtn.addEventListener('click', handleCancelPendingCard);
         newCardDiv.appendChild(cancelBtn);
 
         const listDiv = contentDiv.querySelector(`.${list}`);
@@ -198,9 +189,10 @@ const CardUI = (function() {
         updateDivPriority,
         updateDivDescription,
         getCards,
-        createCardForm
+        createPendingCard,
+        project
     };
-})();
+});
 
 
 

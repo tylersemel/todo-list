@@ -1,49 +1,77 @@
-import { TodoItemManager } from "./todo-manager.js";
+import { TodoItem, STATUS, PRIORITY } from "./todo-item.js";
 
-function createProject(title, description) {
-    let allTodos = [];
+function createProject(title) {
     let todoList = [];
     let doingList = [];
     let doneList = [];
-    
-    function addTodoToList(todo) {
-        todo.projectName = title;
-        allTodos.push(todo);
+    let lists = [todoList, doingList, doneList];
 
-        if (todo.getStatus() == TodoItemManager.STATUS[0]) {
-            todoList.push(todo);
+    function checkWhichList(status) {
+        if (status === STATUS[0]) {
+            return todoList;
         }
-        else if (todo.getStatus() == TodoItemManager.STATUS[1]) {
-            doingList.push(todo);
+        else if (status === STATUS[1]) {
+            return doingList;
         }
-        else if (todo.getStatus() == TodoItemManager.STATUS[2]) {
-            doneList.push(todo);
+        else if (status === STATUS[2]) {
+            return doneList;
         }
     }
 
-    function removeTodoFromList(todo) {
-        allTodos.splice(allTodos.indexOf(todo), 1);
+    function createTodoItem(title, status) {
+        let todo = new TodoItem(title, status);
+        let list = checkWhichList(todo.status);
+        addTodoToList(todo, list);
+        return todo;
+    }
 
-        if (todo.getStatus() == TodoItemManager.STATUS[0]) {
-            todoList.splice(todoList.indexOf(todo), 1);
+    function checkTodoInList(todo, list) {
+        return list.indexOf(todo);
+    }
+
+    function addTodoToList(todo, otherList) {
+        for (const list of lists) {
+            let index = checkTodoInList(todo, list);
+            if (index !== -1) {
+                list.splice(index, 1);
+                break;
+            }
         }
-        else if (todo.getStatus() == TodoItemManager.STATUS[1]) {
-            doingList.splice(doingList.indexOf(todo), 1);
+
+        otherList.push(todo);
+    }
+
+    function getAllTodos() {
+        let allTodos = [];
+
+        for (const list of lists) {
+            for (const todo of list) {
+                allTodos.push(todo);
+            }
         }
-        else if (todo.getStatus() == TodoItemManager.STATUS[2]) {
-            doneList.splice(doneList.indexOf(todo), 1);
-        }        
+
+        return allTodos;
     }
 
     //for debugging
     function printAllTodos() {
-        for (let i = 0; i < allTodos.length; i++) {
-            console.log('Todo #' + (i + 1));
-            allTodos[i].printTodo();
+        let todos = getAllTodos();
+
+        for (const todo of todos) {
+            todo.printTodo();
         }
     }
 
-    return { title, description, addTodoToList, removeTodoFromList, printAllTodos }
+    return { 
+        title, 
+        addTodoToList, 
+        printAllTodos, 
+        createTodoItem, 
+        checkWhichList,
+        todoList, 
+        doingList, 
+        doneList 
+    }
 }
 
 export { createProject }

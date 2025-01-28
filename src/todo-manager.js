@@ -65,4 +65,5 @@ const TodoItemManager = (function() {
     return { STATUS, PRIORITY, createTodoItem };
 })();
 
+
 export { TodoItemManager };

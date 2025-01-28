@@ -2,6 +2,9 @@ import { createElement } from "./create-element";
 import { CardUI } from "./card-UI";
 import { createProject } from "./create-project";
 
+/**
+ * IGNOREEE
+ */
 const GeneralPageModule = (function() {
     const contentDiv = document.querySelector('.content');
     let _project;
