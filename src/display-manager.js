@@ -32,6 +32,10 @@ const DisplayManager = (() => {
         ProjectUI.displayProject(project);
     }
 
+    function displaySidebarProjectList() {
+        
+    }
+
 
     return { displayProject, addProject };
     
@@ -513,4 +517,4 @@ const TodoModalUI = (function() {
 
 // })();
 
-export { DisplayManager };
+export { DisplayManager, ProjectUI };

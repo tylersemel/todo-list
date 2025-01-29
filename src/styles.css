@@ -118,6 +118,10 @@ header div {
 
 .sidebar .projects-list {
     margin-top: 30px;
+    margin-bottom: 100px;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar .projects-list .child {

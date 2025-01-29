@@ -1,3 +1,6 @@
+import { Project } from "./project";
+import { DisplayManager } from "./display-manager";
+
 const CreateProjectModal = (() => {
     const dialog = document.querySelector('dialog');
     const contentDiv = document.querySelector('.content');
@@ -23,6 +26,9 @@ const CreateProjectModal = (() => {
         </div>`;
         const cancelBtn = dialog.querySelector('.cancel');
         cancelBtn.addEventListener('click', closeModal);
+
+        const form = dialog.querySelector('form');
+        form.addEventListener('submit', saveNewProject);
     }
 
     function editModalMargin() {
@@ -33,6 +39,27 @@ const CreateProjectModal = (() => {
 
     function closeModal() {
         dialog.close();
+    }
+
+    function saveNewProject(event) {
+        event.preventDefault()
+
+        const formData = new FormData(event.target);
+
+        const project = new Project(formData.get('title'));
+        DisplayManager.addProject(project);
+        createSidebarProjectHTML(formData.get('title'));
+    }
+
+    function createSidebarProjectHTML(title) {
+        const newProjectBtn = document.createElement('button');
+        newProjectBtn.classList.add('child');
+        newProjectBtn.classList.add('project-btn');
+        newProjectBtn.textContent = title;
+
+        const createProjectBtn = document.querySelector('.create-project-btn');
+        const projectsListDiv = document.querySelector('.projects-list');
+        projectsListDiv.insertBefore(newProjectBtn, createProjectBtn);
     }
 
     return { displayModal };
