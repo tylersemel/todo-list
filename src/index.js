@@ -27,6 +27,6 @@ testProjBtn.addEventListener('click', () => {
     DisplayManager.displayProject(testProj);
 });
 
-DisplayManager.displayProject(testProj);
+// DisplayManager.displayProject(testProj);
 
 

@@ -1,5 +1,6 @@
 import { Project } from "./project.js";
 import { Todo } from "./todo";
+import { AllProjectsUI } from "./all-projects-page.js";
 
 //put all display stuff in here for now.
 const createElement = (elem, className, text) => {
@@ -62,6 +63,16 @@ const DisplayManager = (() => {
 
     return { displayProject, addProject };
     
+})();
+
+const SidebarUI = (() => {
+    //manage all sidebar buttons
+    const allProjectsBtn = document.querySelector('.your-projects-btn');
+    allProjectsBtn.addEventListener('click', AllProjectsUI.handleAllProjectsBtn);
+
+    
+
+
 })();
 
 //for the content area
@@ -538,4 +549,4 @@ const TodoModalUI = (function() {
 
 // })();
 
-export { DisplayManager, ProjectUI };
+export { DisplayManager, ProjectUI, SidebarUI };

@@ -486,7 +486,7 @@ dialog[class="create-project"] form p {
     flex-direction: column;
 }
 
-dialog[class="create-project"] form button[type=submit] {
+dialog.create-project form button[type=submit] {
     align-self: end;
     background-color: #ff5a75;
     padding: 0 5px;
