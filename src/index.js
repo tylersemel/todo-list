@@ -13,9 +13,12 @@ const testProj = new Project('Test');
 const testProjBtn = document.querySelector('.test-proj');
 
 testProj.createTodoItem('Testing task');
-testProj.createTodoItem('Testing task 2', STATUS[1]);
+testProj.createTodoItem('Testing task todo 2', STATUS[0]);
+testProj.createTodoItem('Testing doing', STATUS[1]);
 
 testProjBtn.addEventListener('click', () => {
     //prob should have a function that adds the project first then displays it
     DisplayManager.displayProject(testProj);
 });
+
+DisplayManager.displayProject(testProj);
