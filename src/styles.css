@@ -134,6 +134,78 @@ header div {
 
 .content {
     background-color: var(--main-bg-color);
+
+    max-height: 100%;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+}
+
+.all-projects-page {
+    max-height: 100%;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+}
+
+.all-projects-page h2 {
+    /* height: 45px; */
+    display: flex;
+    flex-direction: column;
+
+    align-items: start;
+    justify-content: center;
+    text-indent: 50px;
+    
+    background-color: rgb(178, 178, 178);
+    color: rgb(0, 0, 0);
+}
+
+.all-projects-page h3 {
+    text-indent: 50px;
+    margin-top: 25px;
+    font-size: 21px;
+}
+
+.all-projects-page .all-projects-container {
+    background-color: rgb(86, 86, 86);
+    padding: 20px;
+    margin-top: 15px;
+    margin-left: 10%;
+    margin-right: 10%;
+    /* width: 63%;
+    height: 80%; */
+    /* width: 80%; */
+    /* width: fit-content; */
+    min-width: fit-content;
+    height: 60vh;
+    overflow-y: auto;
+    margin-bottom: 15%;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 2rem;
+    border-radius: 5px;
+}
+
+.all-projects-page .all-projects-container button {
+    background-color: rgb(251, 251, 251);
+    /* width: fit-content;
+    max-width: 200px; */
+    /* height: 150px; */
+    padding: 20px 30px;
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+.all-projects-page .all-projects-container button p {
+    margin-top: 25px;
+    font-size: 24px;
+    text-align: end;
+}
+
+.project-page {
+    background-color: var(--main-bg-color);
     display: grid;
     grid-template-rows: 45px auto;
     position: relative;
@@ -144,7 +216,7 @@ header div {
     width: 100%;
 }
 
-.content .project-name {
+.project-page .project-name {
     display: flex;
     align-items: center;
     text-indent: 50px;
@@ -153,7 +225,7 @@ header div {
     color: rgb(0, 0, 0);
 }
 
-.content .lists {
+.project-page .lists {
     background-color: rgb(98, 98, 98);
     display: grid;
     grid-template-columns: repeat(3, 400px);
@@ -170,7 +242,7 @@ header div {
     padding-top: 10px;
 }
 
-.content .lists section {
+.project-page .lists section {
     display: flex;
     flex-direction: column;
     font-size: 20px;
@@ -183,7 +255,7 @@ header div {
     margin-left: 10px;
 }
 
-.content .lists section h3 {
+.project-page .lists section h3 {
     background-color: white;
     font-size: 24px;
     padding: 2px 0;
@@ -193,7 +265,7 @@ header div {
     border-top-right-radius: 3px;
 }
 
-.content .lists section .card-container {
+.project-page .lists section .card-container {
     width: 97%;
     background-color: #b7b7b7;
     border-radius: 3px;
@@ -211,14 +283,14 @@ header div {
     max-height: 100%;
 }
 
-.content .lists section .card-container .card  .card-info {
+.project-page .lists section .card-container .card  .card-info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.content .lists section .card-container .card,
-.content .lists section .card-container .new-card {
+.project-page .lists section .card-container .card,
+.project-page .lists section .card-container .new-card {
     width: 95%;
     height: 90px;
     min-height: fit-content;
@@ -229,41 +301,41 @@ header div {
     position: relative; 
 }
 
-.content .lists section .card-container .card .card-info {
+.project-page .lists section .card-container .card .card-info {
     padding: 9px;
 }
 
-.content .lists section .card-container .card .card-info .title {
+.project-page .lists section .card-container .card .card-info .title {
     word-break: break-all;
 }
 
-.content .lists section .card-container .card button {
+.project-page .lists section .card-container .card button {
     background-color: gray;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.content .lists section .card-container .card .symbols {
+.project-page .lists section .card-container .card .symbols {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     margin-top: 12px;
 }
 
-.content .lists section .card-container .card .symbols .due-date:not(:empty),
-.content .lists section .card-container .card .symbols .priority:not(:empty),
-.content .lists section .card-container .card .symbols .has-description:not(:empty) {
+.project-page .lists section .card-container .card .symbols .due-date:not(:empty),
+.project-page .lists section .card-container .card .symbols .priority:not(:empty),
+.project-page .lists section .card-container .card .symbols .has-description:not(:empty) {
     background-color: rgb(164, 206, 255);
     border-radius: 4px;
     padding: 0 5px;
     margin-right: 10px;
 }
 
-.content .lists section .card-container .card:hover {
+.project-page .lists section .card-container .card:hover {
     outline: 2px solid blue;
 }
 
-.content .lists section .card-container .card:hover::after{
+.project-page .lists section .card-container .card:hover::after{
     content: '...';
     color: gray;
     margin-right: 10px;
@@ -274,13 +346,13 @@ header div {
     padding: 5px;
 }
 
-.content .lists section .card-container .new-card {
+.project-page .lists section .card-container .new-card {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.content .lists section .card-container .new-card .cancel {
+.project-page .lists section .card-container .new-card .cancel {
     position: absolute;
     bottom: 0;
     right: 90px;
@@ -291,18 +363,18 @@ header div {
     transition: 0.1s;
 }
 
-.content .lists section .card-container .new-card .cancel:hover {
+.project-page .lists section .card-container .new-card .cancel:hover {
     background-color: rgb(148, 148, 148);
 }
 
-.content .lists section .card-container .new-card form {
+.project-page .lists section .card-container .new-card form {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 98%;
 }
 
-.content .lists section .card-container .new-card .title {
+.project-page .lists section .card-container .new-card .title {
     border:none;
     resize: none;
     padding: 7px;
@@ -310,7 +382,7 @@ header div {
     display: block;
 }
 
-.content .lists section .card-container .new-card .save {
+.project-page .lists section .card-container .new-card .save {
     padding: 2px 9px;
     background-color: rgb(255, 194, 204);
     border-radius: 4px;
@@ -321,21 +393,21 @@ header div {
     margin-right: 8px;
 }
 
-.content .lists section .card-container .new-card .save:hover {
+.project-page .lists section .card-container .new-card .save:hover {
     background-color: #ff5a75;
 }
 
-.content .lists section .card-container .new-card .title:focus {
+.project-page .lists section .card-container .new-card .title:focus {
     outline:none;
 }
 
-.content .lists section .add-task {
+.project-page .lists section .add-task {
     padding: 4px;
     transition: 0.2s;
     margin-top: 10px;
 }
 
-.content .lists section .add-task:not(:disabled):hover {
+.project-page .lists section .add-task:not(:disabled):hover {
     background-color: #898989;
 }
 

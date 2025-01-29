@@ -70,7 +70,7 @@ const SidebarUI = (() => {
     const allProjectsBtn = document.querySelector('.your-projects-btn');
     allProjectsBtn.addEventListener('click', AllProjectsUI.handleAllProjectsBtn);
 
-    
+
 
 
 })();
@@ -90,8 +90,11 @@ const ProjectUI = (function() {
     }
 
     function createOutlineHTML() {
+        const projectPageContainer = createElement('div', 'project-page');
+        
         projectNameH2 = createElement('h2', 'project-name');
-        contentDiv.appendChild(projectNameH2);
+        projectPageContainer.appendChild(projectNameH2);
+        
 
         const listsDiv = createElement('div', 'lists');
 
@@ -116,7 +119,8 @@ const ProjectUI = (function() {
             listsDiv.appendChild(listSections[i]);
         }
 
-        contentDiv.appendChild(listsDiv);
+        projectPageContainer.appendChild(listsDiv);
+        contentDiv.appendChild(projectPageContainer);
     }
 
     function displayCardsHTML(project) {
