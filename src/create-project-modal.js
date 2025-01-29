@@ -1,6 +1,7 @@
 import { Project } from "./project";
 import { DisplayManager } from "./display-manager";
 
+//for the modal display and saving only
 const CreateProjectModal = (() => {
     const dialog = document.querySelector('dialog');
     const contentDiv = document.querySelector('.content');
@@ -9,10 +10,11 @@ const CreateProjectModal = (() => {
         dialog.classList.add('create-project');
         createModalHTML();
         dialog.showModal();
-        editModalMargin();
     }
 
     function createModalHTML() {
+        editModalMargin();
+
         dialog.innerHTML = 
         `<div class="create-project-container">
             <form action="" method="POST">
@@ -45,21 +47,9 @@ const CreateProjectModal = (() => {
         event.preventDefault()
 
         const formData = new FormData(event.target);
+        DisplayManager.addProject(formData.get('title'));
 
-        const project = new Project(formData.get('title'));
-        DisplayManager.addProject(project);
-        createSidebarProjectHTML(formData.get('title'));
-    }
-
-    function createSidebarProjectHTML(title) {
-        const newProjectBtn = document.createElement('button');
-        newProjectBtn.classList.add('child');
-        newProjectBtn.classList.add('project-btn');
-        newProjectBtn.textContent = title;
-
-        const createProjectBtn = document.querySelector('.create-project-btn');
-        const projectsListDiv = document.querySelector('.projects-list');
-        projectsListDiv.insertBefore(newProjectBtn, createProjectBtn);
+        closeModal();
     }
 
     return { displayModal };

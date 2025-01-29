@@ -16,6 +16,7 @@ generalBtn.addEventListener('click', () => {
 
 const testProj = new Project('Test');
 const testProjBtn = document.querySelector('.test-proj');
+testProjBtn.classList.add('child');
 
 testProj.createTodoItem('Testing task');
 testProj.createTodoItem('Testing task todo 2', STATUS[0]);

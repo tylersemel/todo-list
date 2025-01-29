@@ -15,19 +15,42 @@ const contentDiv = document.querySelector('.content');
 //projects created outside of here in index
 const DisplayManager = (() => {
     let projects = [];
+    let projectBtns = [];
 
-    function addProject(project) {
-        //may do 
-        //const project = new Project(title); before later
+    function addProject(title) {
+        const project = new Project(title);
         projects.push(project);
+        projectBtns.push(createSidebarProjectHTML(project, projects.length - 1));
+    }
+
+    function createSidebarProjectHTML(project, idx) {
+        const newProjectBtn = document.createElement('button');
+        newProjectBtn.classList.add('child');
+        newProjectBtn.classList.add('project-btn');
+        newProjectBtn.setAttribute('data-index', idx);
+
+        const createProjectBtn = document.querySelector('.create-project-btn');
+        const projectsListDiv = document.querySelector('.projects-list');
+        projectsListDiv.insertBefore(newProjectBtn, createProjectBtn);
+
+        newProjectBtn.addEventListener('click', handleClickProjectBtn);
+        newProjectBtn.textContent = project.title;
+        return newProjectBtn;
     }
 
     function clearContent() {
         contentDiv.replaceChildren();
     }
 
+    function handleClickProjectBtn(event) {
+        const btn = event.target;
+        const idx = btn.getAttribute('data-index');
+
+        displayProject(projects[idx]);
+    }
+
     function displayProject(project) {
-        // ProjectUI.addProject(project);
+        console.log(project);
         clearContent();
         ProjectUI.displayProject(project);
     }
@@ -41,6 +64,7 @@ const DisplayManager = (() => {
     
 })();
 
+//for the content area
 const ProjectUI = (function() {
     let projectNameH2;
     let _project;
@@ -86,7 +110,6 @@ const ProjectUI = (function() {
 
     function displayCardsHTML(project) {
         const todos = project.getAllTodos();
-        console.log(_project);
 
         for (const todo of todos) {
             const cardDiv = CardUI.createCardHTML();
@@ -186,7 +209,6 @@ const CardUI = (function() {
 
     function handleCardClick(event) {
         let cardDiv = event.target.closest('.card');
-        console.log(cardDiv);
         TodoModalUI.loadModal(cards[cardDiv.getAttribute('data-index')]);
     }
 
@@ -216,7 +238,6 @@ const CardUI = (function() {
     function autoResize(event) {
         event.target.style.height = 'auto';
         event.target.style.height = event.target.scrollHeight + 'px';
-        console.log(event.target.style.height);
     }
 
     /** PENDING CARD HTML AND FUNCTIONALITY */
