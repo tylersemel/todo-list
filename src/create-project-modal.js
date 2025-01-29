@@ -19,7 +19,7 @@ const CreateProjectModal = (() => {
         `<div class="create-project-container">
             <form action="" method="POST">
                 <p>
-                    <label for="title">Name</label>
+                    <label for="title">Project Name</label>
                     <input type="text" id="title" name="title">
                 </p>
                 <button type="submit">Save</button>
