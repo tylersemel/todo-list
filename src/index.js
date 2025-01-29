@@ -2,6 +2,11 @@ import "./styles.css";
 import { DisplayManager } from "./display-manager";
 import { Project } from "./project";
 import { STATUS } from "./todo";
+import { CreateProjectModal } from "./create-project-modal";
+const createProjectBtn = document.querySelector('.create-project-btn');
+createProjectBtn.addEventListener('click', CreateProjectModal.displayModal);
+
+
 
 const defaultProject = new Project('Default');
 const generalBtn = document.querySelector('.general-proj-btn');
@@ -22,3 +27,5 @@ testProjBtn.addEventListener('click', () => {
 });
 
 DisplayManager.displayProject(testProj);
+
+

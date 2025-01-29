@@ -413,6 +413,7 @@ const TodoModalUI = (function() {
             return;
         }
 
+        dialog.classList.add('todo-modal');
         _card = card;
 
         clearModal();
