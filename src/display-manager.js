@@ -20,8 +20,10 @@ const DisplayManager = (() => {
 
     function addProject(title) {
         const project = new Project(title);
+        console.log(project);
         projects.push(project);
         projectBtns.push(createSidebarProjectHTML(project, projects.length - 1));
+        return project;
     }
 
     function createSidebarProjectHTML(project, idx) {
@@ -46,12 +48,12 @@ const DisplayManager = (() => {
     function handleClickProjectBtn(event) {
         const btn = event.target;
         const idx = btn.getAttribute('data-index');
-
+        console.log(projects[idx]);
+        console.log(idx);
         displayProject(projects[idx]);
     }
 
     function displayProject(project) {
-        console.log(project);
         clearContent();
         ProjectUI.displayProject(project);
     }
@@ -60,15 +62,19 @@ const DisplayManager = (() => {
         
     }
 
+    function getProjects() {
+        return projects;
+    }
 
-    return { displayProject, addProject };
+
+    return { displayProject, addProject, clearContent, getProjects, handleClickProjectBtn };
     
 })();
 
 const SidebarUI = (() => {
     //manage all sidebar buttons
     const allProjectsBtn = document.querySelector('.your-projects-btn');
-    allProjectsBtn.addEventListener('click', AllProjectsUI.handleAllProjectsBtn);
+    allProjectsBtn.addEventListener('click', AllProjectsUI.handleClickAllProjectsBtn);
 
 
 

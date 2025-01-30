@@ -200,7 +200,6 @@ header div {
     align-items: start;
     text-align: start;
     
-
 }
 
 .all-projects-page .all-projects-container button span {
@@ -208,11 +207,15 @@ header div {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    pointer-events: none;
 }
 
 .all-projects-page .all-projects-container button p {
     margin-top: 15px;
     font-size: 21px;
+
+    pointer-events: none;
 }
 
 .project-page {

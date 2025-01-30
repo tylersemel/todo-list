@@ -47,7 +47,8 @@ const CreateProjectModal = (() => {
         event.preventDefault()
 
         const formData = new FormData(event.target);
-        DisplayManager.addProject(formData.get('title'));
+        const project = DisplayManager.addProject(formData.get('title'));
+        DisplayManager.displayProject(project);
 
         closeModal();
     }
