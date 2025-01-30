@@ -126,6 +126,10 @@ header div {
 
 .sidebar .projects-list .child {
     text-indent: 50px;
+    width: 230px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .sidebar button:hover {
@@ -146,10 +150,14 @@ header div {
     height: 100%;
     min-height: 100%;
     width: 100%;
+    background-color: #898989;
+
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .all-projects-page h2 {
-    /* height: 45px; */
+    padding: 2px 0;
     display: flex;
     flex-direction: column;
 
@@ -163,45 +171,48 @@ header div {
 
 .all-projects-page h3 {
     text-indent: 50px;
-    margin-top: 25px;
+    margin-top: 10px;
     font-size: 21px;
 }
 
 .all-projects-page .all-projects-container {
-    background-color: rgb(86, 86, 86);
-    padding: 20px;
     margin-top: 15px;
-    margin-left: 10%;
-    margin-right: 10%;
-    /* width: 63%;
-    height: 80%; */
-    /* width: 80%; */
-    /* width: fit-content; */
+    margin-left: 50px;
+    margin-right: 50px;
     min-width: fit-content;
-    height: 60vh;
-    overflow-y: auto;
-    margin-bottom: 15%;
+    /* margin-bottom: 15%; */
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-rows: auto;
     gap: 2rem;
     border-radius: 5px;
 }
 
 .all-projects-page .all-projects-container button {
     background-color: rgb(251, 251, 251);
-    /* width: fit-content;
-    max-width: 200px; */
-    /* height: 150px; */
-    padding: 20px 30px;
+    padding: 15px 20px;
     border-radius: 5px;
     font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    text-align: start;
+    
+
+}
+
+.all-projects-page .all-projects-container button span {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .all-projects-page .all-projects-container button p {
-    margin-top: 25px;
-    font-size: 24px;
-    text-align: end;
+    margin-top: 15px;
+    font-size: 21px;
 }
 
 .project-page {
@@ -558,7 +569,7 @@ dialog[class="create-project"] form p {
     flex-direction: column;
 }
 
-dialog.create-project form button[type=submit] {
+dialog[class="create-project"] form button[type=submit] {
     align-self: end;
     background-color: #ff5a75;
     padding: 0 5px;
