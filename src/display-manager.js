@@ -2,6 +2,7 @@ import { Project } from "./project.js";
 import { Todo } from "./todo";
 import { AllProjectsUI } from "./all-projects-page.js";
 import { AllTasksPageUI } from "./all-tasks-page.js";
+import { TodoUI } from "./todo-UI.js";
 
 //put all display stuff in here for now.
 const createElement = (elem, className, text) => {
@@ -86,6 +87,7 @@ const SidebarUI = (() => {
 const ProjectUI = (function() {
     let projectNameH2;
     let _project;
+    let cards = []; // need to add divs to this list, so that the data-index is reset for each project
 
     function addProject(project) {
         _project = project; 
@@ -135,6 +137,7 @@ const ProjectUI = (function() {
 
         for (const todo of todos) {
             const cardDiv = CardUI.createCardHTML();
+            cardDiv.setAttribute('data-project-idx', DisplayManager.getProjects().indexOf(_project));
             const listSection = contentDiv.querySelector(`.${todo.status}`);
             const cardContainer = listSection.querySelector('.card-container');
             
@@ -163,8 +166,9 @@ const ProjectUI = (function() {
         CardUI.createPendingCard(list);  
     }
 
-    function addTodoToProject(title, list) {
+    function addTodoToProject(title, list, cardDiv) {
         const todo = _project.createTodoItem(title, list);
+        cardDiv.setAttribute('data-project-idx', DisplayManager.getProjects().indexOf(_project));
         return todo;
     }    
 
@@ -224,8 +228,8 @@ const CardUI = (function() {
 
         const cardDiv = createElement('div', 'card');
         cardDiv.appendChild(cardInfo);
-        cardDiv.addEventListener('click', handleCardClick);
-
+        // cardDiv.addEventListener('click', handleCardClick);
+        cardDiv.addEventListener('click', TodoUI.handleClickTodo);
         return cardDiv;
     }
 
@@ -289,10 +293,11 @@ const CardUI = (function() {
             return;
         }
 
-        const todo = ProjectUI.addTodoToProject(formData.get('title'), listSection.classList[0]);
+        
 
         //create cardDiv
         const cardDiv = createCardHTML();
+        const todo = ProjectUI.addTodoToProject(formData.get('title'), listSection.classList[0], cardDiv);
         addCardToList(cardDiv, listSection.classList[0], todo);
         renderCard(cardDiv, todo);
         removePendingCard(listSection);

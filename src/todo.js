@@ -5,7 +5,7 @@ class Todo {
     #status;
     #priority;
 
-    constructor(title, status, description, dueDate, priority, notes, checkList) {
+    constructor(title, status, projectIdx, description, dueDate, priority, notes, checkList) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -13,6 +13,7 @@ class Todo {
         this.#priority = !priority ? PRIORITY[0] : priority;
         this.notes = notes;
         this.checkList = checkList;
+        this.projectIdx = projectIdx;
     }
 
     get status() {
