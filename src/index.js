@@ -24,3 +24,5 @@ testProj.createTodoItem('Testing doing', STATUS[1]);
 // DisplayManager.displayProject(defaultProject);
 
 
+// const dialog = document.querySelector('dialog');
+// dialog.showModal();

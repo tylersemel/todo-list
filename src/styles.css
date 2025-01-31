@@ -617,3 +617,8 @@ tr:first-child {
     text-align: left;
     text-indent: 5px;
 }
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}

@@ -532,39 +532,4 @@ const TodoModalUI = (function() {
     return { loadModal, closeModal };
 })();
 
-//Maybe throw out
-// const PageController = (function() {
-//     //in charge of sidebar projects
-//     let projects = [];
-//     // let defaultProject;
-//     //singleton
-//     // let ProjectUI = ProjectUI();
-//     const contentDiv = document.querySelector('.content');
-//     const generalBtn = document.querySelector('.general-proj-btn');
-//     generalBtn.addEventListener('click', handleGeneralBtnClick );
-
-//     const defaultProject = ProjectUI.addProject('Default');
-
-    
-
-//     function displayGeneralProjectPage() {
-//         ProjectUI.displayProject('Default');
-//     }
-
-//     function handleGeneralBtnClick() {
-//         clearContent();
-//         displayGeneralProjectPage();
-//     }
-
-//     function clearContent() {
-//         contentDiv.replaceChildren();
-//     }
-
-//     return { 
-//         projects,
-//         displayGeneralProjectPage 
-//     }
-
-// })();
-
-export { DisplayManager, ProjectUI, SidebarUI };
+export { DisplayManager, ProjectUI, SidebarUI, CardUI };
