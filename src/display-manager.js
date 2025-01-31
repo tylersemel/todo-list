@@ -1,6 +1,7 @@
 import { Project } from "./project.js";
 import { Todo } from "./todo";
 import { AllProjectsUI } from "./all-projects-page.js";
+import { AllTasksPageUI } from "./all-tasks-page.js";
 
 //put all display stuff in here for now.
 const createElement = (elem, className, text) => {
@@ -76,8 +77,8 @@ const SidebarUI = (() => {
     const allProjectsBtn = document.querySelector('.your-projects-btn');
     allProjectsBtn.addEventListener('click', AllProjectsUI.handleClickAllProjectsBtn);
 
-
-
+    const allTasksBtn = document.querySelector('.all-tasks-btn');
+    allTasksBtn.addEventListener('click', AllTasksPageUI.handleClickAllTasksBtn);
 
 })();
 

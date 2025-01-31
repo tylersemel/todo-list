@@ -614,4 +614,6 @@ tr:nth-child(even) {
 
 tr:first-child {
     border-bottom: 1px solid black;
+    text-align: left;
+    text-indent: 5px;
 }
