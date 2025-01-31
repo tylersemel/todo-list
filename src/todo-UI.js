@@ -10,6 +10,7 @@ const TodoUI = (() => {
     cancel.addEventListener('click', closeModal);
     let _todo;
     const dialog = document.querySelector('dialog');
+    dialog.className = 'todo-dialog';
     let cardDiv;
 
     //should have function called that adds all these listeners

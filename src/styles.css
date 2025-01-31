@@ -428,7 +428,7 @@ body > div > div.content > div > div > button:hover {
 }
 
 ::backdrop {
-    background-color: aliceblue;
+    background-color: rgb(171, 171, 171);
     opacity: 0.7;
 }
 
@@ -440,93 +440,11 @@ body > div > div.content > div > div > button:hover {
     border-radius: 5px;
 }
 
-dialog .todo-container {
-    padding: 20px 50px 20px 30px;
-    position: relative;
-}
-
-dialog .todo {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-dialog .todo-info {
-    background-color: #d8d8d8;
-    border-radius: 4px;
-    flex: 1;
-    padding: 10px;
-}
-
-dialog .exit {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    font-size: 23px;
-    
-}
-
-body > dialog > div > div > div.todo-info > div.description-info {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-}
-
-body > dialog > div > div > div.todo-info > div.description-info > .description {
-    text-align: left;
-    overflow-y: auto;
-    padding-left: 5px;
-    height: 100px;
-    background-color: #ff5a75;
-    border-radius: 4px;
-}
 
 [contentEditable=true]:empty:not(:focus):before {
     content: attr(data-text)
   }
 
-dialog[class="todo-modal"] .title {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    overflow-y: auto;
-    font-size: 24px;
-    word-break: break-all;
-}
-
-body > dialog > div > div > div.todo-info > div.notes-info {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-}
-
-body > dialog > div > div > div.todo-info > div.notes-info > button {
-    text-align: left;
-    overflow-y: auto;
-    padding-left: 5px;
-    height: 100px;
-    background-color: #ff5a75;
-    border-radius: 4px;
-}
-
-dialog .todo-sidebar {
-    background-color: rgb(137, 137, 137);
-    padding: 15px;
-    border-radius: 4px;
-    height: 70vh;
-}
-
-body > dialog > div > div > div.todo-sidebar > div.due-date-info {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-}
-
-body > dialog > div > div > div.todo-sidebar > div.priority-info {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-}
 
 .disabled {
     opacity: 0.6;
@@ -618,7 +536,71 @@ tr:first-child {
     text-indent: 5px;
 }
 
+dialog.todo-dialog {
+    margin: 100px auto;
+    /* padding: 10px; */
+    width: 650px;
+    height: 450px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px rgb(63, 63, 63);
+    font-size: 18px;
+}
+
+dialog.todo-dialog button {
+    width: fit-content;
+    word-break: break-all;
+}
+
+dialog.todo-dialog .todo-container {
+    height: 100%;
+    width: 100%;
+}
+
+dialog.todo-dialog .todo-container .modal-top,
+dialog.todo-dialog .todo-container .main-modal {
+    padding: 10px 25px;
+}
+
+dialog.todo-dialog .todo-container .modal-top {
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+dialog.todo-dialog .todo-container .main-modal {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    gap: 30px;
+
+}
+
+dialog.todo-dialog .todo-container .main-modal .main-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 20px;
+}
+
+dialog.todo-dialog .todo-container .main-modal .main-info button {
+    width: 100%;
+    text-align: left;
+}
+
+dialog.todo-dialog .todo-container .main-modal .main-info .todo-title-container,
+dialog.todo-dialog .todo-container .main-modal .main-info .description-container,
+dialog.todo-dialog .todo-container .main-modal .main-info .todo-title-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+dialog.todo-dialog input[type=text] {
+    width: 90%;
+}
+
+
 .hidden {
-    display: none;
-    visibility: hidden;
+    display: none !important;
 }

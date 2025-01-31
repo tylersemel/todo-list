@@ -7,7 +7,7 @@ const CreateProjectModal = (() => {
     const contentDiv = document.querySelector('.content');
 
     function displayModal() {
-        dialog.classList.add('create-project');
+        dialog.className = 'create-project';
         createModalHTML();
         dialog.showModal();
     }

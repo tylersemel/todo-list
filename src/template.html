@@ -53,7 +53,7 @@
             
         </div>
     </dialog> -->
-    <dialog>
+    <dialog class="todo-dialog">
         <div class="todo-container">
             <div class="modal-top">
                <form action="" class="project-title-form">
@@ -63,7 +63,7 @@
                         <option value="test">Test</option>
                    </select>
                </form>
-               <button class="cancel">X</button>
+               <button class="cancel">✖</button>
             </div>
             <div class="main-modal">
                 <div class="main-info">
@@ -85,7 +85,7 @@
                     <div class="description-container hidden">
                         <form action="" class="description-form">
                             <label for="description">Task</label>
-                            <input type="text" id="description" name="description" value="Description">
+                            <textarea name="description" id="description"></textarea>
                             <button type="submit">Save</button>
                         </form>
                     </div>
