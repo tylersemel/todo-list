@@ -157,7 +157,7 @@ header div {
     overflow-x: hidden;
 }
 
-.all-projects-page h2 {
+.all-projects-page h2, .project-name {
     padding: 2px 0;
     display: flex;
     flex-direction: column;
@@ -579,4 +579,39 @@ dialog[class="create-project"] form button[type=submit] {
     background-color: #ff5a75;
     padding: 0 5px;
     border-radius: 4px;
+}
+
+.tasks-table-container {
+    width: 100%;
+    height: 100%;
+    padding: 15px 25px;
+    font-size: 20px;
+    overflow-y: auto;
+}
+
+th {
+    height: 10px;
+}
+
+td {
+    height: 20px;
+    padding: 4px;
+    max-width: 200px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+tr:nth-child(even) {
+    background-color: #D6EEEE;
+  }
+
+.tasks-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tr:first-child {
+    border-bottom: 1px solid black;
 }

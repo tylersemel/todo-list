@@ -21,6 +21,6 @@ testProj.createTodoItem('Testing task');
 testProj.createTodoItem('Testing task todo 2', STATUS[0]);
 testProj.createTodoItem('Testing doing', STATUS[1]);
 
-DisplayManager.displayProject(defaultProject);
+// DisplayManager.displayProject(defaultProject);
 
 
