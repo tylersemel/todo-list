@@ -21,8 +21,27 @@ const AllProjectsUI = (() => {
         </div>`;
 
         addProjects();
+        addProjectAmount();
     }
 
+    function addProjects() {
+        const allProjectsPageDiv = document.querySelector('.all-projects-page');
+        const allProjectsContainer = document.querySelector('.all-projects-container');
+
+        for (const project of DisplayManager.getProjects()) {
+            const projectBtn = createProjectHTML(project);
+            allProjectsContainer.appendChild(projectBtn);
+            projectBtn.addEventListener('click', DisplayManager.handleClickProjectBtn);
+        }
+
+        allProjectsPageDiv.appendChild(allProjectsContainer);
+    }
+
+    function addProjectAmount() {
+        const h3 = document.querySelector('.all-projects-page h3');
+        h3.textContent = `${DisplayManager.getProjects().length} Projects`;
+    }
+    
     function createProjectHTML(project) {
         const projectBtn = document.createElement('button');
         const projectSpan = document.createElement('span');
@@ -37,19 +56,6 @@ const AllProjectsUI = (() => {
         projectSpan.textContent = project.title;
         projectTasks.textContent = `${project.getAllTodos().length} Tasks`;
         return projectBtn;
-    }
-
-    function addProjects() {
-        const allProjectsPageDiv = document.querySelector('.all-projects-page');
-        const allProjectsContainer = document.querySelector('.all-projects-container');
-
-        for (const project of DisplayManager.getProjects()) {
-            const projectBtn = createProjectHTML(project);
-            allProjectsContainer.appendChild(projectBtn);
-            projectBtn.addEventListener('click', DisplayManager.handleClickProjectBtn);
-        }
-
-        allProjectsPageDiv.appendChild(allProjectsContainer);
     }
 
     return { handleClickAllProjectsBtn };

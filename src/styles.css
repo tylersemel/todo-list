@@ -99,6 +99,7 @@ header div {
     
     font-size: 18px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .sidebar .top {
@@ -345,7 +346,8 @@ header div {
     margin-right: 10px;
 }
 
-.project-page .lists section .card-container .card:hover {
+.project-page .lists section .card-container .card:hover,
+body > div > div.content > div > div > button:hover {
     outline: 2px solid blue;
 }
 

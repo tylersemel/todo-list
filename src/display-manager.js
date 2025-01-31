@@ -469,6 +469,8 @@ const TodoModalUI = (function() {
 
     function closeModal() {
         dialog.close();
+        dialog.classList.remove('todo-modal');
+        dialog.replaceChildren();
     }
 
     function clearModal() {

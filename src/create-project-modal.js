@@ -40,6 +40,9 @@ const CreateProjectModal = (() => {
     }
 
     function closeModal() {
+        dialog.classList.remove('create-project');
+        dialog.replaceChildren();
+        dialog.style.marginTop = 'auto'; //need to fix
         dialog.close();
     }
 
