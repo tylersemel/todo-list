@@ -574,7 +574,6 @@ dialog.todo-dialog .todo-container .main-modal {
     flex-direction: row;
     margin-top: 10px;
     gap: 30px;
-
 }
 
 dialog.todo-dialog .todo-container .main-modal .main-info {
@@ -591,7 +590,8 @@ dialog.todo-dialog .todo-container .main-modal .main-info button {
 
 dialog.todo-dialog .todo-container .main-modal .main-info .todo-title-container,
 dialog.todo-dialog .todo-container .main-modal .main-info .description-container,
-dialog.todo-dialog .todo-container .main-modal .main-info .todo-title-container form {
+dialog.todo-dialog .todo-container .main-modal .main-info .todo-title-container form,
+dialog.todo-dialog .todo-container .main-modal .main-info .description-container form {
     display: flex;
     flex-direction: column;
 }
@@ -603,4 +603,15 @@ dialog.todo-dialog input[type=text] {
 
 .hidden {
     display: none !important;
+}
+
+dialog.todo-dialog .side-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+dialog.todo-dialog .side-info div form {
+    display: flex;
+    flex-direction: column;
 }

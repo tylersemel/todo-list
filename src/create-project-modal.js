@@ -1,4 +1,3 @@
-import { Project } from "./project";
 import { DisplayManager } from "./display-manager";
 
 //for the modal display and saving only

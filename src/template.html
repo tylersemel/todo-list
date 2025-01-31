@@ -80,17 +80,17 @@
                     </div>
                     <div class="description-container">
                         <span>Description</span>
-                        <button class="description">Words...</button>
+                        <button class="description">Add a description...</button>
                     </div>
                     <div class="description-container hidden">
                         <form action="" class="description-form">
-                            <label for="description">Task</label>
+                            <label for="description">Description</label>
                             <textarea name="description" id="description"></textarea>
                             <button type="submit">Save</button>
                         </form>
                     </div>
                     <div class="list-container">
-                        <form action="">
+                        <form action="" class="list-form">
                             <label for="list">In list</label>
                             <select name="list" id="list">
                                 <option value="todo">To do</option>
@@ -104,16 +104,19 @@
                 </div>
                 <div class="side-info">
                     <div class="due-date-container">
-                        <form action="">
+                        <form action="" class="due-form">
                             <label for="due-date">Due</label>
                             <select name="due-date" id="due-date">
                             </select>
                         </form>
                     </div>
                     <div class="priority-container">
-                        <form action="">
+                        <form action="" class="priority-form">
                             <label for="priority">Priority</label>
                             <select name="priority" id="priority">
+                                <option value="none">None</option>
+                                <option value="important">Important</option>
+                                <option value="Urgent">Urgent</option>
                             </select>
                         </form>
                     </div>
