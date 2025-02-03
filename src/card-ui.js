@@ -3,7 +3,6 @@ import { ProjectUI } from "./project-ui";
 import { TodoUI } from "./todo-UI";
 //soley focus on UI of cards, not instantiation of todos or projects
 const CardUI = (function() {
-    let cards = [];
     const contentDiv = document.querySelector('.content');
 
     function updateDivTitle(card, title) {
@@ -46,37 +45,27 @@ const CardUI = (function() {
 
         const cardDiv = createElement('div', 'card');
         cardDiv.appendChild(cardInfo);
-        // cardDiv.addEventListener('click', handleCardClick);
+
         cardDiv.addEventListener('click', TodoUI.handleClickTodo);
+        
+
         return cardDiv;
     }
 
-    function handleCardClick(event) {
-        let cardDiv = event.target.closest('.card');
-        // TodoModalUI.loadModal(cards[cardDiv.getAttribute('data-index')]);
-    }
+    function setCardAttributes(cardDiv, cardIdx, projectIdx) {
+        cardDiv.setAttribute('data-index', cardIdx);
+        cardDiv.setAttribute('data-project-idx', projectIdx);
 
-    function addCardToList(cardDiv, list, todo) {
-        const listDiv = contentDiv.querySelector(`.${list}`);
-        const cardContainerDiv = listDiv.querySelector('.card-container');
-
-        cardContainerDiv.appendChild(cardDiv);
-        cardDiv.setAttribute('data-index', cards.length);
-        let card = { cardDiv, todo };
-        cards.push(card);
     }
 
     function renderCard(card, todo) {
         card.querySelector('.title').textContent = todo.title;
     }
 
-    function getCards() {
-        return cards;
-    }
 
     function deleteCard(card) {
-        card.parentNode.removeChild(card);
-        cards.splice(cards.indexOf(card), 1);
+        // card.parentNode.removeChild(card);
+        // cards.splice(cards.indexOf(card), 1);
     }
 
     function autoResize(event) {
@@ -111,11 +100,8 @@ const CardUI = (function() {
             return;
         }
 
-        //create cardDiv
-        const cardDiv = createCardHTML();
-        const todo = ProjectUI.addTodoToProject(formData.get('title'), listSection.classList[0], cardDiv);
-        addCardToList(cardDiv, listSection.classList[0], todo);
-        renderCard(cardDiv, todo);
+        ProjectUI.addTodoToProject(formData.get('title'), listSection.classList[0]);
+
         removePendingCard(listSection);
 
         ProjectUI.toggleAddTaskBtns();
@@ -170,11 +156,10 @@ const CardUI = (function() {
         updateDivDueDate,
         updateDivPriority,
         updateDivDescription,
-        getCards,
         createPendingCard,
         createCardHTML,
         renderCard,
-        addCardToList,
+        setCardAttributes,
         autoResize
     };
 })();
