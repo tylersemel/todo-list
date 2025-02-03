@@ -1,5 +1,6 @@
-import { DisplayManager, createElement } from "./display-manager";
+import { createElement } from "./display-manager";
 import { ProjectUI } from "./project-ui";
+import { TodoUI } from "./todo-UI";
 //soley focus on UI of cards, not instantiation of todos or projects
 const CardUI = (function() {
     let cards = [];

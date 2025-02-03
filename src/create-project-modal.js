@@ -3,7 +3,6 @@ import { DisplayManager } from "./display-manager";
 //for the modal display and saving only
 const CreateProjectModal = (() => {
     const dialog = document.querySelector('dialog');
-    const contentDiv = document.querySelector('.content');
 
     function displayModal() {
         dialog.className = 'create-project';

@@ -9,7 +9,7 @@ const AllTasksPageUI = (() => {
 
     function createPageHTML() {
         contentDiv.innerHTML = 
-        `<h2 class="project-name">All Tasks</h2>
+        `<h2 class="all-tasks">All Tasks</h2>
             <div class="tasks-table-container">
                 <table class="tasks-table">
                     <tr>

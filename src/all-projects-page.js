@@ -6,7 +6,6 @@ const AllProjectsUI = (() => {
     
     function handleClickAllProjectsBtn() {
         DisplayManager.clearContent();
-        console.log(DisplayManager.getProjects());
         createPageHTML();
     }
 

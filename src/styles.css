@@ -157,7 +157,8 @@ header div {
     overflow-x: hidden;
 }
 
-.all-projects-page h2, .project-name {
+.all-projects-page h2,
+.content .all-tasks {
     padding: 2px 0;
     display: flex;
     flex-direction: column;

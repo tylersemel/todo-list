@@ -1,5 +1,6 @@
 import { CardUI } from "./card-ui";
 import { DisplayManager, createElement } from "./display-manager";
+import { TodoUI } from "./todo-UI";
 //for the content area
 const ProjectUI = (function() {
     const contentDiv = document.querySelector('.content');
@@ -9,7 +10,6 @@ const ProjectUI = (function() {
 
     function addProject(project) {
         _project = project; 
-        // project = new Project('title');
     }
 
     function displayProjectTitle(title) {
@@ -88,7 +88,15 @@ const ProjectUI = (function() {
         const todo = _project.createTodoItem(title, list);
         cardDiv.setAttribute('data-project-idx', DisplayManager.getProjects().indexOf(_project));
         return todo;
-    }    
+    } 
+    
+    function addCard(card) {
+        cards.push(card);
+    }
+
+    function getCards() {
+        return cards;
+    }
 
     function displayProject(project) {
         addProject(project);
