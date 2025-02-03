@@ -3,7 +3,8 @@ import { CardUI } from "./card-ui.js";
 
 const TodoUI = (() => {
     let _todo;
-    let cardDiv;
+    let list;
+    let _cardDiv;
     
     function createOutlineHTML() {
         dialog.innerHTML = 
@@ -100,11 +101,13 @@ const TodoUI = (() => {
         listSelect.addEventListener('click', handleClickList);
     }
 
-    //this has been fired from the CardUI, maybe should move back there
-    function handleClickTodo(event) {
-        cardDiv = event.target.closest('.card');
-        _todo = DisplayManager.getProjects()[0].getAllTodos()[0]; // thgis is wrong but just to test
-        console.log(cardDiv);
+    function displayModal(cardDiv) {
+        _cardDiv = cardDiv;
+        const todoIdx = cardDiv.getAttribute('data-index');
+        const projectIdx = cardDiv.getAttribute('data-project-idx');
+        list = cardDiv.closest(`.list`).id;
+        _todo = DisplayManager.getProjects()[projectIdx].getTodoFromList(list, todoIdx);
+        console.log(_todo);
         
         createOutlineHTML();
         dialog.showModal();
@@ -140,7 +143,7 @@ const TodoUI = (() => {
     }
 
     function moveCardToList(list) {
-        CardUI.addCardToList(cardDiv, list, _todo);
+        CardUI.addCardToList(_cardDiv, list, _todo);
     }
 
     function handleClickDescription() {
@@ -165,7 +168,7 @@ const TodoUI = (() => {
         const formData = new FormData(event.target);
         _todo.description = formData.get('description');
 
-        CardUI.updateDivDescription(cardDiv, _todo.description);
+        CardUI.updateDivDescription(_cardDiv, _todo.description);
         handleClickDescription();
         displayDescription();
     }
@@ -173,7 +176,7 @@ const TodoUI = (() => {
     function handleClickTodoTitle() {
         const todoTitleContainers = document.querySelectorAll('.todo-title-container');
     
-       toggleHidden(todoTitleContainers);
+        toggleHidden(todoTitleContainers);
     }
 
     function displayTodoTitle() {
@@ -189,7 +192,7 @@ const TodoUI = (() => {
         const formData = new FormData(event.target);
         _todo.title = formData.get('todo-title');
 
-        CardUI.updateDivTitle(cardDiv, _todo.title);
+        CardUI.updateDivTitle(_cardDiv, _todo.title);
         handleClickTodoTitle();
         displayTodoTitle();
     }
@@ -198,7 +201,7 @@ const TodoUI = (() => {
         dialog.close();    
     }
 
-    return { handleClickTodo };
+    return { displayModal };
 })();
 
 export { TodoUI };

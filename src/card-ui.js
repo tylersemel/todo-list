@@ -46,10 +46,16 @@ const CardUI = (function() {
         const cardDiv = createElement('div', 'card');
         cardDiv.appendChild(cardInfo);
 
-        cardDiv.addEventListener('click', TodoUI.handleClickTodo);
+        cardDiv.addEventListener('click', handleClickTodo);
         
 
         return cardDiv;
+    }
+
+    function handleClickTodo(event) {
+        const cardDiv = event.target.closest('.card');
+
+        TodoUI.displayModal(cardDiv);
     }
 
     function setCardAttributes(cardDiv, cardIdx, projectIdx) {

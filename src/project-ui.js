@@ -79,15 +79,17 @@ const ProjectUI = (function() {
         //add card to cards list
         switch (todo.status) {
             case STATUS[0]:
-                CardUI.setCardAttributes(cardDiv, todoCards.length, projectIdx);
+                CardUI.setCardAttributes(cardDiv, todoCards.indexOf(cardDiv), projectIdx);
                 break;
             case STATUS[1]:
-                CardUI.setCardAttributes(cardDiv, doingCards.length, projectIdx);
+                CardUI.setCardAttributes(cardDiv, doingCards.indexOf(cardDiv), projectIdx);
                 break;
             case STATUS[2]:
-                CardUI.setCardAttributes(cardDiv, doneCards.length, projectIdx);
+                CardUI.setCardAttributes(cardDiv, doneCards.indexOf(cardDiv), projectIdx);
                 break;
         }
+
+        // CardUI.setCardAttributes(cardDiv, todoCards.indexOf(cardDiv), projectIdx);
     }
 
     function displayCard(listClass) {

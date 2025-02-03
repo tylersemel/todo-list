@@ -48,6 +48,11 @@ class Project {
         }
     }
 
+    getTodoFromList(whichList, idx) {
+        const list = this.checkWhichList(whichList);
+        return list[idx];
+    }
+
     getAllTodos() {
         let allTodos = [];
 
