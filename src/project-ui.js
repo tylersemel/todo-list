@@ -145,13 +145,17 @@ const ProjectUI = (function() {
     } 
     
     function addCard(card, cardList) {
-        // if (cardList.indexOf(card) !== -1) {
+        if (cardList.indexOf(card) === -1) {
             cardList.push(card);
-        // }
+        }
     }
 
     function getCards() {
         return cards;
+    }
+
+    function removeCardFromList(card, list) {
+        
     }
 
     function displayProject(project) {
@@ -166,7 +170,7 @@ const ProjectUI = (function() {
         displayCards();
     }
 
-    return { displayProject, addTodoToProject, toggleAddTaskBtns, getCards };
+    return { displayProject, addTodoToProject, toggleAddTaskBtns, getCards, displayCards };
 
 })();
 

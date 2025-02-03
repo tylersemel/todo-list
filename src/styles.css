@@ -577,6 +577,11 @@ dialog.todo-dialog .todo-container .main-modal {
     gap: 30px;
 }
 
+dialog.todo-dialog .todo-container .main-modal textarea {
+    resize: none;
+    overflow: hidden;
+}
+
 dialog.todo-dialog .todo-container .main-modal .main-info {
     display: flex;
     flex-direction: column;

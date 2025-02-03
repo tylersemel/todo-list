@@ -65,14 +65,12 @@ const CardUI = (function() {
     }
 
     function renderCard(card, todo) {
-        card.querySelector('.title').textContent = todo.title;
+        updateDivTitle(card, todo.title);
+        updateDivDescription(card, todo.description);
+        updateDivDueDate(card, todo.dueDate);
+        updateDivPriority(card, todo.priority);
     }
 
-
-    function deleteCard(card) {
-        // card.parentNode.removeChild(card);
-        // cards.splice(cards.indexOf(card), 1);
-    }
 
     function autoResize(event) {
         event.target.style.height = 'auto';
