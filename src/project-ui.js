@@ -35,9 +35,12 @@ const ProjectUI = (function() {
         const listsDiv = createElement('div', 'lists');
 
         const listSections = [];
-        listSections.push(createElement('section', 'todo'));
-        listSections.push(createElement('section', 'doing'));
-        listSections.push(createElement('section', 'done'));
+        listSections.push(createElement('section'));
+        listSections[0].id = 'todo';
+        listSections.push(createElement('section'));
+        listSections[1].id = 'doing';
+        listSections.push(createElement('section'));
+        listSections[2].id = 'done';
 
         for (let i = 0; i < listSections.length; i++) {
             let text = 'To do';
@@ -89,7 +92,7 @@ const ProjectUI = (function() {
 
     function displayCard(listClass) {
         const cardDiv = CardUI.createCardHTML();
-        const listSection = contentDiv.querySelector(`.${listClass}`);
+        const listSection = contentDiv.querySelector(`#${listClass}`);
         const cardContainer = listSection.querySelector('.card-container');
         
         cardContainer.appendChild(cardDiv);
@@ -120,7 +123,7 @@ const ProjectUI = (function() {
 
     function handleAddTaskClick(event) {
         const listSection = event.target.closest('section');
-        const list = listSection.classList[0]; //may need to change to individual lists later
+        const list = listSection.id; 
         //just make it an id
         
         //after need to disable add task btn temporarily

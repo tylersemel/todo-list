@@ -100,7 +100,7 @@ const CardUI = (function() {
             return;
         }
 
-        ProjectUI.addTodoToProject(formData.get('title'), listSection.classList[0]);
+        ProjectUI.addTodoToProject(formData.get('title'), listSection.id);
 
         removePendingCard(listSection);
 
@@ -143,7 +143,7 @@ const CardUI = (function() {
         cancelBtn.addEventListener('click', handleCancelPendingCard);
         newCardDiv.appendChild(cancelBtn);
 
-        const listDiv = contentDiv.querySelector(`.${list}`);
+        const listDiv = contentDiv.querySelector(`#${list}`);
         const cardContainerDiv = listDiv.querySelector('.card-container');
 
         cardContainerDiv.appendChild(newCardDiv);
