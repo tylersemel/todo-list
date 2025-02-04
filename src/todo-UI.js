@@ -1,6 +1,6 @@
 import { DisplayManager } from "./display-manager";
 import { CardUI } from "./card-ui.js";
-import { format, parse, endOfDay } from "date-fns";
+import { format } from "date-fns";
 
 const TodoUI = (() => {
     let _todo;
@@ -163,8 +163,7 @@ const TodoUI = (() => {
         const dueDateInput = document.querySelector('dialog #due-date');
 
         if (!_todo.dueDate) {
-            const today = format(endOfDay(new Date()), "yyyy-MM-dd");
-            dueDateInput.value = today;
+            dueDateInput.value = "yyyy-mm-dd";
         }
         else {
            dueDateInput.value =  format(_todo.dueDate, "yyyy-MM-dd");

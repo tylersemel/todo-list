@@ -1,6 +1,6 @@
 const STATUS = ['todo', 'doing', 'done'];
 const PRIORITY = ['none', 'important', 'urgent'];
-import { format, parse, endOfDay } from "date-fns";
+import { format, parse } from "date-fns";
 
 class Todo {
     #status;
