@@ -4,7 +4,7 @@ import { AllTasksPageUI } from "./all-tasks-page.js";
 import { ProjectUI } from "./project-ui.js";
 import { CreateProjectModal } from "./create-project-modal";
 import { CreateTaskModal } from "./create-task-modal.js";
-import { TodoUI } from "./todo-UI.js";
+import { TodayTasksPageUI } from "./today-tasks-page.js";
 //put all display stuff in here for now.
 const createElement = (elem, className, text) => {
     const element = document.createElement(elem);
@@ -16,6 +16,7 @@ const createElement = (elem, className, text) => {
 const SidebarUI = (() => {
     //manage all sidebar buttons
     const todayBtn = document.querySelector('.today-btn');
+    todayBtn.addEventListener('click', TodayTasksPageUI.handleClickTodayBtn);
 
     const allTasksBtn = document.querySelector('.all-tasks-btn');
     allTasksBtn.addEventListener('click', AllTasksPageUI.handleClickAllTasksBtn);

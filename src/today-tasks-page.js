@@ -1,39 +1,46 @@
 import { DisplayManager } from "./display-manager";
 import { PRIORITY } from "./todo";
+import { format, endOfDay } from "date-fns";
 
-const AllTasksPageUI = (() => {
+const TodayTasksPageUI = (() => { 
     const contentDiv = document.querySelector('.content');
-    
-    function handleClickAllTasksBtn(event) {
+
+    function handleClickTodayBtn(event) {
         createPageHTML();
     }
 
     function createPageHTML() {
         contentDiv.innerHTML = 
-        `<h2 class="all-tasks">All Tasks</h2>
+        `<h2 class="all-tasks">Tasks Due Today</h2>
+            <p class="today">Today's date:</p>
             <div class="tasks-table-container">
                 <table class="tasks-table">
                     <tr>
-                        <th>Priority</th>
                         <th>Task</th>
                         <th>List</th>
                         <th>Project</th>
-                        <th>Due Date</th>
+                        <th>Priority</th>
                     </tr>
                 </table>
             </div>`;
         
+        const p = document.querySelector('.today');
+        p.textContent += ' ' + format(endOfDay(new Date()), "MMM dd yyyy");
         displayAllTasks();
     }
 
     function displayAllTasks() {
         const table = document.querySelector('table');
-        const tbody = table.querySelector('tbody');
+
         for (const project of DisplayManager.getProjects()) {
             for (const task of project.getAllTodos()) {
-                console.log(task);
-                const tr = createTaskHTML(task, project);
-                tbody.appendChild(tr);
+                if (task.dueDate === format(endOfDay(new Date()), "MMM dd yyyy")) {
+                    console.log(task.dueDate);
+                    const tr = createTaskHTML(task, project);
+                    table.appendChild(tr);
+                }
+                // console.log(task);
+                
             }
         }
     }
@@ -44,46 +51,35 @@ const AllTasksPageUI = (() => {
         const tdList = document.createElement('td');
         const tdProject = document.createElement('td');
         const tdPriority = document.createElement('td');
-        const tdDueDate = document.createElement('td');
-        const circleDiv = document.createElement('div');
-        tdPriority.appendChild(circleDiv);
 
-        tr.appendChild(tdPriority);
         tr.appendChild(tdTask);
         tr.appendChild(tdList);
         tr.appendChild(tdProject);
-        
-        tr.appendChild(tdDueDate);
+        tr.appendChild(tdPriority);
 
         tdTask.textContent = task.title;
         tdList.textContent = task.status;
         tdProject.textContent = project.title;
-        tdDueDate.textContent = task.dueDate;
-
-        
 
         switch (task.priority) {
             case PRIORITY[0]:
                 tdPriority.textContent = '';
-                // tdPriority.style.backgroundColor = 'lightgreen';
+                tr.style.backgroundColor = 'lightgreen';
                 break;
             case PRIORITY[1]:
-                circleDiv.textContent = 'Important'; 
-                circleDiv.style.backgroundColor = 'orange';
-                circleDiv.style.borderRadius = '5px';
+                tdPriority.textContent = task.priority; 
+                tr.style.backgroundColor = 'orange';
                 break;
             case PRIORITY[2]:
-                circleDiv.textContent = 'Urgent'; 
-                circleDiv.style.backgroundColor = 'red';
-                circleDiv.style.borderRadius = '5px';
+                tdPriority.textContent = task.priority; 
+                tr.style.backgroundColor = 'red';
                 break;
         }
 
         return tr;
     }
 
-    return { handleClickAllTasksBtn };
-
+    return { handleClickTodayBtn };
 })();
 
-export { AllTasksPageUI };
+export { TodayTasksPageUI };

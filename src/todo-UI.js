@@ -163,7 +163,7 @@ const TodoUI = (() => {
         const dueDateInput = document.querySelector('dialog #due-date');
 
         if (!_todo.dueDate) {
-            dueDateInput.value = "yyyy-mm-dd";
+            dueDateInput.value = "yyyy-MM-dd";
         }
         else {
            dueDateInput.value =  format(_todo.dueDate, "yyyy-MM-dd");
@@ -308,6 +308,7 @@ const TodoUI = (() => {
 
     function closeModal() {
         dialog.className = '';
+        dialog.replaceChildren();
         dialog.close();    
     }    
     
