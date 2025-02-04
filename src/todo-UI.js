@@ -103,12 +103,12 @@ const TodoUI = (() => {
         descriptionForm.addEventListener('submit', handleSubmitDescription);
         descriptionBtn.addEventListener('click', handleClickDescription);
         listSelect.addEventListener('input', (event) => {
-            if (event.target.selected === _todo.status) {
-                return;
-            }
-            else {
+            // if (event.target.selected === _todo.status) {
+            //     return;
+            // }
+            // else {
                 handleClickList(event);
-            }
+            // }
         });
         description.addEventListener('input', CardUI.autoResize);
         description.addEventListener('keydown', (e) => {
@@ -119,22 +119,6 @@ const TodoUI = (() => {
         });
     }
 
-    function displayModal(cardDiv) {
-        _cardDiv = cardDiv;
-        const todoIdx = cardDiv.getAttribute('data-index');
-        projectIdx = cardDiv.getAttribute('data-project-idx');
-        list = cardDiv.closest(`.list`).id;
-        _todo = DisplayManager.getProjects()[projectIdx].getTodoFromList(list, todoIdx);
-        
-        createOutlineHTML();
-        dialog.showModal();
-
-        displayTodoTitle();
-        displayDescription();
-        displayList();
-        addEvents();
-    }
-    
     function toggleHidden(elements) {
         for (const div of elements) {
             div.classList.toggle('hidden');
@@ -155,18 +139,13 @@ const TodoUI = (() => {
     }
 
     function displayList() {
-        const options = document.querySelectorAll('dialog .list option');
-        const listSelect = document.querySelector('dialog .list-form select');
-
+        const options = document.querySelectorAll('dialog #list option');
+        
         for(const option of options) {
             if (option.value === _todo.status) {
-                listSelect.selected = _todo.status;
+                option.selected = _todo.status;
             }
         }
-    }
-
-    function moveCardToList(list) {
-        // CardUI.addCardToList(_cardDiv, list, _todo);
     }
 
     function handleClickDescription() {
@@ -222,6 +201,22 @@ const TodoUI = (() => {
 
     function closeModal() {
         dialog.close();    
+    }    
+    
+    function displayModal(cardDiv) {
+        _cardDiv = cardDiv;
+        const todoIdx = cardDiv.getAttribute('data-index');
+        projectIdx = cardDiv.getAttribute('data-project-idx');
+        list = cardDiv.closest(`.list`).id;
+        _todo = DisplayManager.getProjects()[projectIdx].getTodoFromList(list, todoIdx);
+        
+        createOutlineHTML();
+        dialog.showModal();
+
+        displayTodoTitle();
+        displayDescription();
+        displayList();
+        addEvents();
     }
 
     return { displayModal };
