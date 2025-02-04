@@ -1,5 +1,6 @@
 import { DisplayManager } from "./display-manager";
 import { CardUI } from "./card-ui.js";
+import { format, parse, endOfDay } from "date-fns";
 
 const TodoUI = (() => {
     let _todo;
@@ -143,21 +144,32 @@ const TodoUI = (() => {
         DisplayManager.displayProject(project);
     }
 
-
-    function handleClickDueDate(event) {
-        
+    function handleClickDueDate() {
         const dueForm = document.querySelector('dialog .due-form');
         const formData = new FormData(dueForm);
-        console.log(formData.get('due-date'));
-        _todo.dueDate = formData.get('due-date');
         const project = DisplayManager.getProjects()[projectIdx];
+        
+        if (formData.get('due-date')) {
+            _todo.dueDate = formData.get('due-date');
+        }
+        else {
+            _todo.dueDate = '';
+        }
+
         DisplayManager.displayProject(project);
     }
 
     function displayDueDate() {
+        const dueDateInput = document.querySelector('dialog #due-date');
 
+        if (!_todo.dueDate) {
+            const today = format(endOfDay(new Date()), "yyyy-MM-dd");
+            dueDateInput.value = today;
+        }
+        else {
+           dueDateInput.value =  format(_todo.dueDate, "yyyy-MM-dd");
+        }   
     }
-
 
     function handleClickPriority(event) {
         const priorityForm = document.querySelector('dialog .priority-form');
@@ -177,7 +189,6 @@ const TodoUI = (() => {
             }
         }
     }
-
 
     function handleClickProject(event) {
         const listForm = document.querySelector('dialog .project-title-form');
@@ -223,7 +234,6 @@ const TodoUI = (() => {
             }
         }
     }
-
     
     function handleClickList(event) {
         const listForm = document.querySelector('dialog .list-form');
@@ -317,6 +327,7 @@ const TodoUI = (() => {
         displayList();
         displayProject();
         displayPriority();
+        displayDueDate();
         addEvents();
     }
 

@@ -12,8 +12,11 @@ const CardUI = (function() {
 
     function updateDivDueDate(card, dueDate) {
         const dueDateDiv = card.querySelector('.due-date');
-        dueDateDiv.textContent = '📅 ';
-        dueDateDiv.textContent += dueDate;
+        if (dueDate) {
+            dueDateDiv.textContent = '📅 ';
+            dueDateDiv.textContent += dueDate; 
+        }
+        
     }
 
     function updateDivPriority(card, priority) {

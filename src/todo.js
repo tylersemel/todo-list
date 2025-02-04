@@ -1,6 +1,6 @@
 const STATUS = ['todo', 'doing', 'done'];
 const PRIORITY = ['none', 'important', 'urgent'];
-import { format, parse } from "date-fns";
+import { format, parse, endOfDay } from "date-fns";
 
 class Todo {
     #status;
@@ -15,7 +15,7 @@ class Todo {
         this.notes = notes;
         this.checkList = checkList;
         this.projectIdx = projectIdx;
-        this.#dueDate = format(new Date(2014, 1, 11), "MMM dd yyyy");
+        this.#dueDate = '';
     }
 
     get status() {
@@ -45,8 +45,14 @@ class Todo {
     }
 
     set dueDate(due) {
-        const date = parse(due, 'yyyy-MM-dd', new Date());
-        this.#dueDate = format(date, "MMM dd yyyy");
+        if (!due) {
+            this.#dueDate = '';
+        }
+        else {
+            const date = parse(due, 'yyyy-MM-dd', new Date());
+            this.#dueDate = format(date, "MMM dd yyyy"); 
+        }
+        
     }
 
     printTodo() {
