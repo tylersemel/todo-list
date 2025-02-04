@@ -1,6 +1,7 @@
 import { createElement } from "./display-manager";
 import { ProjectUI } from "./project-ui";
 import { TodoUI } from "./todo-UI";
+import { PRIORITY } from "./todo";
 //soley focus on UI of cards, not instantiation of todos or projects
 const CardUI = (function() {
     const contentDiv = document.querySelector('.content');
@@ -14,7 +15,13 @@ const CardUI = (function() {
     }
 
     function updateDivPriority(card, priority) {
-        card.querySelector('.priority').textContent = priority;
+        if (priority === PRIORITY[0]) {
+            card.querySelector('.priority').textContent = '';
+        }
+        else {
+          card.querySelector('.priority').textContent = priority;  
+        }
+        
     }
 
     function updateDivDescription(card, hasDescription) {

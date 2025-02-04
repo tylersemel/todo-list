@@ -141,6 +141,7 @@ const TodoUI = (() => {
         const originalProject = DisplayManager.getProjects()[projectIdx];
         originalProject.removeTodo(_todo);
         project.addTodoToList(_todo, list);
+        projectIdx = idx;
         DisplayManager.displayProject(project);
     }
 
