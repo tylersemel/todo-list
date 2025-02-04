@@ -3,6 +3,8 @@ import { AllProjectsUI } from "./all-projects-page.js";
 import { AllTasksPageUI } from "./all-tasks-page.js";
 import { ProjectUI } from "./project-ui.js";
 import { CreateProjectModal } from "./create-project-modal";
+import { CreateTaskModal } from "./create-task-modal.js";
+import { TodoUI } from "./todo-UI.js";
 //put all display stuff in here for now.
 const createElement = (elem, className, text) => {
     const element = document.createElement(elem);
@@ -17,6 +19,9 @@ const SidebarUI = (() => {
 
     const allTasksBtn = document.querySelector('.all-tasks-btn');
     allTasksBtn.addEventListener('click', AllTasksPageUI.handleClickAllTasksBtn);
+
+    const createTaskBtn = document.querySelector('.create-task-btn');
+    createTaskBtn.addEventListener('click', CreateTaskModal.handleClickCreateModal);
 
     const allProjectsBtn = document.querySelector('.your-projects-btn');
     allProjectsBtn.addEventListener('click', AllProjectsUI.handleClickAllProjectsBtn);
@@ -50,13 +55,6 @@ const DisplayManager = (() => {
     const contentDiv = document.querySelector('.content');
 
     function addProject(title) {
-        for (const proj of projects) {
-            if (proj.title === title) {
-                console.log('cannot have same name');
-                return null;
-            }
-        }
-
         const project = new Project(title);
         projects.push(project);
         sidebarUI.createSidebarProjectHTML(project, projects.length - 1);

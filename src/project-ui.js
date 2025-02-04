@@ -161,7 +161,7 @@ const ProjectUI = (function() {
     function displayProject(project) {
         if (!project) {
             displayProject(DisplayManager.getProjects()[0]);
-            //should have error message
+            //should have error message otherwise display default / unsorted
             return;
         }
         todoCards = [];

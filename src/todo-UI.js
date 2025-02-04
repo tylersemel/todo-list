@@ -1,6 +1,5 @@
 import { DisplayManager } from "./display-manager";
 import { CardUI } from "./card-ui.js";
-import { ProjectUI } from "./project-ui.js";
 
 const TodoUI = (() => {
     let _todo;
@@ -78,6 +77,14 @@ const TodoUI = (() => {
                 </div>
             </div>
         </div>`;
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete';
+        deleteBtn.textContent = 'Delete Todo';
+        deleteBtn.addEventListener('click', handleClickDelete);
+
+        dialog.appendChild(deleteBtn);
+
     }
 
     const dialog = document.querySelector('dialog');
@@ -122,6 +129,16 @@ const TodoUI = (() => {
         for (const div of elements) {
             div.classList.toggle('hidden');
         }
+    }
+
+    function handleClickDelete(event) {
+        const project = DisplayManager.getProjects()[projectIdx];
+
+        project.removeTodo(_todo);
+
+        closeModal();
+
+        DisplayManager.displayProject(project);
     }
 
     function handleClickPriority(event) {
@@ -263,6 +280,7 @@ const TodoUI = (() => {
     }
 
     function closeModal() {
+        dialog.className = '';
         dialog.close();    
     }    
     

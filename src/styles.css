@@ -456,14 +456,16 @@ body > div > div.content > div > div > button:hover {
     background-color: none;
 }
 
-dialog[class="create-project"] {
+dialog[class="create-project"],
+dialog.create-task {
     background-color: white;
     border-radius: 6px;
     margin-left: 240px;
     padding: 10px;
 }
 
-dialog[class="create-project"] .create-project-container {
+dialog[class="create-project"] .create-project-container,
+dialog.create-task .create-task-container {
     position: relative;
 
     display: flex;
@@ -471,7 +473,8 @@ dialog[class="create-project"] .create-project-container {
 
 }
 
-dialog[class="create-project"] .cancel {
+dialog[class="create-project"] .cancel,
+dialog.create-task .cancel {
     position: absolute;
     bottom: 0;
     right: 60px;
@@ -546,6 +549,10 @@ dialog.todo-dialog {
     border-radius: 5px;
     box-shadow: 3px 3px 3px rgb(63, 63, 63);
     font-size: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 dialog.todo-dialog button {
@@ -620,4 +627,36 @@ dialog.todo-dialog .side-info {
 dialog.todo-dialog .side-info div form {
     display: flex;
     flex-direction: column;
+}
+
+dialog.todo-dialog .delete {
+    margin-bottom: 20px;
+    background-color: #ff5a75;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+dialog.todo-dialog .delete:hover {
+    background-color: #b0283f;
+}
+
+dialog.create-task .create-task-container form p {
+    display: flex;
+    flex-direction: column;
+}
+
+dialog.create-task .create-task-container form p textarea {
+    resize: none;
+    height: 80px;
+    width: 250px;
+}
+
+dialog.create-task form button[type=submit] {
+    display: flex;
+    justify-self: end;
+    background-color: #ff5a75;
+    padding: 0 5px;
+    border-radius: 4px;
+    margin-top: 8px;
 }
