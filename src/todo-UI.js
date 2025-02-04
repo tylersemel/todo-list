@@ -58,8 +58,7 @@ const TodoUI = (() => {
                     <div class="due-date-container">
                         <form action="" class="due-form">
                             <label for="due-date">Due</label>
-                            <select name="due-date" id="due-date">
-                            </select>
+                            <input type="date" id="due-date" name="due-date" value="2018-07-22" min="2025-01-01" max="2100-12-31" />
                         </form>
                     </div>
                     <div class="priority-container">
@@ -107,6 +106,8 @@ const TodoUI = (() => {
 
         const prioritySelect = document.querySelector('dialog #priority');
 
+        const dueDateInput = document.querySelector('dialog #due-date');
+
         titleBtn.addEventListener('click', handleClickTodoTitle);
         titleForm.addEventListener('submit', handleSubmitTodoTitle);
         cancel.addEventListener('click', closeModal);
@@ -123,6 +124,7 @@ const TodoUI = (() => {
 
         projectSelect.addEventListener('input', handleClickProject);
         prioritySelect.addEventListener('input', handleClickPriority);
+        dueDateInput.addEventListener('input', handleClickDueDate);
     }
 
     function toggleHidden(elements) {
@@ -140,6 +142,22 @@ const TodoUI = (() => {
 
         DisplayManager.displayProject(project);
     }
+
+
+    function handleClickDueDate(event) {
+        
+        const dueForm = document.querySelector('dialog .due-form');
+        const formData = new FormData(dueForm);
+        console.log(formData.get('due-date'));
+        _todo.dueDate = formData.get('due-date');
+        const project = DisplayManager.getProjects()[projectIdx];
+        DisplayManager.displayProject(project);
+    }
+
+    function displayDueDate() {
+
+    }
+
 
     function handleClickPriority(event) {
         const priorityForm = document.querySelector('dialog .priority-form');

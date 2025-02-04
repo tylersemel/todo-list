@@ -140,6 +140,7 @@ const ProjectUI = (function() {
 
         const cardDiv = displayCard(list);
         addTodoInfoToCard(cardDiv, todo);
+        console.log(todo.dueDate);
 
         return todo;
     } 

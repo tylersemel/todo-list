@@ -11,7 +11,9 @@ const CardUI = (function() {
     }
 
     function updateDivDueDate(card, dueDate) {
-        card.querySelector('.due-date').textContent = dueDate;
+        const dueDateDiv = card.querySelector('.due-date');
+        dueDateDiv.textContent = '📅 ';
+        dueDateDiv.textContent += dueDate;
     }
 
     function updateDivPriority(card, priority) {
@@ -50,8 +52,8 @@ const CardUI = (function() {
         const hasDescriptDiv = createElement('div', 'has-description');
     
         const symbolsDiv = createElement('div', 'symbols');
-        symbolsDiv.appendChild(dueDateDiv);
         symbolsDiv.appendChild(priorityFlag);
+        symbolsDiv.appendChild(dueDateDiv);
         symbolsDiv.appendChild(hasDescriptDiv);
     
         const titleDiv = createElement('span', 'title');

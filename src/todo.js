@@ -1,19 +1,21 @@
 const STATUS = ['todo', 'doing', 'done'];
 const PRIORITY = ['none', 'important', 'urgent'];
+import { format } from "date-fns";
 
 class Todo {
     #status;
     #priority;
+    #dueDate;
 
-    constructor(title, status, projectIdx, description, dueDate, priority, notes, checkList) {
+    constructor(title, status, projectIdx, description, priority, notes, checkList) {
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
         this.#status = !status ? STATUS[0] : status;
         this.#priority = !priority ? PRIORITY[0] : priority;
         this.notes = notes;
         this.checkList = checkList;
         this.projectIdx = projectIdx;
+        this.#dueDate = format(new Date(2014, 1, 11), "MMM dd yyyy");
     }
 
     get status() {
@@ -36,6 +38,14 @@ class Todo {
             return;
         }
         this.#priority = priority;
+    }
+
+    get dueDate() {
+        return this.#dueDate;
+    }
+
+    set dueDate(due) {
+        this.#dueDate = format(due, "MMM dd yyyy");
     }
 
     printTodo() {
