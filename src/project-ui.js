@@ -135,7 +135,6 @@ const ProjectUI = (function() {
 
     function addTodoToProject(title, list) {
         const todo = _project.createTodoItem(title, list);
-        console.log(todo.title);
 
         const cardDiv = displayCard(list);
         addTodoInfoToCard(cardDiv, todo);

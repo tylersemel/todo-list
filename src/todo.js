@@ -3,54 +3,54 @@ const PRIORITY = ['none', 'important', 'urgent'];
 import { format, parse } from "date-fns";
 
 class Todo {
-    #status;
-    #priority;
-    #dueDate;
+    // #status;
+    // #priority;
+    // #dueDate;
 
-    constructor(title, status, projectIdx, description, priority, notes, checkList) {
+    constructor(title, status, projectIdx, description, priority, dueDate, notes, checkList) {
         this.title = title;
-        this.description = description;
-        this.#status = !status ? STATUS[0] : status;
-        this.#priority = !priority ? PRIORITY[0] : priority;
-        this.notes = notes;
-        this.checkList = checkList;
-        this.projectIdx = projectIdx;
-        this.#dueDate = '';
+        this.description = description || '';
+        this._status = status || STATUS[0];
+        this._priority = priority || PRIORITY[0];
+        this.notes = notes || '';
+        this.checkList = checkList || '';
+        this.projectIdx = projectIdx || 0;
+        this._dueDate = dueDate || '';
     }
 
     get status() {
-        return this.#status;
+        return this._status;
     }
 
     set status(status) {
         if (STATUS.indexOf(status) === -1) {
             return;
         }
-        this.#status = status;
+        this._status = status;
     }
 
     get priority() {
-        return this.#priority;
+        return this._priority;
     }
 
     set priority(priority) {
         if (PRIORITY.indexOf(priority) === -1) {
             return;
         }
-        this.#priority = priority;
+        this._priority = priority;
     }
 
     get dueDate() {
-        return this.#dueDate;
+        return this._dueDate;
     }
 
     set dueDate(due) {
         if (!due) {
-            this.#dueDate = '';
+            this._dueDate = '';
         }
         else {
             const date = parse(due, 'yyyy-MM-dd', new Date());
-            this.#dueDate = format(date, "MMM dd yyyy"); 
+            this._dueDate = format(date, "MMM dd yyyy"); 
         }
         
     }
@@ -58,9 +58,9 @@ class Todo {
     printTodo() {
         console.log('title: ' + this.title + '\n' + 
                     'descript: ' + this.description + '\n' +
-                    'due date: ' + this.dueDate + '\n' +
-                    'priority: ' + this.#priority + '\n' +
-                    'status: ' + this.#status);
+                    'due date: ' + this._dueDate + '\n' +
+                    'priority: ' + this._priority + '\n' +
+                    'status: ' + this._status);
     }
 }
 

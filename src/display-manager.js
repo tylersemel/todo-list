@@ -95,12 +95,56 @@ const DisplayManager = (() => {
             displayProject(defaultProject);
         });
 
-        ProjectUI.displayProject(defaultProject);
+        displayProject(defaultProject);
     }
 
-    addDefaultProject();
+    function loadProjects() {
+        const projects = Storage.getProjectsFromStorage();
+        if (!projects) {
+            return;
 
-    return { displayProject, addProject, clearContent, getProjects, handleClickProjectBtn };
+        }
+        console.log(projects[0].title);
+        const repeatProject = new Project(projects[0].title);
+        
+        const lists = projects[0].lists;
+
+        for (const list of lists) {
+            for (const todo of list) {
+                console.log(todo._status);
+                repeatProject.createTodoItem(todo.title, todo._status, '', todo.description, todo._priority, todo._dueDate);
+            }
+        }
+
+        getProjects().push(repeatProject);
+        displayProject(repeatProject);
+
+        console.log(repeatProject);
+
+        for (const project of projects) {
+            // if (project.title === 'Unsorted') {
+            //     addDefaultProject();
+            //     // for (const todo of project.todos) {
+            //     //     ProjectUI.addTodoToProject(todo.title)
+            //     // }
+            // }
+            // else {
+            //     getProjects().push(project);
+            // }
+
+            // getProjects().push(new Project(project.title));
+            // console.log(getProjects()[0]);
+        }
+    }
+
+    return { 
+        displayProject, 
+        addProject, 
+        clearContent, 
+        getProjects, 
+        handleClickProjectBtn,
+        addDefaultProject,
+        loadProjects };
     
 })();
 

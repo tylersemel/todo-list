@@ -7,6 +7,7 @@ import { Storage } from "./storage";
 
 
 
-const projects = Storage.getProjectsFromStorage();
+DisplayManager.loadProjects();
 
-console.log(projects);
+// DisplayManager.displayProject(DisplayManager.getProjects()[0]);
+// console.log(projects);

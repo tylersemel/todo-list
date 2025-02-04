@@ -1,11 +1,11 @@
 import { Todo, STATUS } from "./todo.js";
 
 class Project {
-    constructor(title) {
+    constructor(title, todoList, doingList, doneList) {
         this.title = title;
-        this.todoList = [];
-        this.doingList = [];
-        this.doneList = [];
+        this.todoList = todoList || [];
+        this.doingList = doingList || [];
+        this.doneList = doneList || [];
         this.lists = [this.todoList, this.doingList, this.doneList];
     }
 
@@ -21,8 +21,8 @@ class Project {
         }
     }
 
-    createTodoItem(title, status) {
-        let todo = new Todo(title, status);
+    createTodoItem(title, status, projectIdx, description, priority, dueDate, notes, checkList) {
+        let todo = new Todo(title, status, projectIdx, description, priority, dueDate, notes, checkList);
         let list = this.checkWhichList(todo.status);
         this.addTodoToList(todo, list);
         return todo;
