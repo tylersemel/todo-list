@@ -1,6 +1,6 @@
 const STATUS = ['todo', 'doing', 'done'];
 const PRIORITY = ['none', 'important', 'urgent'];
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 
 class Todo {
     #status;
@@ -45,7 +45,8 @@ class Todo {
     }
 
     set dueDate(due) {
-        this.#dueDate = format(due, "MMM dd yyyy");
+        const date = parse(due, 'yyyy-MM-dd', new Date());
+        this.#dueDate = format(date, "MMM dd yyyy");
     }
 
     printTodo() {
