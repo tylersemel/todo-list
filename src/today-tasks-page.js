@@ -16,10 +16,11 @@ const TodayTasksPageUI = (() => {
             <div class="tasks-table-container">
                 <table class="tasks-table">
                     <tr>
+                        <th>Priority</th>
                         <th>Task</th>
                         <th>List</th>
                         <th>Project</th>
-                        <th>Priority</th>
+                        
                     </tr>
                 </table>
             </div>`;
@@ -51,11 +52,14 @@ const TodayTasksPageUI = (() => {
         const tdList = document.createElement('td');
         const tdProject = document.createElement('td');
         const tdPriority = document.createElement('td');
+        const circleDiv = document.createElement('div');
+        tdPriority.appendChild(circleDiv);
 
+        tr.appendChild(tdPriority);
         tr.appendChild(tdTask);
         tr.appendChild(tdList);
         tr.appendChild(tdProject);
-        tr.appendChild(tdPriority);
+        
 
         tdTask.textContent = task.title;
         tdList.textContent = task.status;
@@ -64,15 +68,16 @@ const TodayTasksPageUI = (() => {
         switch (task.priority) {
             case PRIORITY[0]:
                 tdPriority.textContent = '';
-                tr.style.backgroundColor = 'lightgreen';
                 break;
             case PRIORITY[1]:
-                tdPriority.textContent = task.priority; 
-                tr.style.backgroundColor = 'orange';
+                circleDiv.textContent = 'Important'; 
+                circleDiv.style.backgroundColor = 'orange';
+                circleDiv.style.borderRadius = '5px';
                 break;
             case PRIORITY[2]:
-                tdPriority.textContent = task.priority; 
-                tr.style.backgroundColor = 'red';
+                circleDiv.textContent = 'Urgent'; 
+                circleDiv.style.backgroundColor = 'red';
+                circleDiv.style.borderRadius = '5px';
                 break;
         }
 
