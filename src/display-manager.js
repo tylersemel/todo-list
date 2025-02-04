@@ -5,6 +5,7 @@ import { ProjectUI } from "./project-ui.js";
 import { CreateProjectModal } from "./create-project-modal";
 import { CreateTaskModal } from "./create-task-modal.js";
 import { TodayTasksPageUI } from "./today-tasks-page.js";
+import { Storage } from "./storage.js";
 //put all display stuff in here for now.
 const createElement = (elem, className, text) => {
     const element = document.createElement(elem);
@@ -59,6 +60,8 @@ const DisplayManager = (() => {
         const project = new Project(title);
         projects.push(project);
         sidebarUI.createSidebarProjectHTML(project, projects.length - 1);
+        Storage.saveProjectsToStorage(getProjects());
+
         return project;
     }
 
@@ -69,6 +72,7 @@ const DisplayManager = (() => {
     function displayProject(project) {
         clearContent();
         ProjectUI.displayProject(project);
+        Storage.saveProjectsToStorage(DisplayManager.getProjects());
     }
 
     function getProjects() {
@@ -91,7 +95,7 @@ const DisplayManager = (() => {
             displayProject(defaultProject);
         });
 
-        displayProject(defaultProject);
+        ProjectUI.displayProject(defaultProject);
     }
 
     addDefaultProject();

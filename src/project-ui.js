@@ -2,6 +2,7 @@ import { CardUI } from "./card-ui";
 import { DisplayManager, createElement } from "./display-manager";
 import { TodoUI } from "./todo-UI";
 import { STATUS } from "./todo";
+import { Storage } from "./storage";
 //for the content area
 const ProjectUI = (function() {
     const contentDiv = document.querySelector('.content');
@@ -88,8 +89,6 @@ const ProjectUI = (function() {
                 CardUI.setCardAttributes(cardDiv, doneCards.indexOf(cardDiv), projectIdx);
                 break;
         }
-
-        // CardUI.setCardAttributes(cardDiv, todoCards.indexOf(cardDiv), projectIdx);
     }
 
     function displayCard(listClass) {
@@ -140,8 +139,7 @@ const ProjectUI = (function() {
 
         const cardDiv = displayCard(list);
         addTodoInfoToCard(cardDiv, todo);
-        console.log(todo.dueDate);
-
+        Storage.saveProjectsToStorage(DisplayManager.getProjects());
         return todo;
     } 
     
@@ -174,6 +172,7 @@ const ProjectUI = (function() {
         displayProjectTitle(project.title);
 
         displayCards();
+        
     }
 
     return { 

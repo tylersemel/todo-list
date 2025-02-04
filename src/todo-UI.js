@@ -1,6 +1,8 @@
 import { DisplayManager } from "./display-manager";
 import { CardUI } from "./card-ui.js";
 import { format } from "date-fns";
+import { Storage } from "./storage.js";
+
 
 const TodoUI = (() => {
     let _todo;
@@ -126,6 +128,11 @@ const TodoUI = (() => {
         projectSelect.addEventListener('input', handleClickProject);
         prioritySelect.addEventListener('input', handleClickPriority);
         dueDateInput.addEventListener('input', handleClickDueDate);
+        dialog.addEventListener('click', handleClickDialog);
+    }
+
+    function handleClickDialog() {
+        Storage.saveProjectsToStorage(DisplayManager.getProjects());
     }
 
     function toggleHidden(elements) {
@@ -173,7 +180,6 @@ const TodoUI = (() => {
     function handleClickPriority(event) {
         const priorityForm = document.querySelector('dialog .priority-form');
         const formData = new FormData(priorityForm);
-        console.log(formData.get('priority'));
         _todo.priority = formData.get('priority');
         const project = DisplayManager.getProjects()[projectIdx];
         DisplayManager.displayProject(project);
@@ -192,14 +198,12 @@ const TodoUI = (() => {
     function handleClickProject(event) {
         const listForm = document.querySelector('dialog .project-title-form');
         const formData = new FormData(listForm);
-        console.log(formData.get('project-title'));
         
         const options = document.querySelectorAll('dialog #project-title option');
         let idx = 0;
         for(const option of options) {
             if (option.selected) {
                 idx = option.getAttribute('data-project-index');
-                console.log(idx);
             }
         }
 
