@@ -50,6 +50,13 @@ const DisplayManager = (() => {
     const contentDiv = document.querySelector('.content');
 
     function addProject(title) {
+        for (const proj of projects) {
+            if (proj.title === title) {
+                console.log('cannot have same name');
+                return null;
+            }
+        }
+
         const project = new Project(title);
         projects.push(project);
         sidebarUI.createSidebarProjectHTML(project, projects.length - 1);

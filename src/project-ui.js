@@ -155,10 +155,15 @@ const ProjectUI = (function() {
     }
 
     function removeCardFromList(card, list) {
-        
+        list.splice(list.indexOf(card), 1);
     }
 
     function displayProject(project) {
+        if (!project) {
+            displayProject(DisplayManager.getProjects()[0]);
+            //should have error message
+            return;
+        }
         todoCards = [];
         doingCards = [];
         doneCards = [];
@@ -170,7 +175,13 @@ const ProjectUI = (function() {
         displayCards();
     }
 
-    return { displayProject, addTodoToProject, toggleAddTaskBtns, getCards, displayCards };
+    return { 
+        displayProject, 
+        addTodoToProject, 
+        toggleAddTaskBtns, 
+        getCards, 
+        displayCards,
+        removeCardFromList };
 
 })();
 

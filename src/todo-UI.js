@@ -15,8 +15,7 @@ const TodoUI = (() => {
                <form action="" class="project-title-form">
                    <label for="project-title">In project</label>
                    <select name="project-title" id="project-title">
-                        <option value="default">Default</option>
-                        <option value="test">Test</option>
+                        
                    </select>
                </form>
                <button class="cancel">✖</button>
@@ -93,6 +92,8 @@ const TodoUI = (() => {
         
         const listSelect = document.querySelector('dialog .list-form select');
 
+        const projectSelect = document.querySelector('dialog #project-title');
+
         const description = document.querySelector('dialog textarea');
         const descSaveBtn = document.querySelector('dialog .description-container button[type=submit]')
         dialog.className = 'todo-dialog';
@@ -102,14 +103,7 @@ const TodoUI = (() => {
         cancel.addEventListener('click', closeModal);
         descriptionForm.addEventListener('submit', handleSubmitDescription);
         descriptionBtn.addEventListener('click', handleClickDescription);
-        listSelect.addEventListener('input', (event) => {
-            // if (event.target.selected === _todo.status) {
-            //     return;
-            // }
-            // else {
-                handleClickList(event);
-            // }
-        });
+        listSelect.addEventListener('input', handleClickList)
         description.addEventListener('input', CardUI.autoResize);
         description.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
@@ -117,6 +111,8 @@ const TodoUI = (() => {
                 descSaveBtn.click();
             }
         });
+
+        projectSelect.addEventListener('input', handleClickProject);
     }
 
     function toggleHidden(elements) {
@@ -124,6 +120,52 @@ const TodoUI = (() => {
             div.classList.toggle('hidden');
         }
     }
+
+
+    function handleClickProject(event) {
+        const listForm = document.querySelector('dialog .project-title-form');
+        const formData = new FormData(listForm);
+        console.log(formData.get('project-title'));
+        
+        const options = document.querySelectorAll('dialog #project-title option');
+        let idx = 0;
+        for(const option of options) {
+            if (option.selected) {
+                idx = option.getAttribute('data-project-index');
+                console.log(idx);
+            }
+        }
+
+        const project = DisplayManager.getProjects()[idx];
+        const list = project.checkWhichList(_todo.status);
+        const originalProject = DisplayManager.getProjects()[projectIdx];
+        originalProject.removeTodo(_todo);
+        project.addTodoToList(_todo, list);
+        DisplayManager.displayProject(project);
+    }
+
+    function displayProject() {
+        const projectSelect = document.querySelector('dialog #project-title');
+        let idx = 0;
+
+        for (const project of DisplayManager.getProjects()) {
+            const option = document.createElement('option');
+            option.value = project.title;
+            option.textContent = project.title;
+            option.setAttribute('data-project-index', idx);
+            projectSelect.appendChild(option);
+            idx++;
+        }
+
+        const options = document.querySelectorAll('dialog #project-title option');
+        const project = DisplayManager.getProjects()[projectIdx];
+        for(const option of options) {
+            if (option.value === project.title) {
+                option.selected = project.title;
+            }
+        }
+    }
+
     
     function handleClickList(event) {
         const listForm = document.querySelector('dialog .list-form');
@@ -133,9 +175,7 @@ const TodoUI = (() => {
         const project = DisplayManager.getProjects()[projectIdx];
         const list = project.checkWhichList(_todo.status);
         project.addTodoToList(_todo, list);
-        DisplayManager.displayProject(DisplayManager.getProjects()[projectIdx]);
-        console.log(_todo.status);
-        // moveCardToList();
+        DisplayManager.displayProject(project);
     }
 
     function displayList() {
@@ -216,6 +256,7 @@ const TodoUI = (() => {
         displayTodoTitle();
         displayDescription();
         displayList();
+        displayProject();
         addEvents();
     }
 
