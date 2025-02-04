@@ -1,4 +1,5 @@
 import { DisplayManager } from "./display-manager";
+import { PRIORITY } from "./todo";
 
 const AllTasksPageUI = (() => {
     const contentDiv = document.querySelector('.content');
@@ -55,7 +56,12 @@ const AllTasksPageUI = (() => {
         tdList.textContent = task.status;
         tdProject.textContent = project.title;
         tdDueDate.textContent = task.dueDate;
-        tdPriority.textContent = task.priority;
+        if (task.priority == PRIORITY[0]) {
+            tdPriority.textContent = '';
+        }
+        else {
+            tdPriority.textContent = task.priority; 
+        }
 
         return tr;
     }
