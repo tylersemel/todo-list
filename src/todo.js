@@ -1,5 +1,5 @@
 const STATUS = ['todo', 'doing', 'done'];
-const PRIORITY = ['NONE', 'IMPORTANT', 'URGENT'];
+const PRIORITY = ['none', 'important', 'urgent'];
 
 class Todo {
     #status;

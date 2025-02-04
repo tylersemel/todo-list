@@ -15,11 +15,20 @@ const CardUI = (function() {
     }
 
     function updateDivPriority(card, priority) {
+        const COLORS = ['green', 'orange', 'red'];
+        const priorityDiv = card.querySelector('.priority');
+
         if (priority === PRIORITY[0]) {
-            card.querySelector('.priority').textContent = '';
+            priorityDiv.textContent = priority;  
+            priorityDiv.style.backgroundColor = COLORS[0];
         }
-        else {
-          card.querySelector('.priority').textContent = priority;  
+        else if (priority === PRIORITY[1]) {
+            priorityDiv.textContent = priority;  
+            priorityDiv.style.backgroundColor = COLORS[1];
+        }
+        else if (priority === PRIORITY[2]) {
+            priorityDiv.textContent = priority;  
+            priorityDiv.style.backgroundColor = COLORS[2];
         }
         
     }

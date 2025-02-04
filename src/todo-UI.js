@@ -69,7 +69,7 @@ const TodoUI = (() => {
                             <select name="priority" id="priority">
                                 <option value="none">None</option>
                                 <option value="important">Important</option>
-                                <option value="Urgent">Urgent</option>
+                                <option value="urgent">Urgent</option>
                             </select>
                         </form>
                     </div>
@@ -98,6 +98,8 @@ const TodoUI = (() => {
         const descSaveBtn = document.querySelector('dialog .description-container button[type=submit]')
         dialog.className = 'todo-dialog';
 
+        const prioritySelect = document.querySelector('dialog #priority');
+
         titleBtn.addEventListener('click', handleClickTodoTitle);
         titleForm.addEventListener('submit', handleSubmitTodoTitle);
         cancel.addEventListener('click', closeModal);
@@ -113,11 +115,31 @@ const TodoUI = (() => {
         });
 
         projectSelect.addEventListener('input', handleClickProject);
+        prioritySelect.addEventListener('input', handleClickPriority);
     }
 
     function toggleHidden(elements) {
         for (const div of elements) {
             div.classList.toggle('hidden');
+        }
+    }
+
+    function handleClickPriority(event) {
+        const priorityForm = document.querySelector('dialog .priority-form');
+        const formData = new FormData(priorityForm);
+        console.log(formData.get('priority'));
+        _todo.priority = formData.get('priority');
+        const project = DisplayManager.getProjects()[projectIdx];
+        DisplayManager.displayProject(project);
+    }
+
+    function displayPriority() {
+        const options = document.querySelectorAll('dialog #priority option');
+        
+        for(const option of options) {
+            if (option.value === _todo.priority) {
+                option.selected = _todo.priority;
+            }
         }
     }
 
@@ -258,6 +280,7 @@ const TodoUI = (() => {
         displayDescription();
         displayList();
         displayProject();
+        displayPriority();
         addEvents();
     }
 
