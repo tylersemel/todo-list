@@ -53,6 +53,7 @@ const SidebarUI = (() => {
 //projects created outside of here in index
 const DisplayManager = (() => {
     let projects = [];
+    let defaultProject = new Project('Unsorted');
     const sidebarUI = SidebarUI();
     const contentDiv = document.querySelector('.content');
 
@@ -87,54 +88,50 @@ const DisplayManager = (() => {
     }
 
     function addDefaultProject() {
-        const defaultProject = new Project('Unsorted');
         projects.push(defaultProject);
         
         const generalBtn = document.querySelector('.general-proj-btn');
         generalBtn.addEventListener('click', () => {
             displayProject(defaultProject);
         });
-
-        displayProject(defaultProject);
     }
 
     function loadProjects() {
-        const projects = Storage.getProjectsFromStorage();
-        if (!projects) {
+        const projectObjs = Storage.getProjectsFromStorage();
+        if (!projectObjs) {
+            console.log("No proj objs");
+            addDefaultProject();
+            displayProject(defaultProject);
             return;
-
         }
-        console.log(projects[0].title);
-        const repeatProject = new Project(projects[0].title);
-        
-        const lists = projects[0].lists;
 
-        for (const list of lists) {
-            for (const todo of list) {
-                console.log(todo._status);
-                repeatProject.createTodoItem(todo.title, todo._status, '', todo.description, todo._priority, todo._dueDate);
+        for (const obj of projectObjs) {
+            if (obj.title !== 'Unsorted') {
+                const project = new Project(obj.title);
+                const lists = obj.lists;
+                for (const list of lists) {
+                    for (const todo of list) {
+                        console.log(todo._status);
+                        project.createTodoItem(todo.title, todo._status, todo.description, todo._priority, todo._dueDate);
+                    }
+                }
+                getProjects().push(project);
+                sidebarUI.createSidebarProjectHTML(project, projects.length - 1);
             }
+            else {
+                defaultProject = new Project(obj.title);
+                const lists = obj.lists;
+                for (const list of lists) {
+                    for (const todo of list) {
+                        console.log(todo._status);
+                        defaultProject.createTodoItem(todo.title, todo._status, todo.description, todo._priority, todo._dueDate);
+                    }
+                }
+                addDefaultProject();
+            }            
         }
 
-        getProjects().push(repeatProject);
-        displayProject(repeatProject);
-
-        console.log(repeatProject);
-
-        for (const project of projects) {
-            // if (project.title === 'Unsorted') {
-            //     addDefaultProject();
-            //     // for (const todo of project.todos) {
-            //     //     ProjectUI.addTodoToProject(todo.title)
-            //     // }
-            // }
-            // else {
-            //     getProjects().push(project);
-            // }
-
-            // getProjects().push(new Project(project.title));
-            // console.log(getProjects()[0]);
-        }
+        displayProject(defaultProject);
     }
 
     return { 

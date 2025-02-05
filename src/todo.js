@@ -3,18 +3,13 @@ const PRIORITY = ['none', 'important', 'urgent'];
 import { format, parse } from "date-fns";
 
 class Todo {
-    // #status;
-    // #priority;
-    // #dueDate;
-
-    constructor(title, status, projectIdx, description, priority, dueDate, notes, checkList) {
+    constructor(title, status, description, priority, dueDate, notes, checkList) {
         this.title = title;
         this.description = description || '';
         this._status = status || STATUS[0];
         this._priority = priority || PRIORITY[0];
         this.notes = notes || '';
         this.checkList = checkList || '';
-        this.projectIdx = projectIdx || 0;
         this._dueDate = dueDate || '';
     }
 

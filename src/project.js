@@ -21,8 +21,8 @@ class Project {
         }
     }
 
-    createTodoItem(title, status, projectIdx, description, priority, dueDate, notes, checkList) {
-        let todo = new Todo(title, status, projectIdx, description, priority, dueDate, notes, checkList);
+    createTodoItem(title, status, description, priority, dueDate, notes, checkList) {
+        let todo = new Todo(title, status, description, priority, dueDate, notes, checkList);
         let list = this.checkWhichList(todo.status);
         this.addTodoToList(todo, list);
         return todo;

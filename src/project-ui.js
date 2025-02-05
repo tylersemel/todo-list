@@ -171,7 +171,7 @@ const ProjectUI = (function() {
         displayProjectTitle(project.title);
 
         displayCards();
-        
+        Storage.saveProjectsToStorage(DisplayManager.getProjects());
     }
 
     return { 
