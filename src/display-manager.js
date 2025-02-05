@@ -47,14 +47,14 @@ const SidebarUI = (() => {
     }
      
     return { createSidebarProjectHTML };
-});
+})();
 
 //managing displaying projects
 //projects created outside of here in index
 const DisplayManager = (() => {
     let projects = [];
     let defaultProject = new Project('Unsorted');
-    const sidebarUI = SidebarUI();
+    const sidebarUI = SidebarUI;
     const contentDiv = document.querySelector('.content');
 
     function addProject(title) {
