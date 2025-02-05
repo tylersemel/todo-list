@@ -2,7 +2,7 @@ import { createElement } from "./display-manager";
 import { ProjectUI } from "./project-ui";
 import { TodoUI } from "./todo-UI";
 import { PRIORITY } from "./todo";
-
+import { contentDiv } from "./display-content.js";
 //soley focus on UI of cards, not instantiation of todos or projects
 const CardUI = (function() {
     const contentDiv = document.querySelector('.content');
@@ -189,5 +189,109 @@ const CardUI = (function() {
         autoResize
     };
 })();
+
+
+/** PENDING CARD HTML AND FUNCTIONALITY */
+function focusOnCard(pendingCard) {
+    const textArea = pendingCard.querySelector('.title');
+    textArea.focus();
+}
+
+function removePendingCard(listSection) {
+    const cardContainer = listSection.querySelector('.card-container');
+    const child = cardContainer.querySelector('.new-card');
+    cardContainer.removeChild(child);
+}
+
+//save pending card === save info to the project's given list of todos
+//then close out the pending card and create the finalized card, display that card
+function handleSavePendingCard(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const listSection = event.target.closest('.list');
+
+    //create todo
+    if (formData.get('title') === '') {
+        removePendingCard(listSection);
+        return;
+    }
+
+    
+
+    // ProjectUI.addTodoToProject(formData.get('title'), listSection.id);
+    //change to event
+    const addTodoEvent = new CustomEvent('savePendingCard', {
+        detail: {
+            title: formData.get('title'),
+            list: listSection.id
+        }});
+    document.dispatchEvent(addTodoEvent);
+
+    removePendingCard(listSection);
+
+    toggleAddTaskBtns();
+}
+
+function test() {
+    console.log("i am testing");
+}
+
+export function toggleAddTaskBtns() {
+    const addTaskBtns = contentDiv.querySelectorAll('.add-task');
+
+    for (const addTaskBtn of addTaskBtns) {
+        addTaskBtn.disabled = !addTaskBtn.disabled;
+        addTaskBtn.classList.toggle('disabled');
+    }   
+}
+    
+function handleCancelPendingCard(event) {
+    removePendingCard(event.target.closest('.list'));
+    toggleAddTaskBtns();
+}
+
+export function createPendingCard(list) {
+    toggleAddTaskBtns();
+
+    const newCardDiv = createElement('div', 'new-card');
+
+    const newCardForm = createElement('form');
+    newCardForm.setAttribute('method', 'POST');
+    newCardForm.addEventListener('submit', handleSavePendingCard);
+
+    const titleTextArea = createElement('textarea', 'title');
+    titleTextArea.setAttribute('name', 'title');
+    // titleTextArea.addEventListener('input', autoResize);
+
+    const saveBtn = createElement('button', 'save', 'ᯓ➤');
+    saveBtn.setAttribute('title', 'Save');
+    saveBtn.setAttribute('type', 'submit');
+
+    titleTextArea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            if (titleTextArea.textContent !== '') {
+                saveBtn.click();
+            }
+        }
+    });
+
+    newCardForm.appendChild(titleTextArea);
+    newCardForm.appendChild(saveBtn);
+    newCardDiv.appendChild(newCardForm);
+
+    const cancelBtn = createElement('button', 'cancel', '✖');
+    cancelBtn.setAttribute('title', 'Cancel');
+    cancelBtn.addEventListener('click', handleCancelPendingCard);
+    newCardDiv.appendChild(cancelBtn);
+
+    const listDiv = contentDiv.querySelector(`#${list}`);
+    const cardContainerDiv = listDiv.querySelector('.card-container');
+
+    cardContainerDiv.appendChild(newCardDiv);
+    focusOnCard(newCardDiv);
+    return newCardDiv;
+}
 
 export { CardUI };
