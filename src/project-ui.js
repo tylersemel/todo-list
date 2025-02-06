@@ -8,7 +8,6 @@ const ProjectUI = (function() {
     const contentDiv = document.querySelector('.content');
     let projectNameH2;
     let _project;
-     // need to add divs to this list, so that the data-index is reset for each project
     let todoCards = [];
     let doingCards = [];
     let doneCards = [];

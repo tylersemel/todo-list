@@ -1,5 +1,3 @@
-import { DisplayManager } from "./display-manager";
-
 const Storage = (() => {
     function storageAvailable(type) {
         let storage;

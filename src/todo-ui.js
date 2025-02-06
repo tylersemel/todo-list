@@ -17,7 +17,6 @@ const CardUI = (function() {
             dueDateDiv.textContent = '📅 ';
             dueDateDiv.textContent += dueDate; 
         }
-        
     }
 
     function updateDivPriority(card, priority) {
@@ -25,8 +24,7 @@ const CardUI = (function() {
         const priorityDiv = card.querySelector('.priority');
 
         if (priority === PRIORITY[0]) {
-            priorityDiv.textContent = priority;  
-            priorityDiv.style.backgroundColor = COLORS[0];
+            priorityDiv.textContent = ''; 
         }
         else if (priority === PRIORITY[1]) {
             priorityDiv.textContent = priority;  
@@ -156,7 +154,9 @@ const CardUI = (function() {
         titleTextArea.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                saveBtn.click();
+                if (titleTextArea.value !== '') {
+                    saveBtn.click();
+                }
             }
         });
 
