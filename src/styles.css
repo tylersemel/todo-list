@@ -358,9 +358,13 @@ body > div > div.content > div > div > button:hover {
     content: '...';
     color: gray;
     margin-right: 10px;
-    top: -5px;
+    top: 0px;
     right: 0px;
+    height: fit-content;
     position: absolute;
+    background-color: white;
+    font-size: 20px;
+    padding: 2px 4px;
 }
 
 .project-page .lists section .card-container .new-card {
@@ -566,9 +570,9 @@ th:first-child {
 }
 
 dialog.todo-dialog {
-    margin: 100px auto;
-    width: 650px;
-    height: 450px;
+    margin: 60px auto;
+    width: 750px;
+    /* height: 80%; */
     border: none;
     border-radius: 5px;
     box-shadow: 3px 3px 3px rgb(63, 63, 63);
@@ -577,6 +581,12 @@ dialog.todo-dialog {
     display: flex;
     flex-direction: column;
     align-items: center;
+    outline: none;
+    overflow: hidden;
+    
+    /* max-height: calc(100vh - 210px); */
+    /* overflow-y: auto; */
+    
 }
 
 dialog.todo-dialog button {
@@ -599,6 +609,7 @@ dialog.todo-dialog .todo-container .modal-top {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    
 }
 
 dialog.todo-dialog .todo-container .main-modal {
@@ -616,8 +627,12 @@ dialog.todo-dialog .todo-container .main-modal textarea {
 dialog.todo-dialog .todo-container .main-modal .main-info {
     display: flex;
     flex-direction: column;
+    justify-content: start;
     flex: 1;
     gap: 20px;
+    height: 350px;
+    overflow-y: auto;
+    padding-right: 20px;
 }
 
 dialog.todo-dialog .todo-container .main-modal .main-info button {
@@ -645,7 +660,8 @@ dialog.todo-dialog input[type=text] {
 dialog.todo-dialog .side-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
+    gap: 40px;
 }
 
 dialog.todo-dialog .side-info div form {
@@ -654,15 +670,14 @@ dialog.todo-dialog .side-info div form {
 }
 
 dialog.todo-dialog .delete {
-    margin-bottom: 20px;
     background-color: #ff5a75;
-    padding: 5px 10px;
+    padding: 5px 25px;
     border-radius: 5px;
-    transition: 0.2s;
 }
 
 dialog.todo-dialog .delete:hover {
     background-color: #b0283f;
+    transition: 0.2s;
 }
 
 dialog.create-task .create-task-container form p {
@@ -673,6 +688,7 @@ dialog.create-task .create-task-container form p {
 dialog.create-task .create-task-container form p textarea {
     resize: none;
     height: 80px;
+    min-height: fit-content;
     width: 250px;
 }
 

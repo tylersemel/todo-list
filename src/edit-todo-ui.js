@@ -73,18 +73,15 @@ const TodoUI = (() => {
                             </select>
                         </form>
                     </div>
-                    <button class="add-checklist">Add Checklist</button>
-                    <button class="add-checklist hidden">Remove Checklist</button>
+                    <button class="delete">Delete Todo</button>
                 </div>
             </div>
         </div>`;
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.className = 'delete';
-        deleteBtn.textContent = 'Delete Todo';
+        const deleteBtn = document.querySelector('.delete');
         deleteBtn.addEventListener('click', handleClickDelete);
 
-        dialog.appendChild(deleteBtn);
+        // dialog.appendChild(deleteBtn);
 
     }
 
