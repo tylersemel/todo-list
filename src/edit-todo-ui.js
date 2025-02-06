@@ -1,8 +1,7 @@
-import { DisplayManager } from "./display-manager";
-import { CardUI } from "./card-ui.js";
+import { DisplayManager } from "./display-manager.js";
+import { CardUI } from "./todo-ui.js";
 import { format } from "date-fns";
 import { Storage } from "./storage.js";
-
 
 const TodoUI = (() => {
     let _todo;

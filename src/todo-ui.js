@@ -1,6 +1,6 @@
 import { createElement } from "./display-manager";
 import { ProjectUI } from "./project-ui";
-import { TodoUI } from "./todo-UI";
+import { TodoUI } from "./edit-todo-ui";
 import { PRIORITY } from "./todo";
 
 //soley focus on UI of cards, not instantiation of todos or projects

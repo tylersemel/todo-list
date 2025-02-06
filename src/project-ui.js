@@ -1,6 +1,6 @@
-import { CardUI } from "./card-ui";
+import { CardUI } from "./todo-ui";
 import { DisplayManager, createElement } from "./display-manager";
-import { TodoUI } from "./todo-UI";
+import { TodoUI } from "./edit-todo-ui";
 import { STATUS } from "./todo";
 import { Storage } from "./storage";
 //for the content area
