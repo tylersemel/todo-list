@@ -57,6 +57,7 @@ const CardUI = (function() {
         symbolsDiv.appendChild(priorityFlag);
         symbolsDiv.appendChild(dueDateDiv);
         symbolsDiv.appendChild(hasDescriptDiv);
+        symbolsDiv.style.fontSize = '18px';
     
         const titleDiv = createElement('span', 'title');
         
