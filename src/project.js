@@ -1,30 +1,41 @@
-import { Todo, STATUS } from "./todo.js";
+import { Todo, LIST } from "./todo.js";
 
 class Project {
-    constructor(title, todoList, doingList, doneList) {
+    static #id = 0;
+
+    static #incrementId() {
+        this.#id++;
+    }
+
+    constructor(title, todos) {
+        Project.#incrementId();
+        this.id = Project.#id;
         this.title = title;
-        this.todoList = todoList || [];
-        this.doingList = doingList || [];
-        this.doneList = doneList || [];
+        this.todos = todos;
+
+
+        this.todoList = [];
+        this.doingList = [];
+        this.doneList = [];
         this.lists = [this.todoList, this.doingList, this.doneList];
     }
 
-    checkWhichList(status) {
-        if (status === STATUS[0]) {
+    checkWhichList(list) {
+        if (list === LIST[0]) {
             return this.todoList;
         }
-        else if (status === STATUS[1]) {
+        else if (list === LIST[1]) {
             return this.doingList;
         }
-        else if (status === STATUS[2]) {
+        else if (list === LIST[2]) {
             return this.doneList;
         }
     }
 
-    createTodo(title, status, description, priority, dueDate, notes, checkList) {
-        let todo = new Todo(title, status, description, priority, dueDate, notes, checkList);
-        let list = this.checkWhichList(todo.status);
-        this.addTodoToList(todo, list);
+    static createTodo(title, list, description, priority, dueDate, notes, checkList) {
+        let todo = new Todo(title, list, description, priority, dueDate, notes, checkList);
+        let _list = this.checkWhichList(todo.list);
+        this.addTodoToList(todo, _list);
         return todo;
     }
 

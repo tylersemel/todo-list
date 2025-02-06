@@ -1,27 +1,36 @@
-const STATUS = ['todo', 'doing', 'done'];
-const PRIORITY = ['none', 'important', 'urgent'];
+
 import { format, parse } from "date-fns";
 
 class Todo {
-    constructor(title, status, description, priority, dueDate, notes, checkList) {
+    static #id = 0;
+    static LIST = ['todo', 'doing', 'done'];
+    static PRIORITY = ['none', 'important', 'urgent'];
+
+    static #incrementId() {
+        Todo.#id++;
+    }
+
+    constructor(title, list, description, priority, dueDate, notes, checkList) {
+        Todo.#incrementId();
+        this.id = Todo.#id;
         this.title = title;
         this.description = description || '';
-        this._status = status || STATUS[0];
+        this._list = list || LIST[0];
         this._priority = priority || PRIORITY[0];
         this.notes = notes || '';
         this.checkList = checkList || '';
         this._dueDate = dueDate || '';
     }
 
-    get status() {
-        return this._status;
+    get list() {
+        return this._list;
     }
 
-    set status(status) {
-        if (STATUS.indexOf(status) === -1) {
+    set list(list) {
+        if (LIST.indexOf(list) === -1) {
             return;
         }
-        this._status = status;
+        this._list = list;
     }
 
     get priority() {
@@ -55,8 +64,8 @@ class Todo {
                     'descript: ' + this.description + '\n' +
                     'due date: ' + this._dueDate + '\n' +
                     'priority: ' + this._priority + '\n' +
-                    'status: ' + this._status);
+                    'list: ' + this._list);
     }
 }
 
-export { Todo, STATUS, PRIORITY };
+export { Todo };

@@ -1,12 +1,14 @@
 import "./styles.css";
-import { getDefaultProject, getProjects } from "./project-manager";
-import { displayProject } from "./project-display";
-import { DisplayDOM } from "./display-DOM";
-import { getCurrentProject } from "./project-manager";
 
+import { Project } from "./project";
 
-window.getProjects = getProjects();
+// window.getProjects = getProjects();
 
-DisplayDOM.render();
+// DisplayDOM.render();
+const project1 = new Project('1');
+console.log(project1.id);
+
+// const project2 = new Project('1');
+// console.log(project2.id);
 
 
