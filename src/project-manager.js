@@ -9,6 +9,13 @@ export function getProjects() {
     return projects;
 }
 
+export function getProject(index) {
+    if (index < 0 || index > projects.length - 1) {
+        return;
+    }
+    return projects[index];
+}
+
 export function createProject(title) {
     return new Project(title);
 }
@@ -33,9 +40,17 @@ function loadProjects() {
 
 }
 
-function addTodoToProject(event) {
-    getCurrentProject().createTodo(event.detail.title, event.detail.list);
-    console.log(getCurrentProject().getAllTodos());
+export function addTodoToProject({title, list}) {
+    getCurrentProject().createTodo(title, list);
+
+    const addCardEvent = new CustomEvent('addCard');
+    const projectPageContainer = document.querySelector('.project-page');
+    projectPageContainer.dispatchEvent(addCardEvent, {
+        detail: {
+            todo
+        }});
+
+    console.log("all todos in current proj: " + getCurrentProject().getAllTodos()[0].title);
 }
 
-document.addEventListener('savePendingCard', addTodoToProject);
+document.addEventListener('addTodoFromPendingCard', addTodoToProject);

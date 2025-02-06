@@ -1,11 +1,11 @@
 import { createElement } from "./create-element.js";
-import { createPendingCard } from "./card-ui.js";
-import { contentDiv } from "./display-content.js";
-import observable from "./observable.js";
+import { createPendingCard, createCardHTML, renderCard } from "./card-ui.js";
+import { contentDiv } from "./display-DOM.js";
 
 //add events to all of the project display elements that need it
 function addEvents() {
     const projectPageContainer = document.querySelector('.project-page');
+    projectPageContainer.addEventListener('addCard', handleAddCard);
     const addTaskBtns = projectPageContainer.querySelectorAll('.add-task');
 
     for (const addTaskBtn of addTaskBtns) {
@@ -13,13 +13,11 @@ function addEvents() {
     }
 }
 
-export function toggleAddTaskBtns() {
-    const addTaskBtns = contentDiv.querySelectorAll('.add-task');
+function handleAddCard(e) {
+    console.log("to add a card?");
+    const cardDiv = createCardHTML();
+    renderCard(cardDiv)
 
-    for (const addTaskBtn of addTaskBtns) {
-        addTaskBtn.disabled = !addTaskBtn.disabled;
-        addTaskBtn.classList.toggle('disabled');
-    }    
 }
 
 //find the list the task btn is apart of and then disable while user
@@ -69,7 +67,7 @@ function createProjectPageHTML(project) {
 }
 
 function displayCards(todos) {
-
+    //create html for these
 }
 
 function getCards() {

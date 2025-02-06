@@ -1,4 +1,5 @@
 import { getDefaultProject, getProjects } from "./project-manager";
+import { createSidebarProjectsHTML } from "./sidebar";
 import { displayProject } from "./project-display";
 
 //main display functionality
@@ -14,6 +15,10 @@ export const DisplayDOM = (() => {
         const defaultProject = getDefaultProject();
 
         displayProject(defaultProject);
+        
+    }
+
+    function addEventsToSidebar() {
         
     }
 

@@ -2,7 +2,7 @@ import { createElement } from "./display-manager";
 import { ProjectUI } from "./project-ui";
 import { TodoUI } from "./todo-UI";
 import { PRIORITY } from "./todo";
-import { contentDiv } from "./display-content.js";
+import { contentDiv } from "./display-DOM.js";
 //soley focus on UI of cards, not instantiation of todos or projects
 const CardUI = (function() {
     const contentDiv = document.querySelector('.content');
@@ -191,7 +191,97 @@ const CardUI = (function() {
 })();
 
 
+import { autoResize } from "./display-helpers.js";
+import { addTodoToProject, getCurrentProject } from "./project-manager.js"
+
+function updateDivTitle(card, title) {
+    card.querySelector('.title').textContent = title;
+}
+
+function updateDivDueDate(card, dueDate) {
+    const dueDateDiv = card.querySelector('.due-date');
+    if (dueDate) {
+        dueDateDiv.textContent = '📅 ';
+        dueDateDiv.textContent += dueDate; 
+    }
+    
+}
+
+function updateDivPriority(card, priority) {
+    const COLORS = ['green', 'orange', 'red'];
+    const priorityDiv = card.querySelector('.priority');
+
+    if (priority === PRIORITY[0]) {
+        priorityDiv.textContent = priority;  
+        priorityDiv.style.backgroundColor = COLORS[0];
+    }
+    else if (priority === PRIORITY[1]) {
+        priorityDiv.textContent = priority;  
+        priorityDiv.style.backgroundColor = COLORS[1];
+    }
+    else if (priority === PRIORITY[2]) {
+        priorityDiv.textContent = priority;  
+        priorityDiv.style.backgroundColor = COLORS[2];
+    }
+    
+}
+
+function updateDivDescription(card, hasDescription) {
+    if (hasDescription) {
+        card.querySelector('.has-description').textContent = 'More';
+    }
+    else {
+        card.querySelector('.has-description').textContent = '';
+    }
+}
+
+
+function handleClickTodo(event) {
+    const cardDiv = event.target.closest('.card');
+
+    TodoUI.displayModal(cardDiv);
+}
+
+function setCardAttributes(cardDiv, cardIdx, projectIdx) {
+    cardDiv.setAttribute('data-index', cardIdx);
+    cardDiv.setAttribute('data-project-idx', projectIdx);
+
+}
+
+export function renderCard(card, todo) {
+    updateDivTitle(card, todo.title);
+    updateDivDescription(card, todo.description);
+    updateDivDueDate(card, todo.dueDate);
+    updateDivPriority(card, todo.priority);
+}
+
+export function createCardHTML() {
+    const cardInfo = createElement('div', 'card-info');
+
+    const dueDateDiv = createElement('div', 'due-date');
+    const priorityFlag = createElement('div', 'priority');
+    const hasDescriptDiv = createElement('div', 'has-description');
+
+    const symbolsDiv = createElement('div', 'symbols');
+    symbolsDiv.appendChild(priorityFlag);
+    symbolsDiv.appendChild(dueDateDiv);
+    symbolsDiv.appendChild(hasDescriptDiv);
+
+    const titleDiv = createElement('span', 'title');
+    
+    cardInfo.appendChild(titleDiv);
+    cardInfo.appendChild(symbolsDiv);
+
+    const cardDiv = createElement('div', 'card');
+    cardDiv.appendChild(cardInfo);
+
+    cardDiv.addEventListener('click', handleClickTodo);
+    
+    return cardDiv;
+}
+
 /** PENDING CARD HTML AND FUNCTIONALITY */
+
 function focusOnCard(pendingCard) {
     const textArea = pendingCard.querySelector('.title');
     textArea.focus();
@@ -217,27 +307,17 @@ function handleSavePendingCard(event) {
         return;
     }
 
-    
-
-    // ProjectUI.addTodoToProject(formData.get('title'), listSection.id);
-    //change to event
-    const addTodoEvent = new CustomEvent('savePendingCard', {
-        detail: {
-            title: formData.get('title'),
-            list: listSection.id
-        }});
-    document.dispatchEvent(addTodoEvent);
-
     removePendingCard(listSection);
+
+    const todo = getCurrentProject().createTodo(formData.get('title'), listSection.id);
+    const cardDiv = createCardHTML();
+    renderCard(cardDiv, todo);
+    setCardAttributes(cardDiv, getCurrentProject())
 
     toggleAddTaskBtns();
 }
 
-function test() {
-    console.log("i am testing");
-}
-
-export function toggleAddTaskBtns() {
+function toggleAddTaskBtns() {
     const addTaskBtns = contentDiv.querySelectorAll('.add-task');
 
     for (const addTaskBtn of addTaskBtns) {
@@ -262,7 +342,7 @@ export function createPendingCard(list) {
 
     const titleTextArea = createElement('textarea', 'title');
     titleTextArea.setAttribute('name', 'title');
-    // titleTextArea.addEventListener('input', autoResize);
+    titleTextArea.addEventListener('input', autoResize);
 
     const saveBtn = createElement('button', 'save', 'ᯓ➤');
     saveBtn.setAttribute('title', 'Save');
@@ -271,7 +351,7 @@ export function createPendingCard(list) {
     titleTextArea.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            if (titleTextArea.textContent !== '') {
+            if (titleTextArea.value !== '') {
                 saveBtn.click();
             }
         }
