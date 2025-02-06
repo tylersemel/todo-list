@@ -12,21 +12,24 @@ const TodayTasksPageUI = (() => {
     function createPageHTML() {
         contentDiv.innerHTML = 
         `<h2 class="all-tasks">Tasks Due Today</h2>
-            <p class="today">Today's date:</p>
-            <div class="tasks-table-container">
-                <table class="tasks-table">
-                    <tr>
-                        <th>Priority</th>
-                        <th>Task</th>
-                        <th>List</th>
-                        <th>Project</th>
-                        
-                    </tr>
-                </table>
-            </div>`;
+            <div class="today-container">
+                <div class="today-table-container">
+                    <table class="tasks-table">
+                        <caption>Tasks for </caption>
+                        <tr>
+                            <th>Priority</th>
+                            <th>Task</th>
+                            <th>List</th>
+                            <th>Project</th>
+                            
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            `;
         
-        const p = document.querySelector('.today');
-        p.textContent += ' ' + format(endOfDay(new Date()), "MMM dd yyyy");
+        const caption = document.querySelector('caption');
+        caption.textContent += ' ' + format(endOfDay(new Date()), "MMM dd, yyyy");
         displayAllTasks();
     }
 

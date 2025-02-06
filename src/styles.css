@@ -511,6 +511,14 @@ dialog[class="create-project"] form button[type=submit] {
     overflow-y: auto;
 }
 
+.today-container {
+    width: 100%;
+    height: calc(100% - 40px);
+    padding: 15px 50px;
+    font-size: 20px;
+    overflow-y: auto; 
+}
+
 th {
     height: 10px;
     padding: 8px 10px;
@@ -675,9 +683,4 @@ dialog.create-task form button[type=submit] {
     padding: 0 5px;
     border-radius: 4px;
     margin-top: 8px;
-}
-
-.today {
-    margin-left: 50px;
-    margin-top: 10px;
 }
