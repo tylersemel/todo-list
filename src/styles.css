@@ -12,7 +12,7 @@ body {
     -webkit-font-smoothing: antialiased;
 
     height: 100vh;
-    font-family: "Arial Narrow", Helvetica, sans-serif;
+    font-family: "Arial ", Helvetica, sans-serif;
 }
 
 img, picture, video, canvas, svg {
@@ -53,10 +53,11 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 :root {
-    --main-bg-color: #ffffff;
-    --sidebar-bg-color: #000000;
-    --list-bg-color: hwb(105 0% 0%);
-    --header-bg-color:rgb(0, 255, 26);
+    --main-bg-color: rgb(94, 93, 100);
+    --sidebar-bg-color: #1c1d23;
+    --list-bg-color: #d4d9e0;
+    --header-bg-color:var(var(--main-bg-color));
+    --accent-color:rgb(201, 223, 255);
 }
 
 .container {
@@ -77,21 +78,24 @@ button, input[type="submit"], input[type="reset"] {
 header {
     background-color: var(--header-bg-color);
     grid-area: header;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     display: flex;
     align-items: center;
-    /* color: white; */
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    /* border-bottom: 1px solid rgb(180, 191, 245); */
 }
 
 header div {
     font-size: 1.9rem;
-    margin-left: 50px;
+    margin-left: 25px;
     width: 300px;
 }
 
 .sidebar {
     background-color: var(--sidebar-bg-color);
-    color: white;
+    color: rgb(246, 246, 246);
     grid-area: sidebar;
     max-height: 100%;
     height: 100vh;
@@ -103,10 +107,13 @@ header div {
     font-size: 18px;
     overflow-y: auto;
     overflow-x: hidden;
+    border-right: 1px solid var(--accent-color);
+    /* box-shadow: 1px 0px 5px rgb(53, 53, 53); */
+    /* z-index: 1; */
 }
 
 .sidebar nav button {
-    color: white;
+    /* color: white; */
 }
 
 .sidebar .top {
@@ -140,7 +147,7 @@ header div {
 }
 
 .sidebar button:hover {
-    color: rgb(50, 255, 9);
+    color: var(--accent-color);
 }
 
 .content {
@@ -254,7 +261,6 @@ header div {
     align-items: start;
     justify-content: start;
     gap: 8px;
-    margin-left: 10px;
     overflow-x: auto;
     overflow-y: hidden;
 
@@ -274,15 +280,14 @@ header div {
     min-height: none;
     background-color: var(--list-bg-color);
     border-radius: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 .project-page .lists section h3 {
-    /* background-color: rgb(206, 206, 206); */
-    font-size: 24px;
+    font-size: 20px;
     padding: 4px 0 0px;
-    text-align: center;
-    /* border-bottom: 4px solid black;  */
+    /* text-align: center; */
+    margin-left: 20px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
@@ -303,7 +308,10 @@ header div {
     overflow-y: auto;
     height: 100%;
     max-height: 100%;
+    scrollbar-color: rgb(179, 179, 179) rgb(255, 255, 255);
+    scrollbar-width: thin;
 }
+
 
 .project-page .lists section .card-container .card  .card-info {
     display: flex;
@@ -318,7 +326,7 @@ header div {
     min-height: fit-content;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 2px 3px 4px rgb(102, 102, 102);
+    box-shadow: 0px 0px 4px rgb(132, 132, 132);
     cursor: pointer;
     position: relative; 
 }
@@ -356,7 +364,9 @@ header div {
 .project-page .lists section .card-container .card:hover,
 body > div > div.content > div > div > button:hover {
     transition: 0.2s;
-    filter: brightness(90%);
+    /* filter: brightness(90%); */
+    box-shadow: none;
+    box-shadow: 0px 0px 8px rgb(23, 23, 23);
 }
 
 
@@ -412,7 +422,7 @@ body > div > div.content > div > div > button:hover {
 
 .project-page .lists section .card-container .new-card .save {
     padding: 2px 9px;
-    background-color: rgb(255, 194, 204);
+    background-color: var(--header-bg-color);
     border-radius: 4px;
     margin-bottom: 7px;
     width: 60px;
@@ -422,7 +432,7 @@ body > div > div.content > div > div > button:hover {
 }
 
 .project-page .lists section .card-container .new-card .save:hover {
-    background-color: #ff5a75;
+    filter: brightness(80%);
 }
 
 .project-page .lists section .card-container .new-card .title:focus {
@@ -434,10 +444,19 @@ body > div > div.content > div > div > button:hover {
     transition: 0.2s;
     margin-top: 10px;
     margin-bottom: 10px;
-    align-self: center;
+    margin-left: 20px;
+    align-self: flex-start;
+    text-align: start;
+    text-indent: 5px;
     width: 90%;
     border-radius: 5px;
     background-color: var(--list-bg-color);
+}
+
+
+.project-page .lists section .add-task,
+.project-page .lists section h3 {
+    color: black;
 }
 
 .project-page .lists section .add-task:not(:disabled):hover {
@@ -607,6 +626,11 @@ dialog.todo-dialog .todo-container {
     width: 100%;
 }
 
+dialog.todo-dialog .todo-container span,
+dialog.todo-dialog .todo-container label {
+    font-weight: bold;
+}
+
 dialog.todo-dialog .todo-container .modal-top,
 dialog.todo-dialog .todo-container .main-modal {
     padding: 10px 25px;
@@ -643,6 +667,7 @@ dialog.todo-dialog .todo-container .main-modal .main-info {
     max-height: 350px;
     overflow-y: auto;
     padding-right: 20px;
+    scrollbar-width: thin;
 }
 
 dialog.todo-dialog .todo-container .main-modal .main-info button {
@@ -680,13 +705,13 @@ dialog.todo-dialog .side-info div form {
 }
 
 dialog.todo-dialog .delete {
-    background-color: #ff5a75;
+    background-color: #a7a7a7;
     padding: 5px 25px;
     border-radius: 5px;
 }
 
 dialog.todo-dialog .delete:hover {
-    background-color: #b0283f;
+    filter: brightness(80%);
     transition: 0.2s;
 }
 
@@ -694,7 +719,6 @@ dialog.create-task .create-task-container form p {
     display: flex;
     flex-direction: column;
 }
-
 dialog.create-task .create-task-container form p textarea {
     resize: none;
     height: 80px;
