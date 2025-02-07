@@ -53,7 +53,7 @@ const CreateTaskModal = (() => {
 
     function closeModal() {
         dialog.replaceChildren();
-        dialog.style.marginTop = 'auto'; //need to fix
+        dialog.style.marginTop = ''; 
         dialog.className = '';
         dialog.close();
     }

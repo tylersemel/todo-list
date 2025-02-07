@@ -22,15 +22,12 @@ const ProjectUI = (function() {
     }
 
     function displayProjectTitle(title) {
-        projectNameH2.textContent = title;
+        const header = document.querySelector('header div');
+        header.textContent = title;
     }
 
     function createOutlineHTML() {
         const projectPageContainer = createElement('div', 'project-page');
-        
-        projectNameH2 = createElement('h2', 'project-name');
-        projectPageContainer.appendChild(projectNameH2);
-        
 
         const listsDiv = createElement('div', 'lists');
 
