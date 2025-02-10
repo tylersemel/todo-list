@@ -53,11 +53,11 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 :root {
-    --main-bg-color: rgb(94, 93, 100);
-    --sidebar-bg-color: #1c1d23;
-    --list-bg-color: #d4d9e0;
+    --main-bg-color: #dce0d9; 
+    --sidebar-bg-color:   #595959;
+    --list-bg-color: #808f85;
     --header-bg-color:var(var(--main-bg-color));
-    --accent-color:rgb(201, 223, 255);
+    --accent-color: #31081f;
 }
 
 .container {
@@ -67,7 +67,7 @@ button, input[type="submit"], input[type="reset"] {
     min-height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: 230px auto;
+    grid-template-columns: 300px auto;
     grid-template-rows: 60px auto;
     grid-template-areas: 
     "sidebar header"
@@ -78,13 +78,10 @@ button, input[type="submit"], input[type="reset"] {
 header {
     background-color: var(--header-bg-color);
     grid-area: header;
-    /* margin-bottom: 10px; */
     display: flex;
     align-items: center;
-    color: white;
     font-weight: bold;
     margin-top: 10px;
-    /* border-bottom: 1px solid rgb(180, 191, 245); */
 }
 
 header div {
@@ -107,13 +104,6 @@ header div {
     font-size: 18px;
     overflow-y: auto;
     overflow-x: hidden;
-    border-right: 1px solid var(--accent-color);
-    /* box-shadow: 1px 0px 5px rgb(53, 53, 53); */
-    /* z-index: 1; */
-}
-
-.sidebar nav button {
-    /* color: white; */
 }
 
 .sidebar .top {
@@ -196,7 +186,6 @@ header div {
     margin-left: 50px;
     margin-right: 50px;
     min-width: fit-content;
-    /* margin-bottom: 15%; */
 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -242,7 +231,6 @@ header div {
     height: 100%;
     min-height: 100%;
     width: 100%;
-    /* font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif; */
 }
 
 .project-page .project-name {
@@ -422,7 +410,7 @@ body > div > div.content > div > div > button:hover {
 
 .project-page .lists section .card-container .new-card .save {
     padding: 2px 9px;
-    background-color: var(--header-bg-color);
+    background-color: var(--list-bg-color);
     border-radius: 4px;
     margin-bottom: 7px;
     width: 60px;
