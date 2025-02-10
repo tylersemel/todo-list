@@ -12,7 +12,6 @@ const AllProjectsUI = (() => {
     function createPageHTML() {
         contentDiv.innerHTML =
         `<div class="all-projects-page">
-                <h2 class="project-name">All Projects</h2>
                 <h3>[X] Projects</h3>
                 <div class="all-projects-container">
                 </div>
@@ -26,6 +25,8 @@ const AllProjectsUI = (() => {
     function addProjects() {
         const allProjectsPageDiv = document.querySelector('.all-projects-page');
         const allProjectsContainer = document.querySelector('.all-projects-container');
+        const title = document.querySelector('header div');
+        title.textContent = 'All Projects';
 
         for (const project of DisplayManager.getProjects()) {
             const projectBtn = createProjectHTML(project);

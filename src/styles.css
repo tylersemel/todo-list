@@ -104,6 +104,8 @@ header div {
     font-size: 18px;
     overflow-y: auto;
     overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color:var(--main-bg-color) var(--list-bg-color); 
 }
 
 .sidebar .top {
@@ -155,10 +157,14 @@ header div {
     height: 100%;
     min-height: 100%;
     width: 100%;
-    background-color: #898989;
+    background-color: var(--main-bg-color);
 
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.all-projects-page button {
+    box-shadow: 0px 0px 4px gray;
 }
 
 .all-projects-page h2,
@@ -274,7 +280,6 @@ header div {
 .project-page .lists section h3 {
     font-size: 20px;
     padding: 4px 0 0px;
-    /* text-align: center; */
     margin-left: 20px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -282,7 +287,6 @@ header div {
 
 .project-page .lists section .card-container {
     width: 97%;
-    /* background-color: #b7b7b7; */
     border-radius: 3px;
     align-self: center;
 
@@ -352,7 +356,6 @@ header div {
 .project-page .lists section .card-container .card:hover,
 body > div > div.content > div > div > button:hover {
     transition: 0.2s;
-    /* filter: brightness(90%); */
     box-shadow: none;
     box-shadow: 0px 0px 8px rgb(23, 23, 23);
 }
