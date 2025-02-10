@@ -531,7 +531,7 @@ dialog[class="create-project"] form button[type=submit] {
 
 .tasks-table-container {
     width: 100%;
-    height: calc(100% - 36px);
+    height: 100%;
     padding: 15px 50px;
     font-size: 20px;
     overflow-y: auto;
@@ -539,7 +539,7 @@ dialog[class="create-project"] form button[type=submit] {
 
 .today-container {
     width: 100%;
-    height: calc(100% - 40px);
+    height: 100%;
     padding: 15px 50px;
     font-size: 20px;
     overflow-y: auto; 
@@ -550,6 +550,17 @@ th {
     padding: 8px 10px;
 }
 
+
+
+
+tr:nth-child(even) {
+    background-color: rgb(178, 200, 188);
+  }
+
+tr div {
+    padding: 3px 8px;
+    text-align: center;
+}
 td {
     height: 20px;
     padding: 8px 10px;
@@ -559,16 +570,6 @@ td {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
-tr div {
-    padding: 3px 8px;
-    text-align: center;
-}
-
-tr:nth-child(even) {
-    background-color: #d6eed6;
-  }
-
 .tasks-table {
     border-collapse: collapse;
     width: 100%;

@@ -10,19 +10,20 @@ const AllTasksPageUI = (() => {
 
     function createPageHTML() {
         contentDiv.innerHTML = 
-        `<h2 class="all-tasks">All Tasks</h2>
-            <div class="tasks-table-container">
-                <table class="tasks-table">
-                    <tr>
-                        <th>Priority</th>
-                        <th>Task</th>
-                        <th>List</th>
-                        <th>Project</th>
-                        <th>Due Date</th>
-                    </tr>
-                </table>
-            </div>`;
+        `<div class="tasks-table-container">
+            <table class="tasks-table">
+                <tr>
+                    <th>Priority</th>
+                    <th>Task</th>
+                    <th>List</th>
+                    <th>Project</th>
+                    <th>Due Date</th>
+                </tr>
+            </table>
+        </div>`;
         
+        const title = document.querySelector('header div');
+        title.textContent = 'All Tasks';
         displayAllTasks();
     }
 
@@ -60,21 +61,20 @@ const AllTasksPageUI = (() => {
         tdProject.textContent = project.title;
         tdDueDate.textContent = task.dueDate;
 
-        
+        const COLORS = ['green', '#d9c551', '#d95151'];
 
         switch (task.priority) {
             case PRIORITY[0]:
                 tdPriority.textContent = '';
-                // tdPriority.style.backgroundColor = 'lightgreen';
                 break;
             case PRIORITY[1]:
                 circleDiv.textContent = 'Important'; 
-                circleDiv.style.backgroundColor = 'orange';
+                circleDiv.style.backgroundColor = COLORS[1];
                 circleDiv.style.borderRadius = '5px';
                 break;
             case PRIORITY[2]:
                 circleDiv.textContent = 'Urgent'; 
-                circleDiv.style.backgroundColor = 'red';
+                circleDiv.style.backgroundColor = COLORS[2];
                 circleDiv.style.borderRadius = '5px';
                 break;
         }

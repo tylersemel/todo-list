@@ -20,18 +20,18 @@ const CardUI = (function() {
     }
 
     function updateDivPriority(card, priority) {
-        const COLORS = ['green', 'orange', 'red'];
+        const COLORS = ['green', '#d9c551', '#d95151'];
         const priorityDiv = card.querySelector('.priority');
 
         if (priority === PRIORITY[0]) {
             priorityDiv.textContent = ''; 
         }
         else if (priority === PRIORITY[1]) {
-            priorityDiv.textContent = priority;  
+            priorityDiv.textContent = 'Important';  
             priorityDiv.style.backgroundColor = COLORS[1];
         }
         else if (priority === PRIORITY[2]) {
-            priorityDiv.textContent = priority;  
+            priorityDiv.textContent = 'Urgent';  
             priorityDiv.style.backgroundColor = COLORS[2];
         }
         
@@ -120,8 +120,9 @@ const CardUI = (function() {
         const listSection = event.target.closest('.list');
 
         //create todo
-        if (formData.get('title') === '') {
+        if (formData.get('title') === '' ) {
             removePendingCard(listSection);
+            ProjectUI.toggleAddTaskBtns();
             return;
         }
 

@@ -10,8 +10,7 @@ const TodayTasksPageUI = (() => {
     }
 
     function createPageHTML() {
-        contentDiv.innerHTML = 
-        `<h2 class="all-tasks">Tasks Due Today</h2>
+        contentDiv.innerHTML = `
             <div class="today-container">
                 <div class="today-table-container">
                     <table class="tasks-table">
@@ -28,6 +27,8 @@ const TodayTasksPageUI = (() => {
             </div>
             `;
         
+        const title = document.querySelector('header div');
+        title.textContent = 'Tasks Due Today';
         const caption = document.querySelector('caption');
         caption.textContent += ' ' + format(endOfDay(new Date()), "MMM dd, yyyy");
         displayAllTasks();
@@ -68,18 +69,20 @@ const TodayTasksPageUI = (() => {
         tdList.textContent = task.status;
         tdProject.textContent = project.title;
 
+        const COLORS = ['green', '#d9c551', '#d95151'];
+
         switch (task.priority) {
             case PRIORITY[0]:
                 tdPriority.textContent = '';
                 break;
             case PRIORITY[1]:
                 circleDiv.textContent = 'Important'; 
-                circleDiv.style.backgroundColor = 'orange';
+                circleDiv.style.backgroundColor = COLORS[1];
                 circleDiv.style.borderRadius = '5px';
                 break;
             case PRIORITY[2]:
                 circleDiv.textContent = 'Urgent'; 
-                circleDiv.style.backgroundColor = 'red';
+                circleDiv.style.backgroundColor = COLORS[2];
                 circleDiv.style.borderRadius = '5px';
                 break;
         }
