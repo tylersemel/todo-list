@@ -23,5 +23,10 @@ Live preview [here](https://tylersemel.github.io/todo-list/)!
 - **CSS**: For styling of static and dynamic content
 - **date-fns Library**: A library for manipulating and formatting calendar dates
 
+## Summary
+Through this project I made use of the module pattern as well as classes to create and manage projects. I also applied SOLID principles in order
+to make code more scalable as the project details increased. If I were to redo this project I would have more of the dom modules with similar functionality
+be merged together in order to edit the projects better.
+
   
 
